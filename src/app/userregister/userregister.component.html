@@ -1,0 +1,100 @@
+<div class="parent">
+  <div class="register-container">
+    
+    <h2>User Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+      <div>
+        <label>Username:</label>
+        <input type="text" formControlName="username" />
+        <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid" class="error-message">
+          <small *ngIf="registerForm.get('username')?.errors?.['required']">Username is required.</small>
+        </div>
+      </div>
+
+      <div>
+        <label>Full Name:</label>
+        <input type="text" formControlName="fullname" />
+        <div *ngIf="registerForm.get('fullname')?.touched && registerForm.get('fullname')?.invalid" class="error-message">
+          <small *ngIf="registerForm.get('fullname')?.errors?.['required']">Full Name is required.</small>
+        </div>
+      </div>
+
+      <div>
+        <label>Email:</label>
+        <input type="email" formControlName="email" />
+        <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" class="error-message">
+          <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
+          <small *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</small>
+        </div>
+      </div>
+
+      <div>
+        <label>Password:</label>
+        <input type="password" formControlName="password" />
+        <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid" class="error-message">
+          <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
+        </div>
+      </div>
+
+      <div>
+        <label>Confirm Password:</label>
+        <input type="password" formControlName="confirmPassword" />
+        <div *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid" class="error-message">
+          <small *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required.</small>
+          <small *ngIf="registerForm.errors?.['passwordMismatch']">Passwords do not match.</small>
+        </div>
+      </div>
+
+      <div>
+        <label>Mobile No:</label>
+        <input type="text" formControlName="mobileNo" />
+        <div *ngIf="registerForm.get('mobileNo')?.touched && registerForm.get('mobileNo')?.invalid" class="error-message">
+          <small *ngIf="registerForm.get('mobileNo')?.errors?.['required']">Mobile No is required.</small>
+          <small *ngIf="registerForm.get('mobileNo')?.errors?.['pattern']">Invalid mobile number.</small>
+        </div>
+      </div>
+
+      <div>
+        <label>Address:</label>
+        <input type="text" formControlName="address" />
+        <div *ngIf="registerForm.get('address')?.touched && registerForm.get('address')?.invalid" class="error-message">
+          <small *ngIf="registerForm.get('address')?.errors?.['required']">Address is required.</small>
+        </div>
+      </div>
+
+      <div>
+        <label>Gender:</label>
+        <select formControlName="gender">
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <div *ngIf="registerForm.get('gender')?.touched && registerForm.get('gender')?.invalid" class="error-message">
+          <small *ngIf="registerForm.get('gender')?.errors?.['required']">Gender is required.</small>
+        </div>
+      </div>
+
+      <div>
+        <label>Profile Picture:</label>
+        <input type="file" (change)="onFileSelected($event)" />
+        <div *ngIf="fileSizeError" class="error-message">
+          <small>File size should be less than 2MB.</small>
+        </div>
+        <div *ngIf="fileFormatError" class="error-message">
+          <small>Only JPG, JPEG, and PNG files are allowed.</small>
+        </div>
+      </div>
+
+      <div class="agreement-section">
+        <input type="checkbox" formControlName="terms" id="terms" />
+        <label for="terms">I agree to the Terms & Conditions</label>
+        <div *ngIf="registerForm.get('terms')?.touched && registerForm.get('terms')?.invalid" class="error-message">
+          <small>You must agree to the terms.</small>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="registerForm.invalid || !selectedFile">Register</button>
+    </form>
+  </div>
+  </div>

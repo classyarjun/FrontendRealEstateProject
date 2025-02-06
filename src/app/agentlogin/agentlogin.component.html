@@ -1,0 +1,56 @@
+<!-- components/agent-login/agent-login.component.html -->
+<!-- <h2>Login Agent</h2>
+<form (ngSubmit)="loginAgent()">
+  <div>
+    <label>Username:</label>
+    <input type="text" [(ngModel)]="username" name="username" required />
+  </div>
+  <div>
+    <label>Password:</label>
+    <input type="password" [(ngModel)]="password" name="password" required />
+  </div>
+  <button type="submit">Login</button>
+
+  <div class="register-section">
+    <p>Don't have an account? <a routerLink="/agentregister" class="register-link">Register here</a></p>
+  </div>
+</form> -->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<body>
+  <div class="login-container">
+    <span class="close-btn" (click)="closeLogin()">&times;</span>
+    <h2>Agent Login</h2>
+    <form (ngSubmit)="loginAgent()">
+      <div>
+        <label>Username:</label>
+        <input type="text" [(ngModel)]="username" name="username" required />
+      </div>
+      <div>
+        <label>Password:</label>
+        <div class="password-container">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+          <i
+            class="toggle-password fa"
+            [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+            (click)="togglePasswordVisibility()"
+          ></i>
+        </div>
+      </div>
+      <button type="submit">Login</button>
+
+      <div class="register-section">
+        <p>Don't have an account? <a routerLink="/agentregister" class="register-link">Register here</a></p>
+      </div>
+    </form>
+  </div>
+</body>
+
+ 

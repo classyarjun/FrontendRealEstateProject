@@ -1,0 +1,17 @@
+
+<div class="parent">
+<div class="otp-container">
+  <h2>OTP Verification</h2>
+<div class="abc">
+  <label>Email:</label>
+  <input type="email" [(ngModel)]="email" readonly />
+</div>
+<div class="abc">
+  <label>Enter OTP:</label>
+  <input type="text" [(ngModel)]="otp" />
+</div>
+  <button (click)="verifyOtp()">Verify OTP</button>
+
+  <p *ngIf="message">{{ message }}</p>
+</div>
+

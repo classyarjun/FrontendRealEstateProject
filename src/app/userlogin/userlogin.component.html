@@ -1,0 +1,33 @@
+<div class="parent">
+  <div class="login-container">
+    <h2>User Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label>Username:</label>
+        <input type="text" formControlName="username" />
+      </div>
+      <div>
+        <label>Password:</label>
+        <div class="password-container">
+          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" />
+          <i class="toggle-password" [class]="showPassword ? 'icon-eye-close' : 'icon-eye-open'"
+            (click)="togglePasswordVisibility()"></i>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+
+    <div class="register-section">
+      <p>
+        Don't have an account?
+        <a routerLink="/userregister" class="register-link">Register here</a>
+      </p>
+
+      <div class="forgot-password">
+        <a routerLink="/reset-password" class="forgot-link">Forgot Password?</a>
+      </div>
+
+    </div>
+  </div>
+</div>

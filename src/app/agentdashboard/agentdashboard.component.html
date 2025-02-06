@@ -1,0 +1,316 @@
+<div class="wrapper">
+  <!-- Sidebar navbar -->
+  <nav *ngIf="isVisible" id="sidebar" class="bg-light border-dark">
+    <div class="sidebar-header p-3">
+      <div class="d-flex align-items-center flex-column">
+        <img
+          src="https://images.unsplash.com/7/sunset-hair.jpg?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Profile Avatar" class="rounded-circle" width="70" height="70" />
+        <div class="p-2">
+          <h6 class="">John Doe</h6>
+          <small class="text-muted">Agent Dashboard</small>
+        </div>
+      </div>
+    </div>
+
+    <div class=" ">
+      <ul class="nav flex-column nav-tabs mx-3" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active fw-bold" data-bs-toggle="tab" href="#Dashboard" role="tab">
+            <i class="bi bi-house-door text-danger"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link fw-bold" data-bs-toggle="tab" href="#Property" role="tab">
+            <i class="bi bi-map"></i>
+            <span>Property</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Content  section -->
+  <div id="content">
+    <!-- Top navbar  in content section-->
+    <nav class="navbar navbar-expand-lg bg-light shadow-sm">
+      <div class="container-fluid">
+        <button type="button" (click)="toggle()" class="btn btn-dark btn-sm">
+          <i class="bi bi-list"></i>
+        </button>
+        <button class="btn btn-outline-dark btn-sm">
+          <i class="bi bi-person"></i>
+          LogOut
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main content  content section-->
+    <div class="container-fluid">
+      <div class="tab-content">
+        <!-- Dashboard Tab -->
+        <div class="tab-pane fade show active" id="Dashboard" role="tabpanel">
+          <div class="mt-4">
+            <h3 class="mb-4">Real Estate Overview</h3>
+            <div class="row">
+              <div class="col-md-3 mb-4">
+                <div class="card text-white bg-dark">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Properties</h5>
+                    <p class="card-text display-4">156</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-4">
+                <div class="card text-white bg-danger">
+                  <div class="card-body">
+                    <h5 class="card-title">Properties Sold</h5>
+                    <p class="card-text display-4">42</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-4">
+                <div class="card text-white bg-success">
+                  <div class="card-body">
+                    <h5 class="card-title">New Listings</h5>
+                    <p class="card-text display-4">8</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-4">
+                <div class="card text-white bg-warning">
+                  <div class="card-body">
+                    <h5 class="card-title">Pending Sales</h5>
+                    <p class="card-text display-4">15</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-8 mb-4">
+                <div class="card">
+                  <div class="card-header">Recent Property Listings</div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <i class="bi bi-house-door me-2"></i>
+                      3 BHK Apartment in City Center - $250,000
+                    </li>
+                    <li class="list-group-item">
+                      <i class="bi bi-house me-2"></i>
+                      4 BHK Villa with Pool - $500,000
+                    </li>
+                    <li class="list-group-item">
+                      <i class="bi bi-building me-2"></i>
+                      Commercial Space in Business Park - $1,000,000
+                    </li>
+                    <li class="list-group-item">
+                      <i class="bi bi-house-door me-2"></i>
+                      2 BHK Condo with Sea View - $180,000
+                    </li>
+                    <li class="list-group-item">
+                      <i class="bi bi-house me-2"></i>
+                      5 BHK Luxury Penthouse - $750,000
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <div class="card-header">Quick Actions</div>
+                  <div class="card-body">
+                    <div class="d-grid gap-2">
+
+                      <!-- Add Property Button -->
+
+                      <button class="btn btn-danger" type="button">
+                        <i class="bi bi-plus-circle me-2"></i> Add Property
+                      </button>
+
+                      <button class="btn btn-success" type="button">
+                        <i class="bi bi-person-plus me-2"></i>Add New Client
+                      </button>
+                      <button class="btn btn-info" type="button">
+                        <i class="bi bi-calendar-event me-2"></i>Schedule
+                        Viewing
+                      </button>
+                      <button class="btn btn-warning" type="button">
+                        <i class="bi bi-file-earmark-text me-2"></i>Generate
+                        Report
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- property manage Tab -->
+        <div class="tab-pane fade" id="Property" role="tabpanel">
+          <div class="mt-4">
+            <div class="container mt-4">
+              <h3 class="mb-4">Property Management</h3>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="row ">
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" placeholder="Search properties..." />
+                    </div>
+
+                    <div class="col-md-2">
+                      <button class="btn btn-primary">
+                        <i class="bi bi-search"></i> Search
+                      </button>
+                    </div>
+
+                    <div class="col-md-2">
+
+                      <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addPropertyModal">
+                        <i class="bi bi-plus-circle me-2"></i> Add Property
+                      </button>
+
+                    </div>
+                  </div>
+
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Username</th>
+                          <th>Full Name</th>
+                          <th>Email</th>
+                          <th>Role</th>
+                          <th>Status</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>admin</td>
+                          <td>Admin User</td>
+                          <td>Admin User</td>
+                          <td>Admin User</td>
+                          <td>Admin User</td>
+                          <td>Admin User</td>
+                          <td>
+                            <!-- <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id!)" [disabled]="!user.id">Delete</button> -->
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+
+
+              <!--! // Bootstrap Modal for Adding Property //=======================  -->
+
+              <div class="modal fade" id="addPropertyModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Add New Property</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+
+                        <div class="mb-3">
+                          <label class="form-label">Property Title</label>
+                          <input type="text" class="form-control" formControlName="title"
+                            placeholder="Enter Property Title">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Address</label>
+                          <input type="text" class="form-control" formControlName="address" placeholder="Enter Address">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Price</label>
+                          <input type="number" class="form-control" formControlName="price" placeholder="Enter Price">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Size (sq ft)</label>
+                          <input type="number" class="form-control" formControlName="size" placeholder="Enter Size">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Year Built</label>
+                          <input type="number" class="form-control" formControlName="yearBuilt"
+                            placeholder="Enter Year Built">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Property Type</label>
+                          <select class="form-control" formControlName="propertyType">
+                            <option value="Apartment">Apartment</option>
+                            <option value="House">House</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Commercial">Commercial</option>
+                          </select>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Bedrooms</label>
+                          <input type="number" class="form-control" formControlName="bedrooms"
+                            placeholder="Enter Bedrooms">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Bathrooms</label>
+                          <input type="number" class="form-control" formControlName="bathrooms"
+                            placeholder="Enter Bathrooms">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Features</label>
+                          <input type="text" class="form-control" formControlName="features"
+                            placeholder="Enter Features">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Amenities</label>
+                          <input type="text" class="form-control" formControlName="amenities"
+                            placeholder="Comma separated amenities">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Proximity</label>
+                          <input type="text" class="form-control" formControlName="proximity"
+                            placeholder="Enter Proximity Details">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Status</label>
+                          <select class="form-control" formControlName="status">
+                            <option value="ACTIVE">ACTIVE</option>
+
+                          </select>
+                        </div>
+
+                        <div class="mb-3">
+                          <!-- <label class="form-label">Gallery Images</label> -->
+                          <label class="form-label">Upload Images</label>
+                          <input type="file" class="form-control" (change)="onFileSelected($event)" multiple>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Save Property</button>
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+              </div>

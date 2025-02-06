@@ -1,0 +1,45 @@
+<!-- <div *ngIf="properties.length > 0; else noProperties">
+  <h2>Property List</h2>
+  <ul>
+    <li *ngFor="let property of properties">
+      <h3>{{ property.title }}</h3>
+      <p>Price: {{ property.price }}</p>
+      <p>Size: {{ property.size }} sqft</p>
+      <p>Address: {{ property.address }}</p>
+      <p>Bedrooms: {{ property.bedrooms }}, Bathrooms: {{ property.bathrooms }}</p>
+      <p>Status: {{ property.status }}</p>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noProperties>
+  <p>No properties available.</p>
+</ng-template> -->
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Property Name</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let property of pendingProperties">
+      <td>{{ property.tempPropertyId }}</td>
+      <td>{{ property.title }}</td>
+      <td>{{ property.status }}</td>
+      <td>
+        <!-- <button class="btn btn-primary btn-sm ms-1">View</button> -->
+        <button class="btn btn-success btn-sm ms-1"(click)="approveProperty(property.tempPropertyId)">Approve</button>
+        <button class="btn btn-danger btn-sm ms-1"(click)="rejectProperty(property.tempPropertyId)">Reject</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+

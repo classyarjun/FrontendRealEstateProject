@@ -1,0 +1,119 @@
+/* Global Styles */
+
+.parent{
+ background-image: url("../../assets/userloginbg/UserRegistration.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Login Container */
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background-color: aliceblue;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form Fields */
+div {
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Error Styling */
+.error-message {
+  color: #d9534f;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Responsiveness */
+@media (max-width: 600px) {
+  .login-container {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px; /* Add space for the eye icon */
+  box-sizing: border-box;
+}
+
+.password-container .toggle-password {
+  position: absolute;
+  right: 10px; /* Align icon inside the input box */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px; /* Adjust icon size */
+  color: #888; /* Default icon color */
+  user-select: none; /* Prevent text selection on click */
+}
+
+.password-container .toggle-password:hover {
+  color: #333; /* Change icon color on hover */
+}

@@ -1,0 +1,46 @@
+
+
+<div class="card my-2">
+  <div class="card-header"><h5>Property List</h5></div>
+  <div class="card-body">
+    <!-- <div class="table-responsive"> -->
+      <div class="table-responsive" style="height: 300px; overflow-y: auto;">
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Year Built</th>
+            <th>Location</th>
+            <th>bedrooms</th>
+            <th>bathrooms</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let propert of property">
+            <td>{{ propert.propertyId }}</td>
+            <td>{{ propert.title }}</td>
+            <td>{{ propert.propertyType }}</td>
+            <td>{{ propert.size }}</td>
+            <td>{{ propert.price }}</td>
+            <td>{{ propert.yearBuilt }}</td>
+            <td>{{ propert.address }}</td>
+            <td>{{ propert.bedrooms }}</td>
+            <td>{{ propert.bathrooms }}</td>
+            <td>{{ propert.status }}</td>
+             <td>
+              <button class="btn btn-success btn-sm me-1">View</button>
+              <button class="btn btn-danger btn-sm me-1">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

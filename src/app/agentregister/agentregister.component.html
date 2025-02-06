@@ -1,0 +1,121 @@
+<body>
+  <h2>Register Agent</h2>
+
+  <!-- Cross Button (Reset Form) -->
+  <form (ngSubmit)="registerAgent()">
+    <span class="close-btn" (click)="closeLogin()" role="button" aria-label="Close registration form">&times;</span>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" [(ngModel)]="agent.username" name="username" required id="username" placeholder="Enter your username" #username="ngModel" />
+        <div *ngIf="username.invalid && username.touched" class="alert">{{ 'Username is required' }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="fullname">Fullname:</label>
+        <input type="text" [(ngModel)]="agent.fullname" name="fullname" required id="fullname" placeholder="Enter your full name" #fullname="ngModel" />
+        <div *ngIf="fullname.invalid && fullname.touched" class="alert">{{ 'Fullname is required' }}</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" [(ngModel)]="agent.email" name="email" required id="email" placeholder="Enter your email address" #email="ngModel" [pattern]="'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'" />
+        <div *ngIf="email.invalid && email.touched" class="alert">
+          <div *ngIf="email.errors?.['required']">{{ 'Email is required' }}</div>
+          <div *ngIf="email.errors?.['pattern']">{{ 'Please enter a valid email address' }}</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <div class="password-container">
+          <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="agent.password" name="password" required id="password" placeholder="Enter your password" #password="ngModel" />
+          <span class="eye-icon" (click)="togglePasswordVisibility()" role="button" aria-label="Toggle password visibility">👁️</span>
+        </div>
+        <div *ngIf="password.invalid && password.touched" class="alert">{{ 'Password is required' }}</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="mobileNo">Mobile Number:</label>
+        <input type="text" [(ngModel)]="agent.mobileNo" name="mobileNo" required id="mobileNo" placeholder="Enter your mobile number" #mobileNo="ngModel" [pattern]="'^[0-9]{10}$'" />
+        <div *ngIf="mobileNo.invalid && mobileNo.touched" class="alert">
+          <div *ngIf="mobileNo.errors?.['required']">{{ 'Mobile number is required' }}</div>
+          <div *ngIf="mobileNo.errors?.['pattern']">{{ 'Please enter a valid 10-digit mobile number' }}</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="experience">Experience (in years):</label>
+        <input type="number" [(ngModel)]="agent.experience" name="experience" required id="experience" placeholder="Enter your years of experience" #experience="ngModel" />
+        <div *ngIf="experience.invalid && experience.touched" class="alert">{{ 'Experience is required' }}</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="role">Role:</label>
+        <select [(ngModel)]="agent.role" name="role" required id="role" #role="ngModel">
+          <option value="ADMIN">Admin</option>
+          <option value="AGENT">Agent</option>
+        </select>
+        <div *ngIf="role.invalid && role.touched" class="alert">{{ 'Role is required' }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <select [(ngModel)]="agent.status" name="status" required id="status" #status="ngModel">
+          <option value="ACTIVE">Active</option>
+          <option value="INACTIVE">Inactive</option>
+        </select>
+        <div *ngIf="status.invalid && status.touched" class="alert">{{ 'Status is required' }}</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="bio">Bio:</label>
+        <textarea [(ngModel)]="agent.bio" name="bio" placeholder="Tell us about yourself..." required id="bio" #bio="ngModel"></textarea>
+        <div *ngIf="bio.invalid && bio.touched" class="alert">{{ 'Bio is required' }}</div>
+      </div>
+
+      <div class="form-group">
+        <label for="rating">Rating (1-5):</label>
+        <input type="number" [(ngModel)]="agent.rating" name="rating" min="1" max="5" required id="rating" placeholder="Rate between 1-5" #rating="ngModel" />
+        <div *ngIf="rating.invalid && rating.touched" class="alert">{{ 'Rating is required' }}</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="profilePic">Profile Picture:</label>
+        <input type="file" (change)="onFileSelected($event)" id="profilePic" accept="image/*" />
+        <div *ngIf="!profilePicture" class="alert">{{ 'Please upload a profile picture' }}</div>
+      </div>
+
+      <div class="form-group">
+        <div class="agreement-container">
+          <input type="checkbox" id="agreement" [(ngModel)]="agreementChecked" name="agreement" required #agreement="ngModel" />
+          <label for="agreement">I agree to the terms and conditions</label>
+          <div *ngIf="agreement.invalid && agreement.touched" class="alert">{{ 'You must agree to the terms and conditions' }}</div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!agreementChecked">Register</button>
+  </form>
+
+  <!-- Success Popup -->
+  <div *ngIf="isFormSubmitted" class="popup-container">
+    <div class="popup">
+      <h2>Registration Successful!</h2>
+      <p>Your registration has been completed successfully.</p>
+      <button (click)="closePopup()">Close</button>
+    </div>
+  </div>
+  </body>
+   

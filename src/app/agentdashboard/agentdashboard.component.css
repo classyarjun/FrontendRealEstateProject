@@ -1,0 +1,46 @@
+   
+.wrapper {
+    display: flex;
+    width: 100%;
+
+  }
+  
+  #sidebar {
+    min-width: 250px;
+    min-height: 100vh;
+    transition: all 0.1s;
+
+
+  }
+  
+
+  
+  #content {
+    width: 100%;
+    min-height: 100vh;
+  }
+  
+
+  
+  @media (max-width: 768px) {
+    #sidebar {
+      min-width: 200px;
+    }
+    #sidebar.active {
+      margin-left: 0;
+    }
+  }
+  
+  .nav-link {
+    color: #333;
+    padding: 10px 20px;
+  }
+  
+  .nav-link i {
+    margin-right: 10px;
+  }
+  
+  .nav-link:hover {
+    background-color: #e9ecef;
+  }
+ 

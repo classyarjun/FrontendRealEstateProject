@@ -1,0 +1,177 @@
+/* .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
+
+html, body {
+  background: url('src/assets/userloginbg/admin registrations.jpg') no-repeat center center/cover;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  display: flex; /* Flexbox to center content */
+  flex-direction: column;
+  justify-content: center;
+}
+.container {
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.4); /* Increased transparency */
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px); /* Increased blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for clarity */
+}
+
+h2 {
+  text-align: center;
+  color: #333; /* Keep text visible */
+}
+
+input,
+select {
+  background: rgba(255, 255, 255, 0.5); /* Semi-transparent input fields */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #333;
+}
+
+button {
+  background-color: rgba(76, 175, 80, 0.8); /* Slight transparency for button */
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: rgba(69, 160, 73, 0.9);
+}
+
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two-column layout */
+  gap: 20px;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+}
+
+input,
+select {
+  padding: 8px;
+  margin-top: 5px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  grid-column: span 2; /* Make the button span across both columns */
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  grid-column: span 2;
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 3px;
+  right: 12px;
+  font-size: 24px;
+  cursor: pointer;
+  color: red;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  color: darkred;
+}
+.alert {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border: 2px solid red;
+}
+
+/* Ensure that inputs span the full column */
+input[type="file"] {
+  grid-column: span 2;
+}
+.input-group {
+  position: relative;
+}
+
+.input-group .btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.input-group .btn:focus {
+  box-shadow: none;
+}
+
+.input-group .fa {
+  font-size: 18px;
+  color: #333;
+}
+
+.input-group .btn:hover .fa {
+  color: #007bff; /* Change color on hover */
+}
+.input-group {
+  position: relative;
+}
+
+.password-input {
+  padding-right: 10px; /* Ensure space for the icon */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.toggle-password .fa {
+  font-size: 18px;
+  color: #333;
+}
+
+.toggle-password:hover .fa {
+  color: #007bff; /* Change color on hover */
+}
+

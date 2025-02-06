@@ -1,0 +1,429 @@
+<div class="wrapper">
+  <!-- Sidebar navbar -->
+  <nav *ngIf="isVisible" id="sidebar" class="bg-light border-dark">
+    <div class="sidebar-header p-3">
+      <div class="d-flex align-items-center flex-column">
+
+        <img
+          src="https://images.unsplash.com/7/sunset-hair.jpg?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Profile Avatar" class="rounded-circle" width="70" height="70" />
+        <div class="p-2">
+          <h6 class="">John Doe</h6>
+          <small class="text-muted">Administrator</small>
+        </div>
+      </div>
+    </div>
+
+
+    <div class=" ">
+      <ul class="nav flex-column nav-tabs mx-3" role="tablist">
+        <li class="nav-item ">
+          <a class="nav-link active fw-bold" data-bs-toggle="tab" href="#Dashboard" role="tab">
+            <i class="bi bi-house-door text-danger"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold" data-bs-toggle="tab" href="#User" role="tab">
+            <i class="bi bi-people text-success"></i>
+            <span>User</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold" data-bs-toggle="tab" href="#Agent" role="tab">
+            <i class="bi bi-people text-danger"></i>
+            <span>Agents</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold" data-bs-toggle="tab" href="#Property" role="tab">
+            <i class="bi bi-map "></i>
+            <span>Property</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold" data-bs-toggle="tab" href="#reports" role="tab">
+            <i class="bi bi-bar-chart text-warning"></i>
+            <span>Reports</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link fw-bold" data-bs-toggle="tab" href="#Content" role="tab">
+            <i class="bi bi-file-text text-primary"></i>
+            <span>Content</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Content  section -->
+  <div id="content">
+    <!-- Top navbar  in content section-->
+    <nav class="navbar navbar-expand-lg  bg-light shadow-sm ">
+      <div class="container-fluid">
+        <button type="button" (click)="toggle()" class="btn btn-dark btn-sm">
+          <i class="bi bi-list"></i>
+        </button>
+        <button class="btn btn-outline-dark btn-sm">
+          <i class="bi bi-person"></i>
+          LogOut
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main content  content section-->
+    <div class="container-fluid">
+      <div class="tab-content">
+        <!-- Dashboard Tab -->
+        <div class="tab-pane fade show active" id="Dashboard" role="tabpanel">
+          <div class=" mt-4">
+            <h3 class="mb-4">Real Estate Overview</h3>
+            <div class="row">
+              <div class="col-md-3 mb-4">
+                <div class="card text-white bg-dark">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Properties</h5>
+                    <p class="card-text display-4">156</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-4">
+                <div class="card text-white bg-danger">
+                  <div class="card-body">
+                    <h5 class="card-title">Properties Sold</h5>
+                    <p class="card-text display-4">42</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-4">
+                <div class="card text-white bg-success">
+                  <div class="card-body">
+                    <h5 class="card-title">New Listings</h5>
+                    <p class="card-text display-4">8</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 mb-4">
+                <div class="card text-white bg-warning">
+                  <div class="card-body">
+                    <h5 class="card-title">Pending Sales</h5>
+                    <p class="card-text display-4">15</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <app-recent-listed></app-recent-listed>
+
+          </div>
+        </div>
+
+        <!-- User Tab -->
+        <div class="tab-pane fade" id="User" role="tabpanel">
+          <div class="mt-4">
+            <h3>User</h3>
+            <app-user></app-user>
+          </div>
+        </div>
+
+        <!-- Agents mangae Tab -->
+        <div class="tab-pane fade" id="Agent" role="tabpanel">
+
+          <div class="mt-4">
+            <h3>Agents</h3>
+            <app-agent></app-agent>
+          </div>
+
+        </div>
+
+        <!-- property manage Tab -->
+        <div class="tab-pane fade" id="Property" role="tabpanel">
+          <div class="mt-4">
+            <div class=" mt-4">
+
+
+              <h3 class="mb-4">Property Listing</h3>
+
+              <div class="card">
+
+                <div class="card-header">
+                  <h5>Property for Approval</h5>
+
+                </div>
+
+                <div class="card-body">
+                  <div class="table-responsive" style="height: 200px; overflow-y: auto;">
+                    <table class="table table-striped" *ngIf="pendingProperties.length > 0; else noPending">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Property Name</th>
+                          <th>Category</th>
+                          <th>Address</th>
+                          <th>Year Built</th>
+                          <th>Status</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr *ngFor="let property of pendingProperties;  let i = index">
+                          <td>{{ i+1}}</td>
+                          <td>{{ property.title }}</td>
+                          <td>{{ property.propertyType}}</td>
+                          <td>{{ property.address}}</td>
+                          <td>{{ property.yearBuilt}}</td>
+                          <td>{{ property.status }}</td>
+                          <td>
+                            <button class="btn btn-success btn-sm ms-1" (click)="approveProperty(property.tempPropertyId)">Approve</button>
+                            <button class="btn btn-danger btn-sm ms-1" (click)="rejectProperty(property.tempPropertyId)">Reject</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <!-- If there are no pending properties, show this message -->
+                    <ng-template #noPending>
+                      <div class="alert alert-info text-center mt-3">
+                        No pending property approvals.
+                      </div>
+                    </ng-template>
+
+                  </div>
+                </div>
+              </div>
+
+              <!--! All property listing -->
+
+              <app-property></app-property>
+
+
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Reports Tab -->
+        <div class="tab-pane fade" id="reports" role="tabpanel">
+          <div class="mt-4">
+            <h3>Reports Analytics</h3>
+
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">
+                    Sales Performance
+                  </div>
+                  <div class="card-body">
+                    <canvas id="salesChart"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header">
+                    Property Type Distribution
+                  </div>
+                  <div class="card-body">
+                    <canvas id="propertyTypeChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-4">
+                <div class="card">
+                  <div class="card-header">
+                    Key Metrics
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Average Days on Market
+                      <span class="badge bg-primary rounded-pill">45</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Total Revenue (YTD)
+                      <span class="badge bg-success rounded-pill">$1.5M</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      Conversion Rate
+                      <span class="badge bg-info rounded-pill">12%</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="card">
+                  <div class="card-header">
+                    Top Performing Agents
+                  </div>
+                  <div class="card-body">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Agent</th>
+                          <th>Properties Sold</th>
+                          <th>Total Value</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>John Doe</td>
+                          <td>15</td>
+                          <td>$3.2M</td>
+                        </tr>
+                        <tr>
+                          <td>Jane Smith</td>
+                          <td>12</td>
+                          <td>$2.8M</td>
+                        </tr>
+                        <tr>
+                          <td>Mike Johnson</td>
+                          <td>10</td>
+                          <td>$2.5M</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    Generate Custom Reports
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <div class="row mb-3">
+                        <div class="col-md-4">
+                          <label for="reportType" class="form-label">Report Type</label>
+                          <select id="reportType" class="form-select">
+                            <option>Sales Summary</option>
+                            <option>Property Performance</option>
+                            <option>Client Acquisition</option>
+                            <option>Market Trends</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="dateRange" class="form-label">Date Range</label>
+                          <select id="dateRange" class="form-select">
+                            <option>Last 30 days</option>
+                            <option>Last 3 months</option>
+                            <option>Last 6 months</option>
+                            <option>Last year</option>
+                            <option>Custom range</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="format" class="form-label">Format</label>
+                          <select id="format" class="form-select">
+                            <option>PDF</option>
+                            <option>Excel</option>
+                            <option>CSV</option>
+                          </select>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Generate Report</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- contatent tab -->
+        <div class="tab-pane fade" id="Content" role="tabpanel">
+          <div class="mt-4">
+            <h3>Edit Blog</h3>
+            <div class="card">
+              <div class="card-header">
+                User List
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>#12345</td>
+                        <td>John Doe</td>
+                        <td>2023-05-20</td>
+                        <td><span class="badge bg-success">Completed</span></td>
+                        <td>$150.00</td>
+                        <td class="d-flex align-items-center ">
+                          <button class='btn btn-success btn-sm'>A</button>
+                          <button class='btn btn-danger btn-sm mx-1'>d</button>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="mt-4">
+            <h3>Edit Contact</h3>
+            <div class="card">
+              <div class="card-header">
+                User List
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>#12345</td>
+                        <td>John Doe</td>
+                        <td>2023-05-20</td>
+                        <td><span class="badge bg-success">Completed</span></td>
+                        <td>$150.00</td>
+                        <td class="d-flex align-items-center ">
+                          <button class='btn btn-success btn-sm'>A</button>
+                          <button class='btn btn-danger btn-sm mx-1'>d</button>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

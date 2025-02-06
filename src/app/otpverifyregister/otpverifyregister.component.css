@@ -1,0 +1,78 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+
+}
+
+.parent{
+  /*  background-color: #f0f4f8;  */
+background-image: url("src/assets/userloginbg/admin registrations.jpg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+
+.abc{
+text-align: left;
+
+}
+.otp-container {
+  background: white; /* White background for the container */
+  border-radius: 10px; /* Rounded corners */
+  padding: 30px; /* Padding around the content */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 300px; /* Fixed width for the container */
+  text-align: center; /* Center text alignment */
+}
+
+h2 {
+  margin-bottom: 20px; /* Space below the heading */
+  color: #333; /* Dark color for the heading */
+}
+
+label {
+  display: block; /* Make labels block elements */
+  margin-bottom: 5px; /* Space below labels */
+  color: #555; /* Medium gray color for labels */
+  font-weight: 600; /* Slightly bolder font */
+}
+
+input {
+  width: 100%; /* Full width for inputs */
+  padding: 10px; /* Padding inside inputs */
+  margin-bottom: 15px; /* Space below inputs */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px; /* Rounded corners for inputs */
+  font-size: 16px; /* Font size for inputs */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+input:focus {
+  border-color: #007bff; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+}
+
+button {
+  padding: 10px; /* Padding inside the button */
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white; /* White text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners for button */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Font size for button */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+  width: 100%;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+p {
+  margin-top: 15px; /* Space above the message */
+  color: #d9534f; /* Bootstrap danger color for messages */
+  font-weight: 500; /* Medium weight for messages */
+}

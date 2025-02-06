@@ -1,0 +1,128 @@
+.parent {
+  font-family: Arial, sans-serif;
+  background-image: url('../../assets/userloginbg/UserRegistration.jpg');
+  /* height: 200vh; */
+  padding: 3rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+
+
+/* Register Container */
+.register-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fffefe74;
+  border-radius: 18px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: -100px; /* Moves the container upward */
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #000000;
+  font-size:35px;
+}
+
+/* Form Fields */
+div {
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  color: #363535;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 25px; /* Rounded corners */
+  box-sizing: border-box;
+  outline: none;
+  transition: 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus,
+input[type="file"]:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+/* Button styling */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px; /* Rounded button */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Error Message */
+.error-message {
+  color: #f13c36;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Agreement Checkbox */
+label input[type="checkbox"] {
+  width: auto;
+  margin-right: 8px;
+}
+
+label {
+  display: inline-block;
+  font-size: 14px;
+  color: #555;
+}
+
+.agreement-section {
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .register-container {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+

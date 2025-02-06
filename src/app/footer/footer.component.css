@@ -1,0 +1,41 @@
+.footer {
+    background: linear-gradient(45deg, #47698d, #0e317c);
+    color: white;
+    padding: 50px 20px;
+  }
+  
+  .footer a {
+    color: #f8f9fa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline;
+    color: #ffc107;
+  }
+  
+  .footer h5 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+  }
+  
+  .footer .newsletter-input {
+    max-width: 400px;
+    border: none;
+    border-radius: 0;
+    outline: none;
+  }
+  
+  .footer .btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: black;
+    transition: background-color 0.3s ease;
+  }
+  
+  .footer .btn-warning:hover {
+    background-color: #e0a800;
+  }
+  

@@ -1,0 +1,28 @@
+
+<div class="parent">
+<div class="container">
+  <h2>Admin Login</h2>
+
+  <form (ngSubmit)="loginAdmin()">
+
+    <div class="a">
+
+      <label for="username">Username:</label>
+      <input id="username" [(ngModel)]="username" name="username" required />
+    </div>
+
+    <div class="a">
+      <label for="password">Password:</label>
+      <input id="password" [(ngModel)]="password" name="password" type="password" required />
+    </div>
+
+    <button type="submit">Login</button>
+
+    <div class="register-section">
+      <p>Don't have an account? <a routerLink="/adminregister" class="register-link">Register here</a></p>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </form>
+</div>
+</div>
