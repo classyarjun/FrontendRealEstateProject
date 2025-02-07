@@ -11,12 +11,9 @@ import { environment } from '../environments/environment'; // Import environment
 
 export class PropertyService {
 
-
   // private apiUrl = 'http://localhost:8080/api/properties';
 
   private apiUrl = environment.apiUrl; //?  apiUrl: 'http://localhost:8080/api',
-
-
 
   constructor(private http: HttpClient) {}
 
@@ -43,24 +40,24 @@ export class PropertyService {
   }
 
 
-
   getPropertyById(propertyId: number): Observable<Property> {
-    return this.http.get<Property>(`${this.apiUrl}/properties/${propertyId}`);
+    return this.http.get<Property>(`${this.apiUrl}/properties/getPropertyById/${propertyId}`);
   }
 
   deleteProperty(propertyId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/properties/${propertyId}`);
+    return this.http.delete(`${this.apiUrl}/properties/deleteProperty/${propertyId}`);
   }
 
-  updateProperty(propertyId: number, property: Property): Observable<Property> {
-    return this.http.put<Property>(`${this.apiUrl}/properties/${propertyId}`, property);
+  // updateProperty(propertyId: number, property: Property): Observable<Property> {
+  //   return this.http.put<Property>(`${this.apiUrl}/properties/updateProperty/${propertyId}`, property);
+  // }
+
+  updateProperty(propertyId: number, propertyData: FormData): Observable<Property> {
+    return this.http.put<Property>(`${this.apiUrl}/properties/updateProperty/${propertyId}`, propertyData);
   }
 
   searchProperties(keyword: string): Observable<Property[]> {
     return this.http.get<Property[]>(`${this.apiUrl}/properties/search/${keyword}`);
   }
-
-
-
 
 }

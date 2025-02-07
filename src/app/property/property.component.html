@@ -1,10 +1,14 @@
 
-
 <div class="card my-2">
-  <div class="card-header"><h5>Property List</h5></div>
+  <div class="card-header d-flex justify-content-between">
+    <h5>Property List</h5>
+    <button class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#addPropertyModal">
+      <i class="bi bi-plus-circle me-2"></i> Add Property
+    </button>
+  </div>
   <div class="card-body">
     <!-- <div class="table-responsive"> -->
-      <div class="table-responsive" style="height: 300px; overflow-y: auto;">
+      <div class="table-responsive" style="height: 500px; overflow-y: auto;">
 
       <table class="table table-striped">
         <thead>
@@ -23,24 +27,225 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let propert of property">
-            <td>{{ propert.propertyId }}</td>
-            <td>{{ propert.title }}</td>
-            <td>{{ propert.propertyType }}</td>
-            <td>{{ propert.size }}</td>
-            <td>{{ propert.price }}</td>
-            <td>{{ propert.yearBuilt }}</td>
-            <td>{{ propert.address }}</td>
-            <td>{{ propert.bedrooms }}</td>
-            <td>{{ propert.bathrooms }}</td>
-            <td>{{ propert.status }}</td>
+           <tr *ngFor="let property of properties">
+            <td>{{ property.propertyId }}</td>
+            <td>{{ property.title }}</td>
+            <td>{{ property.propertyType }}</td>
+            <td>{{ property.size }}</td>
+            <td>{{ property.price }}</td>
+            <td>{{ property.yearBuilt }}</td>
+            <td>{{ property.address }}</td>
+            <td>{{ property.bedrooms }}</td>
+            <td>{{ property.bathrooms }}</td>
+            <td>{{ property.status }}</td>
              <td>
-              <button class="btn btn-success btn-sm me-1">View</button>
-              <button class="btn btn-danger btn-sm me-1">Delete</button>
+              <button class="btn btn-primary btn-sm me-1">View</button>
+              <button class="btn btn-success btn-sm me-1"  (click)="loadProperty(property.propertyId!)"
+              data-bs-toggle="modal"
+              data-bs-target="#updatePropertyModal">Update</button>
+              <button class="btn btn-danger btn-sm me-1" (click)="deleteProperty(property.propertyId!)">Delete</button>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+
+<!--! // Bootstrap Modal for Adding Property //=======================  -->
+
+<div class="modal fade" id="addPropertyModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Property</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+
+          <div class="mb-3">
+            <label class="form-label">Property Title</label>
+            <input type="text" class="form-control" formControlName="title"
+              placeholder="Enter Property Title">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Address</label>
+            <input type="text" class="form-control" formControlName="address" placeholder="Enter Address">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input type="number" class="form-control" formControlName="price" placeholder="Enter Price">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Size (sq ft)</label>
+            <input type="number" class="form-control" formControlName="size" placeholder="Enter Size">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Year Built</label>
+            <input type="number" class="form-control" formControlName="yearBuilt"
+              placeholder="Enter Year Built">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Property Type</label>
+            <select class="form-control" formControlName="propertyType">
+              <option value="Apartment">Apartment</option>
+              <option value="House">House</option>
+              <option value="Villa">Villa</option>
+              <option value="Commercial">Commercial</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Bedrooms</label>
+            <input type="number" class="form-control" formControlName="bedrooms"
+              placeholder="Enter Bedrooms">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Bathrooms</label>
+            <input type="number" class="form-control" formControlName="bathrooms"
+              placeholder="Enter Bathrooms">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Features</label>
+            <input type="text" class="form-control" formControlName="features"
+              placeholder="Enter Features">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Amenities</label>
+            <input type="text" class="form-control" formControlName="amenities"
+              placeholder="Comma separated amenities">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Proximity</label>
+            <input type="text" class="form-control" formControlName="proximity"
+              placeholder="Enter Proximity Details">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Status</label>
+            <select class="form-control" formControlName="status">
+              <option value="ACTIVE">ACTIVE</option>
+
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <!-- <label class="form-label">Gallery Images</label> -->
+            <label class="form-label">Upload Images</label>
+            <input type="file" class="form-control" (change)="onFileSelected($event)" multiple>
+          </div>
+
+          <button type="submit" class="btn btn-success">Save Property</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--! // Bootstrap Modal for Update Property //=======================  -->
+
+
+<!-- Update Property Modal -->
+<div class="modal fade" id="updatePropertyModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Property</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateForm" (ngSubmit)="updateProperty()">
+
+          <div class="mb-3">
+            <label class="form-label">Property Title</label>
+            <input type="text" class="form-control" formControlName="title" placeholder="Enter Property Title">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Address</label>
+            <input type="text" class="form-control" formControlName="address" placeholder="Enter Address">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input type="number" class="form-control" formControlName="price" placeholder="Enter Price">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Size (sq ft)</label>
+            <input type="number" class="form-control" formControlName="size" placeholder="Enter Size">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Year Built</label>
+            <input type="number" class="form-control" formControlName="yearBuilt" placeholder="Enter Year Built">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Property Type</label>
+            <select class="form-control" formControlName="propertyType">
+              <option value="Apartment">Apartment</option>
+              <option value="House">House</option>
+              <option value="Villa">Villa</option>
+              <option value="Commercial">Commercial</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Bedrooms</label>
+            <input type="number" class="form-control" formControlName="bedrooms" placeholder="Enter Bedrooms">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Bathrooms</label>
+            <input type="number" class="form-control" formControlName="bathrooms" placeholder="Enter Bathrooms">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Features</label>
+            <input type="text" class="form-control" formControlName="features" placeholder="Enter Features">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Amenities</label>
+            <input type="text" class="form-control" formControlName="amenities" placeholder="Comma separated amenities">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Proximity</label>
+            <input type="text" class="form-control" formControlName="proximity" placeholder="Enter Proximity Details">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Status</label>
+            <select class="form-control" formControlName="status">
+              <option value="ACTIVE">ACTIVE</option>
+              <option value="SOLD">SOLD</option>
+              <option value="PENDING">PENDING</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Upload Images</label>
+            <input type="file" class="form-control" (change)="onFileSelected($event)" multiple>
+          </div>
+
+          <button type="submit" class="btn btn-success">Update Property</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

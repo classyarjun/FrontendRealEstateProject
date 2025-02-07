@@ -28,9 +28,8 @@
             <td>{{ agent.experience }}</td>
             <td>{{ agent.rating }}</td>
             <td>{{ agent.status }}</td>
-           
             <td>
-              <button class="btn btn-danger">Delete</button>
+              <button class="btn btn-danger"  (click)="deleteAgent(agent.id!)" [disabled]="!agent.id">Delete</button>
             </td>
           </tr>
         </tbody>

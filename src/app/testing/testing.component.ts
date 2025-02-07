@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from './../../services/admin.service';
+import { AdminService } from 'src/services/admin.service';
+import { AuthService } from 'src/services/auth.service';
+
 
 @Component({
   selector: 'app-testing',
@@ -9,14 +11,18 @@ import { AdminService } from './../../services/admin.service';
 export class TestingComponent implements OnInit {
   pendingProperties: any[] = [];
 
-  constructor(private AdminService: AdminService) {}
+
+  adminId: number | null = null;
+
+  constructor(private adminService: AdminService, private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.adminId = this.authService.getAdminId();
     this.fetchPendingProperties();
   }
 
   fetchPendingProperties(): void {
-    this.AdminService.getAllPendingProperties().subscribe({
+    this.adminService.getAllPendingProperties().subscribe({
       next: (data: any[]) => {
         this.pendingProperties = data;
         // console.log('Pending Properties:', data);
@@ -30,7 +36,7 @@ export class TestingComponent implements OnInit {
 
   approveProperty(tempPropertyId: number): void {
     const adminId = 1; //repalce your admin id here
-    this.AdminService.approveProperty(tempPropertyId, adminId).subscribe({
+    this.adminService.approveProperty(tempPropertyId, adminId).subscribe({
       next: (response: string) => {
         alert('Property Approved Successfully!');
         this.fetchPendingProperties();
@@ -42,17 +48,38 @@ export class TestingComponent implements OnInit {
     });
   }
 
+
   rejectProperty(tempPropertyId: number): void {
-    const adminId = 1; //repalce your admin id here
-    this.AdminService.rejectProperty(tempPropertyId, adminId).subscribe({
-      next: (response: string) => {
+    if (!this.adminId) {
+      alert('Admin ID not found!');
+      return;
+    }
+    this.adminService.rejectProperty(tempPropertyId, this.adminId).subscribe({
+      next: () => {
         alert('Property rejected successfully!');
-        this.fetchPendingProperties();
       },
-      error: (err: any) => {
+      error: (err) => {
         console.error('Error rejecting property:', err);
         alert('Error rejecting property!');
       }
     });
   }
 }
+
+
+  // rejectProperty(tempPropertyId: number): void {
+  //   const adminId = 1; //repalce your admin id here
+  //   this.AdminService.rejectProperty(tempPropertyId, adminId).subscribe({
+  //     next: (response: string) => {
+  //       alert('Property rejected successfully!');
+  //       this.fetchPendingProperties();
+  //     },
+  //     error: (err: any) => {
+  //       console.error('Error rejecting property:', err);
+  //       alert('Error rejecting property!');
+  //     }
+  //   });
+  // }
+
+
+

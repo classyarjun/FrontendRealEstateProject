@@ -17,6 +17,14 @@ import { PropertyComponent } from './property/property.component';
 import { RecentListedComponent } from './recent-listed/recent-listed.component';
 import { OtpverifyregisterComponent } from './otpverifyregister/otpverifyregister.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import { XyzComponent } from './xyz/xyz.component';
+
+
+
+
+
+
 const routes: Routes = [
 
   { path: '', component: HomeComponent},
@@ -36,6 +44,8 @@ const routes: Routes = [
   { path: 'recent', component: RecentListedComponent},
   { path: 'otpverifyregister', component: OtpverifyregisterComponent},
   { path: 'reset-password', component: ResetpasswordComponent},
+  { path: 'xyz', component: XyzComponent},
+
 
 
 ];

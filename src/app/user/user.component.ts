@@ -34,6 +34,7 @@ export class UserComponent implements OnInit {
   }
 
   deleteUser(id: number): void {
+    if (confirm("Are you sure you want to delete this user?")) {
     if (id) {
       this.userService.deleteUser(id).subscribe(() => {
         this.users = this.users.filter(user => user.id !== id);
@@ -42,6 +43,7 @@ export class UserComponent implements OnInit {
     alert('User deleted successfully');
    this.loadUsers();
   }
+}
 
 //getUserById
   getUserById(id: number): void {

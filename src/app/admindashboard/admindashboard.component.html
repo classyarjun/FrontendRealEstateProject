@@ -85,7 +85,7 @@
                 <div class="card text-white bg-dark">
                   <div class="card-body">
                     <h5 class="card-title">Total Properties</h5>
-                    <p class="card-text display-4">156</p>
+                    <p class="card-text display-4">{{property.length}}</p>
                   </div>
                 </div>
               </div>
@@ -93,7 +93,7 @@
                 <div class="card text-white bg-danger">
                   <div class="card-body">
                     <h5 class="card-title">Properties Sold</h5>
-                    <p class="card-text display-4">42</p>
+                    <p class="card-text display-4">{{pendingProperties.length > 0 ? pendingProperties.length : 0}}</p>
                   </div>
                 </div>
               </div>
@@ -101,10 +101,11 @@
                 <div class="card text-white bg-success">
                   <div class="card-body">
                     <h5 class="card-title">New Listings</h5>
-                    <p class="card-text display-4">8</p>
+                    <p class="card-text display-4">{{pendingProperties.length > 0 ? pendingProperties.length : 0}}</p>
                   </div>
                 </div>
               </div>
+
               <div class="col-md-3 mb-4">
                 <div class="card text-white bg-warning">
                   <div class="card-body">
@@ -113,47 +114,16 @@
                   </div>
                 </div>
               </div>
+
             </div>
 
 
-            <app-recent-listed></app-recent-listed>
-
-          </div>
-        </div>
-
-        <!-- User Tab -->
-        <div class="tab-pane fade" id="User" role="tabpanel">
-          <div class="mt-4">
-            <h3>User</h3>
-            <app-user></app-user>
-          </div>
-        </div>
-
-        <!-- Agents mangae Tab -->
-        <div class="tab-pane fade" id="Agent" role="tabpanel">
-
-          <div class="mt-4">
-            <h3>Agents</h3>
-            <app-agent></app-agent>
-          </div>
-
-        </div>
-
-        <!-- property manage Tab -->
-        <div class="tab-pane fade" id="Property" role="tabpanel">
-          <div class="mt-4">
-            <div class=" mt-4">
-
-
-              <h3 class="mb-4">Property Listing</h3>
-
+            <div class="card my-2">
+              <h3 class="m-3 text-center">Property Listing</h3>
               <div class="card">
-
                 <div class="card-header">
                   <h5>Property for Approval</h5>
-
                 </div>
-
                 <div class="card-body">
                   <div class="table-responsive" style="height: 200px; overflow-y: auto;">
                     <table class="table table-striped" *ngIf="pendingProperties.length > 0; else noPending">
@@ -191,21 +161,45 @@
                         No pending property approvals.
                       </div>
                     </ng-template>
-
                   </div>
                 </div>
               </div>
-
               <!--! All property listing -->
-
-              <app-property></app-property>
-
-
-
-
             </div>
+
+
+
+
+
+            <!-- <app-property></app-property> -->
+
+
           </div>
         </div>
+
+        <!-- User Tab -->
+        <div class="tab-pane fade" id="User" role="tabpanel">
+          <div class="mt-4">
+            <h3>User</h3>
+            <app-user></app-user>
+          </div>
+        </div>
+
+        <!-- Agents mangae Tab -->
+        <div class="tab-pane fade" id="Agent" role="tabpanel">
+
+          <div class="mt-4">
+            <h3>Agents</h3>
+            <app-agent></app-agent>
+          </div>
+
+        </div>
+
+        <!-- property manage Tab -->
+        <div class="tab-pane fade" id="Property" role="tabpanel">
+           <app-property></app-property>
+        </div>
+
 
         <!-- Reports Tab -->
         <div class="tab-pane fade" id="reports" role="tabpanel">

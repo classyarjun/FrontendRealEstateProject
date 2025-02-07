@@ -27,6 +27,7 @@ import { RecentListedComponent } from './recent-listed/recent-listed.component';
 import { OtpverifyregisterComponent } from './otpverifyregister/otpverifyregister.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
+import { XyzComponent } from './xyz/xyz.component';
 
 
 
@@ -53,6 +54,7 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
     OtpverifyregisterComponent,
     ResetpasswordComponent,
     SearchbarComponent,
+    XyzComponent,
   ],
   imports: [
     BrowserModule,

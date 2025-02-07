@@ -2,11 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { AdminService } from './../../services/admin.service';
-
+import { Property } from 'src/modal/property';
+import { PropertyService } from './../../services/property.service';
 
 Chart.register(...registerables);
-
-
 
 @Component({
   selector: 'app-admindashboard',
@@ -17,7 +16,9 @@ Chart.register(...registerables);
 export class AdmindashboardComponent implements OnInit {
   pendingProperties: any[] = [];
 
+  property: Property[] = []
   isVisible = true;
+
   toggle() {
     this.isVisible = !this.isVisible;
   }
@@ -25,14 +26,14 @@ export class AdmindashboardComponent implements OnInit {
   salesChart: any;
   propertyTypeChart: any;
 
-  constructor(private AdminService: AdminService) {}
-
+  constructor(private AdminService: AdminService,private PropertyService: PropertyService) {}
 
 
   ngOnInit() {
     this.createSalesChart();
     this.createPropertyTypeChart();
     this.fetchPendingProperties();
+    this.loadProperty()
 
   }
 
@@ -130,4 +131,27 @@ export class AdmindashboardComponent implements OnInit {
     });
   }
 
+
+  loadProperty(): void {
+    this.PropertyService.getAllProperties().subscribe(
+      (property) => {
+        this.property = property;
+        // console.log("Fetched Properties:", this.property.length); // ✅ Console Log Added
+      },
+      (error) => console.error("Error fetching property:", error)
+    );
+  }
+
+
+
 }
+
+
+//? testing code
+
+
+
+
+
+
+
