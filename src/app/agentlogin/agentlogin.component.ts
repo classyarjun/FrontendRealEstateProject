@@ -1,6 +1,5 @@
-
-
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AgentService } from 'src/services/agent.service';
 import { Router } from '@angular/router';
 
@@ -10,35 +9,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./agentlogin.component.css']
 })
 export class AgentloginComponent {
-  username: string = '';
-  password: string = '';
-  showPassword: boolean = false; // Password visibility state
+  loginForm: FormGroup;
+  showPassword: boolean = false;
 
-  constructor(private agentService: AgentService, private router: Router) {}
+  constructor(private fb: FormBuilder, private agentService: AgentService, private router: Router) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
-  // Toggle password visibility
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
 
-  // Close login modal (Navigate to Home)
   closeLogin(): void {
     this.router.navigate(['/']);
   }
 
-  // Submit login
   loginAgent(): void {
-    this.agentService.loginAgent(this.username, this.password).subscribe(
-      (data) => {
-        alert('Login successful!');
-        console.log('Logged in agent:', data);
-        this.router.navigate(['/agentpanel']); // Redirect after login
-      },
-      (error) => {
-        console.error('Login failed:', error);
-        alert('Login failed. Please check your credentials.');
-      }
-    );
+    if (this.loginForm.valid) {
+      const { username, password } = this.loginForm.value;
+      this.agentService.loginAgent(username, password).subscribe(
+        (data) => {
+          alert('Login successful!');
+          console.log('Logged in agent:', data);
+          this.router.navigate(['/agentpanel']);
+        },
+        (error) => {
+          console.error('Login failed:', error);
+          alert('Login failed. Please check your credentials.');
+        }
+      );
+    }
   }
 }
-

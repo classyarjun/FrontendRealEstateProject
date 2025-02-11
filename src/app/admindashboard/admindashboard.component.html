@@ -158,7 +158,7 @@
                     <!-- If there are no pending properties, show this message -->
                     <ng-template #noPending>
                       <div class="alert alert-info text-center mt-3">
-                        No pending property approvals.
+                        No pending propertys approvals.
                       </div>
                     </ng-template>
                   </div>
@@ -166,21 +166,13 @@
               </div>
               <!--! All property listing -->
             </div>
-
-
-
-
-
-            <!-- <app-property></app-property> -->
-
-
           </div>
         </div>
 
         <!-- User Tab -->
         <div class="tab-pane fade" id="User" role="tabpanel">
           <div class="mt-4">
-            <h3>User</h3>
+            <h3>User Management Panel</h3>
             <app-user></app-user>
           </div>
         </div>
@@ -188,11 +180,60 @@
         <!-- Agents mangae Tab -->
         <div class="tab-pane fade" id="Agent" role="tabpanel">
 
-          <div class="mt-4">
-            <h3>Agents</h3>
-            <app-agent></app-agent>
-          </div>
+          <div class="my-2">
+            <h3>Agents Management Panel</h3>
+            <!-- //? write your code here-->
 
+            <div class="card my-2">
+              <h3 class="m-3 text-center">Agents Listing</h3>
+              <div class="card">
+                <div class="card-header">
+                  <h5>Agents for Approval</h5>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive" style="height: 200px; overflow-y: auto;">
+                    <table class="table table-striped" *ngIf="pendingAgents.length > 0; else noPendingAgent">
+                      <thead>
+                        <tr>
+                          <th>Id</th>
+                          <th>Full Name</th>
+                          <th>Username</th>
+                          <th>Email</th>
+                          <th>Mobile No</th>
+                          <th>Experience</th>
+                          <th>Status</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <tr *ngFor="let agent of pendingAgents;  let i = index">
+                          <td>{{ i+1}}</td>
+                          <td>{{ agent.fullName }}</td>
+                          <td>{{ agent.userName}}</td>
+                          <td>{{ agent.email}}</td>
+                          <td>{{ agent.mobileNo}}</td>
+                          <td>{{ agent.experience}} Years</td>
+                          <td>{{ agent.status}}</td>
+                          <!-- <td>{{ agent.email}}</td> -->
+                          <td>
+                            <button class="btn btn-success btn-sm ms-1" (click)="approveAgent(agent.id)">Approve</button>
+                            <button class="btn btn-danger btn-sm ms-1" (click)="rejectAgent(agent.id)">Reject</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <!-- If there are no pending properties, show this message -->
+                    <ng-template #noPendingAgent>
+                      <div class="alert alert-info text-center mt-3">
+                        No pending Agent approvals.
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+              <app-agent></app-agent>
         </div>
 
         <!-- property manage Tab -->

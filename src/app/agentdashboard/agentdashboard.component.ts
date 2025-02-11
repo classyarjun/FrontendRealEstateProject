@@ -1,20 +1,22 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PropertyService } from '../../services/property.service';
+import { Property } from 'src/modal/property';
 
 @Component({
   selector: 'app-agentdashboard',
   templateUrl: './agentdashboard.component.html',
   styleUrls: ['./agentdashboard.component.css']
 })
-export class AgentdashboardComponent {
+export class AgentdashboardComponent implements OnInit  {
   propertyForm: FormGroup;
   selectedFiles: FileList | null = null;
 
   agentId: number = 1; // Example agentId
   recipientEmail: string = "akkiraj7531@gmail.com";
   isVisible = true;
-
+  property: Property[] = [];
+  properties: Property[] = [];
 
   constructor(private fb: FormBuilder, private propertyService: PropertyService) {
     this.propertyForm = this.fb.group({
@@ -33,14 +35,22 @@ export class AgentdashboardComponent {
       status: ['', Validators.required],
     });
   }
-
-
-
+  ngOnInit() {
+    this.loadProperties();
+  }
   toggle() {
     this.isVisible = !this.isVisible;
   }
 
-
+  loadProperties(): void {
+    this.propertyService.getAllProperties().subscribe(
+      (data: Property[]) => {
+        this.properties = data;
+      },
+      (error) => console.error("Error fetching properties:", error)
+    );
+  }
+  
   // Handle file selection
   onFileSelected(event: any) {
     this.selectedFiles = event.target.files;
@@ -84,5 +94,21 @@ export class AgentdashboardComponent {
         );
     }
   }
+
+
+  deleteProperty(propertyId: number): void {
+    if (confirm('Are you sure you want to delete this property?')) {
+      this.propertyService.deleteProperty(propertyId).subscribe({
+        next: (response) => {
+          console.log('Property deleted successfully', response);
+          this.loadProperties();  // Refresh the properties list
+        },
+        error: (error) => {
+          console.error('Error deleting property', error);
+        },
+      });
+    }
+  }
+
 }
 

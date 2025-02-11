@@ -1,7 +1,10 @@
 <div class="card">
-  <div class="card-header">User List</div>
+  <div class="card-header">
+    <h5>Approval Agent List</h5>
+
+  </div>
   <div class="card-body">
-    <div class="table-responsive">
+    <div class="table-responsive" style="height:400px; overflow-y: auto;">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -10,7 +13,6 @@
             <th>Full Name</th>
             <th>Email</th>
             <th>Mobile No</th>
-            <th>Role</th>
             <th>Experience</th>
             <th>Rating</th>
             <th>Status</th>
@@ -20,11 +22,10 @@
         <tbody>
           <tr *ngFor="let agent of agents">
             <td>{{ agent.id }}</td>
-            <td>{{ agent.username }}</td>
-            <td>{{ agent.fullname }}</td>
+            <td>{{ agent.userName }}</td>
+            <td>{{ agent.fullName }}</td>
             <td>{{ agent.email }}</td>
             <td>{{ agent.mobileNo }}</td>
-            <td>{{ agent.role }}</td>
             <td>{{ agent.experience }}</td>
             <td>{{ agent.rating }}</td>
             <td>{{ agent.status }}</td>

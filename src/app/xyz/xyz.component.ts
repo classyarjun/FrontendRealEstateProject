@@ -1,3 +1,5 @@
+import { AgentService } from 'src/services/agent.service';
+import { AdminService } from './../../services/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { PropertyService } from 'src/services/property.service';
 import { Property } from '../../modal/property';
@@ -9,17 +11,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./xyz.component.css']
 })
 
+
 export class XyzComponent implements OnInit {
-  updateForm!: FormGroup;
-  selectedProperty!: Property | null;
-  property: Property[] = [];
-  selectedFiles: FileList | null = null;
-  properties: Property[]= [];
+  propertyForm: FormGroup;
+  selectedFiles: File[] = [];
+  agentId: number = 9;
 
-  constructor(private fb: FormBuilder, private propertyService: PropertyService) {}
-
-  ngOnInit(): void {
-    this.updateForm = this.fb.group({
+  constructor(private fb: FormBuilder, private propertyService: PropertyService) {
+    this.propertyForm = this.fb.group({
       title: ['', Validators.required],
       price: [0, Validators.required],
       size: [0, Validators.required],
@@ -28,75 +27,43 @@ export class XyzComponent implements OnInit {
       propertyType: ['', Validators.required],
       bedrooms: [0, Validators.required],
       bathrooms: [0, Validators.required],
+      amenities: [''],
       features: [''],
       status: ['', Validators.required],
-      amenities: [''],
-      proximity: [''],
-      galleryImages: [''], // New field
-      admin: this.fb.group({
-        adminId: [0, Validators.required]
-      })
+      availability: ['', Validators.required],
+      proximity: ['']
     });
-    this.loadAllProperty();
   }
+
+  ngOnInit() {}
 
   onFileSelected(event: any) {
-    this.selectedFiles = event.target.files;
+    this.selectedFiles = Array.from(event.target.files);
   }
 
-
-  loadAllProperty(): void {
-    this.propertyService.getAllProperties().subscribe(
-      (property) => {
-        this.property = property;
-        console.log("Fetched Properties:", this.property.length); //
-      },
-      (error) => console.error("Error fetching property:", error)
-    );
-  }
-
-  loadProperty(propertyId: number): void {
-    this.propertyService.getPropertyById(propertyId).subscribe(
-      (property) => {
-        this.selectedProperty = property;
-        this.updateForm.patchValue(property);
-        console.log('Fetched Property:', property);
-
-      },
-      (error) => console.error('Error fetching property:', error)
-    );
-  }
-
-  updateProperty(): void {
-    if (this.selectedProperty) {
+  onSubmit() {
+    if (this.propertyForm.valid) {
       const formData = new FormData();
+      const formValue = { ...this.propertyForm.value };
 
-      // convert form value to JSON
-      const propertyJson = JSON.stringify(this.updateForm.value);
-      formData.append("property", propertyJson);  // send to JSON as String
+      // Convert amenities from string to array
+      formValue.amenities = formValue.amenities ? formValue.amenities.split(',').map((item: string) => item.trim()) : [];
 
-      // Add to Multiple files in FormData
-      if (this.selectedFiles) {
-        Array.from(this.selectedFiles).forEach((file) => {
-          formData.append("files", file);
-        });
-      }
+      formData.append('property', JSON.stringify(formValue));
 
-      // API call to update property
-      if(confirm("Are you sure you want to update this property?")){
+      this.selectedFiles.forEach((file) => {
+        formData.append('images', file);
+      });
 
-      this.propertyService.updateProperty(this.selectedProperty.propertyId!, formData).subscribe(
+      this.propertyService.addProperty(this.agentId, formData).subscribe(
         (response) => {
-          console.log("Property updated successfully:", response);
-          this.selectedProperty = null;
-          this.updateForm.reset();
-          this.selectedFiles = null;
+          console.log('Property added:', response);
+          alert('Property added successfully');
+          this.propertyForm.reset();
+          this.selectedFiles = [];
         },
-        (error) => console.error("Error updating property:", error)
+        (error) => console.error('Error:', error)
       );
     }
   }
-
-  }
-
 }

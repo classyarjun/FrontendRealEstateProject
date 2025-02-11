@@ -1,186 +1,81 @@
-/* Form Styling */
-body {
-  background: url('src/assets/userloginbg/agent Registration.jpg') no-repeat center center/cover;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: 'Poppins', sans-serif;
+/* Container for the form */
+.form-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+  background-color: #f4f4f4; /* Light background color */
 }
 
-form {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 15px;
-  background-color: rgba(249, 249, 249, 0.8); /* Transparent white background */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  transition: transform 0.3s ease-in-out;
+/* Form styling */
+.agent-form {
+  background-color: #ffffff; /* White background for the form */
+  padding: 20px; /* Padding around the form */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 600px; /* Fixed width for the form */
 }
 
-h2, .agreement-container, button {
-  grid-column: span 2;
-  text-align: center;
-  margin-bottom: 10px;
+/* Input group styling */
+.input-group {
+  display: flex; /* Use flexbox for the input group */
+  justify-content: space-between; /* Space between inputs */
+  margin-bottom: 15px; /* Space below input groups */
 }
 
-/* Input and Select Fields */
+/* Individual input field styling */
+.input-field {
+  flex: 1; /* Allow fields to grow equally */
+  margin-right: 10px; /* Space between fields */
+}
+
+.input-field:last-child {
+  margin-right: 0; /* Remove margin for the last field */
+}
+
+/* Form elements styling */
+label {
+  display: block; /* Make labels block elements */
+  margin-bottom: 5px; /* Space between label and input */
+  font-weight: bold; /* Bold labels */
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"],
 textarea,
 select {
-  width: 89%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  transition: border-color 0.3s ease;
+  width: 100%; /* Full width */
+  padding: 10px; /* Padding inside inputs */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 16px; /* Font size */
 }
 
-textarea {
-  grid-column: span 2;
-  resize: vertical;
-  min-height: 60px;
-}
-
+/* File input styling */
 input[type="file"] {
-  padding: 5px;
-  font-size: 12px;
-  grid-column: span 2;
+  margin-bottom: 15px; /* Space below file input */
 }
 
+/* Button styling */
 button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  border: none;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white; /* White text */
+  padding : 10px; /* Padding inside button */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Font size */
+  transition: background-color 0.3s; /* Smooth transition */
+  width: 100%; /* Full width */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
 button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+  background-color: #ccc; /* Gray background for disabled button */
+  cursor: not-allowed; /* Not-allowed cursor */
 }
-
-button:hover:not(:disabled) {
-  background-color: #0056b3;
-}
-
-/* Responsive Design */
-@media (max-width: 480px) {
-  form {
-    grid-template-columns: 1fr;
-    width: 90%;
-    padding: 10px;
-  }
-}
-
-/* Password Input Wrapper */
-.password-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.password-container input {
-  width: 100%;
-  padding-right: 40px;
-}
-
-.eye-icon {
-  position: absolute;
-  right: 10px;
-  cursor: pointer;
-  color: #666;
-  font-size: 16px;
-}
-
-.eye-icon:hover {
-  color: #007bff;
-}
-
-input.ng-invalid.ng-touched,
-textarea.ng-invalid.ng-touched,
-select.ng-invalid.ng-touched {
-  border: 2px solid red;
-}
-.close-btn {
-  position: absolute;
-  top: 70px;
-  right: 330px;
-  font-size: 24px;
-  cursor: pointer;
-  color: red;
-  transition: 0.3s;
-  font-weight: bold;
-}
-
-.close-btn:hover {
-  color: darkred;
-}
-.alert {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-/* Popup container */
-.popup-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-/* Popup box */
-.popup {
-  background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.popup h2 {
-  margin-bottom: 20px;
-  color: green;
-}
-
-.popup p {
-  margin-bottom: 20px;
-  font-size: 16px;
-}
-
-.popup button {
-  padding: 10px 20px;
-  background-color: green;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.popup button:hover {
-  background-color: darkgreen;
-}
-

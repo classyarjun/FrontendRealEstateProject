@@ -27,13 +27,12 @@ export class PropertyService {
       });
     }
 
-    if (recipientEmail) {
-      formData.append('recipientEmail', recipientEmail);
-    }
 
-    return this.http.post<any>(`${this.apiUrl}/properties/saveProperty/${agentId}`, formData);
+    return this.http.post<any>(`${this.apiUrl}/properties/addProperty/${agentId}`, formData);
   }
-
+  addProperty(agentId: number, formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/properties/addProperty/${agentId}`, formData);
+  }
 
   getAllProperties(): Observable<Property[]> {
     return this.http.get<Property[]>(`${this.apiUrl}/properties/getAllProperties`);
@@ -47,10 +46,6 @@ export class PropertyService {
   deleteProperty(propertyId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/properties/deleteProperty/${propertyId}`);
   }
-
-  // updateProperty(propertyId: number, property: Property): Observable<Property> {
-  //   return this.http.put<Property>(`${this.apiUrl}/properties/updateProperty/${propertyId}`, property);
-  // }
 
   updateProperty(propertyId: number, propertyData: FormData): Observable<Property> {
     return this.http.put<Property>(`${this.apiUrl}/properties/updateProperty/${propertyId}`, propertyData);

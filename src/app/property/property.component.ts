@@ -130,7 +130,6 @@ export class PropertyComponent implements OnInit {
   properties: Property[] = [];
   selectedProperty: Property | null = null;
   selectedFiles: FileList | null = null;
-
   propertyForm: FormGroup;
   updateForm: FormGroup;
   agentId: number = 1;

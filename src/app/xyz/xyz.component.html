@@ -1,107 +1,104 @@
-<p>xyz works!</p>
-
-<!-- <button class=" btn-primary"  (click)="loadProperty(property.propertyId!)"> vhbdjfv</button> -->
-
-<div *ngFor="let propertyies of property">
-  <p>{{ propertyies.title }} - {{ propertyies.address }}</p>
-
-  <button class="btn btn-primary"
-          (click)="loadProperty(propertyies.propertyId!)"
-          data-bs-toggle="modal"
-          data-bs-target="#updatePropertyModal">
-    Update Property
-  </button>
-</div>
+<button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#addPropertyModal">
+  <i class="bi bi-plus-circle me-2"></i> Add Property
+</button>
 
 
-<!-- Update Property Modal -->
-<div class="modal fade" id="updatePropertyModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Update Property</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="updateForm" (ngSubmit)="updateProperty()">
+<!--! // Bootstrap Modal for Adding Property // =======================  -->
 
-          <div class="mb-3">
-            <label class="form-label">Property Title</label>
-            <input type="text" class="form-control" formControlName="title" placeholder="Enter Property Title">
-          </div>
+              <div class="modal fade" id="addPropertyModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Add New Property</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
 
-          <div class="mb-3">
-            <label class="form-label">Address</label>
-            <input type="text" class="form-control" formControlName="address" placeholder="Enter Address">
-          </div>
 
-          <div class="mb-3">
-            <label class="form-label">Price</label>
-            <input type="number" class="form-control" formControlName="price" placeholder="Enter Price">
-          </div>
+                        <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label class="form-label">Title</label>
+                                <input type="text" class="form-control" formControlName="title" required>
+                            </div>
 
-          <div class="mb-3">
-            <label class="form-label">Size (sq ft)</label>
-            <input type="number" class="form-control" formControlName="size" placeholder="Enter Size">
-          </div>
+                            <div class="mb-3">
+                                <label class="form-label">Price</label>
+                                <input type="number" class="form-control" formControlName="price" required>
+                            </div>
 
-          <div class="mb-3">
-            <label class="form-label">Year Built</label>
-            <input type="number" class="form-control" formControlName="yearBuilt" placeholder="Enter Year Built">
-          </div>
+                            <div class="mb-3">
+                                <label class="form-label">Size</label>
+                                <input type="number" class="form-control" formControlName="size" required>
+                            </div>
 
-          <div class="mb-3">
-            <label class="form-label">Property Type</label>
-            <select class="form-control" formControlName="propertyType">
-              <option value="Apartment">Apartment</option>
-              <option value="House">House</option>
-              <option value="Villa">Villa</option>
-              <option value="Commercial">Commercial</option>
-            </select>
-          </div>
+                            <div class="mb-3">
+                                <label class="form-label">Address</label>
+                                <input type="text" class="form-control" formControlName="address" required>
+                            </div>
 
-          <div class="mb-3">
-            <label class="form-label">Bedrooms</label>
-            <input type="number" class="form-control" formControlName="bedrooms" placeholder="Enter Bedrooms">
-          </div>
+                            <div class="mb-3">
+                                <label class="form-label">Year Built</label>
+                                <input type="number" class="form-control" formControlName="yearBuilt" required>
+                            </div>
 
-          <div class="mb-3">
-            <label class="form-label">Bathrooms</label>
-            <input type="number" class="form-control" formControlName="bathrooms" placeholder="Enter Bathrooms">
-          </div>
+                            <div class="mb-3">
+                                <label class="form-label">Property Type</label>
+                                <input type="text" class="form-control" formControlName="propertyType" required>
+                            </div>
 
-          <div class="mb-3">
-            <label class="form-label">Features</label>
-            <input type="text" class="form-control" formControlName="features" placeholder="Enter Features">
-          </div>
+                            <div class="mb-3">
+                                <label class="form-label">Bedrooms</label>
+                                <input type="number" class="form-control" formControlName="bedrooms" required>
+                            </div>
 
-          <div class="mb-3">
-            <label class="form-label">Amenities</label>
-            <input type="text" class="form-control" formControlName="amenities" placeholder="Comma separated amenities">
-          </div>
+                            <div class="mb-3">
+                                <label class="form-label">Bathrooms</label>
+                                <input type="number" class="form-control" formControlName="bathrooms" required>
+                            </div>
 
-          <div class="mb-3">
-            <label class="form-label">Proximity</label>
-            <input type="text" class="form-control" formControlName="proximity" placeholder="Enter Proximity Details">
-          </div>
+                            <div class="mb-3">
+                                <label class="form-label">Amenities (Comma Separated)</label>
+                                <input type="text" class="form-control" formControlName="amenities">
+                            </div>
 
-          <div class="mb-3">
-            <label class="form-label">Status</label>
-            <select class="form-control" formControlName="status">
-              <option value="ACTIVE">ACTIVE</option>
-              <option value="SOLD">SOLD</option>
-              <option value="PENDING">PENDING</option>
-            </select>
-          </div>
+                            <div class="mb-3">
+                                <label class="form-label">Features</label>
+                                <input type="text" class="form-control" formControlName="features">
+                            </div>
 
-          <div class="mb-3">
-            <label class="form-label">Upload Images</label>
-            <input type="file" class="form-control" (change)="onFileSelected($event)" multiple>
-          </div>
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select class="form-control" formControlName="status">
+                                    <option value="PENDING">Pending</option>
+                                    <option value="ACTIVE">Active</option>
+                                    <option value="REJECTED">Rejected</option>
+                                </select>
+                            </div>
 
-          <button type="submit" class="btn btn-success">Update Property</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+                            <div class="mb-3">
+                                <label class="form-label">Availability</label>
+                                <select class="form-control" formControlName="availability">
+                                    <option value="AVAILABLE">Available</option>
+                                    <option value="RENTED">Rented</option>
+                                    <option value="SOLD">Sold</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Proximity</label>
+                                <input type="text" class="form-control" formControlName="proximity">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Upload Images</label>
+                                <input type="file" class="form-control" (change)="onFileSelected($event)" multiple>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Add Property</button>
+                        </form>
+
+
+
+                    </div>
+                  </div>
+                </div>

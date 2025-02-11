@@ -1,64 +1,94 @@
-
-
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Agent } from '../modal/agent';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AgentService {
+  // private apiUrl = 'http://localhost:9090/api/agents'; // Base API URL.
 
-  // private apiUrl = 'http://localhost:8080/api/agents'; // Base API URL.
-
-    private apiUrl = environment.apiUrl; //?  apiUrl: 'http://localhost:8080/api',
-
+  private apiUrl = environment.apiUrl; //?  apiUrl: 'http://localhost:8080/api',
 
   constructor(private http: HttpClient) {}
 
-  // Register a new agent
-  registerAgent(agent: Agent, profilePicture?: File): Observable<Agent> {
+  // Register agent
+  registerAgent(agent: FormData): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/agents/registerTemporaryAgent`,
+      agent
+    );
+  }
+
+  // // // Login Agent
+  // loginAgent(credentials: {
+  //   username: string;
+  //   password: string;
+  // }): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/agents/loginAgent`, credentials);
+  // }
+
+
+  loginAgent(username: string, password: string): Observable<any> {
     const formData = new FormData();
-    formData.append('agent', JSON.stringify(agent));
-    if (profilePicture) {
-      formData.append('profilePicture', profilePicture);
-    }
-
-    return this.http.post<Agent>(`${this.apiUrl}/agents/registerAgent`, formData);
+    formData.append('username', username);
+    formData.append('password', password);
+    return this.http.post(`${this.apiUrl}agents/loginAgent`, formData);
   }
 
-  // Login agent
-  loginAgent(username: string, password: string): Observable<Agent> {
-    const loginDetails = { username, password };
-    return this.http.post<Agent>(`${this.apiUrl}/agents/loginAgent`, loginDetails);
+  // Update Agent
+  updateAgent(agentId: number, agent: FormData): Observable<any> {
+    return this.http.put(`${this.apiUrl}/agents/updateAgent/${agentId}`, agent);
   }
 
-
-  getAllAgents(): Observable<Agent[]> {
-    return this.http.get<Agent[]>(`${this.apiUrl}/agents/getAllAgents`)
-  }
-
-  getAgentById(agentId: number): Observable<Agent> {
-    return this.http.get<Agent>(`${this.apiUrl}/agents/getAgentById/${agentId}`)
-  }
-
-
+  // Delete Agent
   deleteAgent(agentId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/agents/deleteAgent/${agentId}`)
+    return this.http.delete(`${this.apiUrl}/agents/deleteAgent/${agentId}`);
   }
 
-
-  updateAgent(agentId: number, agent: Agent, profilePicture?: File): Observable<Agent> {
-    const formData = new FormData()
-    formData.append("agent", JSON.stringify(agent))
-    if (profilePicture) {
-      formData.append("profilePicture", profilePicture)
-    }
-    return this.http.put<Agent>(`${this.apiUrl}/agents/updateAgent/${agentId}`, formData)
+  // Get Agent By ID
+  getAgentById(agentId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/agents/getAgentById/${agentId}`);
   }
 
+  // Get All Agents
+  getAllAgents(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/agents/getAllAgents`);
+  }
 
+  // Get All Pending Agents
+  getAllPendingAgents(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/agents/getAllPendingAgents`);
+  }
+
+  // Approve Agent
+  approveAgent(tempAgentId: number): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/agents/approveAgent/${tempAgentId}`,
+      {}
+    );
+  }
+
+  // Reject Agent
+  rejectAgent(tempAgentId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/agents/rejectAgent/${tempAgentId}`);
+  }
+
+  changePassword(
+    agentId: number,
+    oldPassword: string,
+    newPassword: string
+  ): Observable<any> {
+    return this.http.put(
+      `${this.apiUrl}/agents/changeAgentPassword/${agentId}`,
+      null,
+      {
+        params: {
+          oldPassword,
+          newPassword,
+        },
+      }
+    );
+  }
 }
-
