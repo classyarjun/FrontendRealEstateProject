@@ -1,0 +1,271 @@
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  background: url('src/assets/Re images/1.png') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align content to the left */
+  text-align: left;
+  padding: 0 10%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #222;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #6a5acd;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #5a4dbb;
+}
+
+
+
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  gap: 50px;
+}
+
+.about-content {
+  flex: 1;
+  max-width: 500px;
+}
+
+.about-content h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #6a5acd;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #5848b6;
+}
+
+.about-image {
+  flex: 1;
+  max-width: 600px;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-content {
+    max-width: 100%;
+  }
+
+  .about-image {
+    max-width: 100%;
+  }
+}
+
+
+
+
+
+.why-choose-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  gap: 40px;
+}
+
+.image-container {
+  flex: 1;
+  max-width: 600px;
+}
+
+.image-container img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.content-container {
+  flex: 1;
+  max-width: 600px;
+}
+
+.content-container h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.content-container ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.content-container li {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .why-choose-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .image-container {
+    max-width: 100%;
+  }
+
+  .content-container {
+    max-width: 100%;
+  }
+
+  .content-container ul {
+    text-align: left;
+    padding-left: 0;
+  }
+
+  .content-container li {
+    display: flex;
+    align-items: center;
+  }
+
+  .content-container li::before {
+    content: "•";
+    color: black;
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+}
+
+
+.mission-vision-container {
+  min-height: 50vh;
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),url('src/assets/Re images/1.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 3rem;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  height: 80vh;
+  position: relative;
+}
+
+.mission-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 10px;
+  width: 40%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.vision-section {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 10px;
+  width: 40%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .mission-section,
+  .vision-section {
+    width: 90%;
+    position: static;
+    margin: 1rem auto;
+    text-align: center;
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+

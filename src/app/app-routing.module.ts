@@ -20,6 +20,14 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { XyzComponent } from './xyz/xyz.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ServicepageComponent } from './servicepage/servicepage.component';
+import { PropertyTypeComponent } from './property-type/property-type.component';
+import { PropertyAgentComponent } from './property-agent/property-agent.component';
+import { ClientsayComponent } from './clientsay/clientsay.component';
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { SideMapsComponent } from './side-maps/side-maps.component';
 
 
 
@@ -48,9 +56,15 @@ const routes: Routes = [
   { path: 'xyz', component: XyzComponent},
   { path: 'search', component: SearchbarComponent},
   { path: 'adminpanel', component: AdminpanelComponent},
-
-
-
+  { path: 'about-us', component: AboutUsComponent},
+  { path: 'servicepage', component: ServicepageComponent},
+  { path: 'property-type', component: PropertyTypeComponent},
+  { path: 'property-agent', component: PropertyAgentComponent},
+  { path: 'client-say', component: ClientsayComponent},
+  { path: 'side-maps', component: SideMapsComponent},
+  
+  { path: 'terms-conditions', component: TermsConditionsComponent},
+  { path: 'privacy-policy', component: PrivacyPolicyComponent},
 
 ];
 

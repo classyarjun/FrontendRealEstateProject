@@ -29,6 +29,14 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { XyzComponent } from './xyz/xyz.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ServicepageComponent } from './servicepage/servicepage.component';
+import { PropertyTypeComponent } from './property-type/property-type.component';
+import { PropertyAgentComponent } from './property-agent/property-agent.component';
+import { ClientsayComponent } from './clientsay/clientsay.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
+import { SideMapsComponent } from './side-maps/side-maps.component';
 
 
 
@@ -57,6 +65,14 @@ import { AdminpanelComponent } from './adminpanel/adminpanel.component';
     SearchbarComponent,
     XyzComponent,
     AdminpanelComponent,
+    AboutUsComponent,
+    ServicepageComponent,
+    PropertyTypeComponent,
+    PropertyAgentComponent,
+    ClientsayComponent,
+    PrivacyPolicyComponent,
+    TermsConditionsComponent,
+    SideMapsComponent,
   ],
   imports: [
     BrowserModule,

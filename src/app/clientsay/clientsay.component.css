@@ -1,0 +1,145 @@
+.testimonial-section {
+  padding: 3rem 0;
+  background-color: #fff;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1a365d;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #4a5568;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.slider-container {
+  position: relative;
+  padding: 0 3rem;
+  margin-top: 2rem;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.nav-button.prev {
+  left: 0;
+}
+
+.nav-button.next {
+  right: 0;
+}
+
+.nav-button i {
+  color: #1a365d;
+}
+
+.slides-wrapper {
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  flex: 0 0 50%; /* Each slide takes 50% of the container width */
+  padding: 0 1rem;
+}
+
+.card {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 3rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+  font-size: 1.1rem;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.client-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.client-info .avatar {
+  width: 40px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.client-info .info h3 {
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+}
+
+.client-info .info p {
+  color: #718096;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.dots-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #cbd5e0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background: #1a365d;
+}
+
+

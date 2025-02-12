@@ -1,0 +1,36 @@
+
+<!-- Carousel wrapper -->
+<div id="carouselMultiItemExample" class="carousel slide carousel-dark text-center">
+  <!-- Main heading -->
+  <h2 class="carousel-heading">Services and Strategy</h2>
+
+  <!-- Inner -->
+  <div class="carousel-inner py-4">
+      <!-- Loop through each carousel item -->
+      <div *ngFor="let item of carouselItems; let i = index"
+           class="carousel-item"
+           [class.active]="i === currentSlide"
+           [class.fade-in]="i === currentSlide">
+
+          <div class="container">
+              <div class="row">
+                  <!-- Dynamically adjust column size -->
+                  <div *ngFor="let image of item.images; let j = index"
+                       [class.col-lg-4]="isDesktopView"
+                       [class.col-12]="!isDesktopView">
+                      <div class="card">
+                          <img [src]="image" class="card-img-top" [alt]="'Image ' + (i * 3 + j + 1)">
+                          <div class="card-body">
+                              <h5 class="card-title">{{ item.titles[j] }}</h5>
+                              <p class="card-text">{{ item.descriptions[j] }}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+  <!-- Inner -->
+</div>
+

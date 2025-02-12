@@ -1,0 +1,19 @@
+<section class="property-types">
+  <div class="container">
+    <h2><b>Property Types</b></h2>
+    <p class="description">
+      Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd
+      vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.
+    </p>
+
+    <div class="property-grid">
+      <div class="property-card" *ngFor="let type of propertyTypes">
+        <div class="icon-circle">
+          <img [src]="type.iconPath" [alt]="type.name + ' icon'" class="property-icon">
+        </div>
+        <h3>{{type.name}}</h3>
+        <p class="property-count">{{type.count}} Properties</p>
+      </div>
+    </div>
+  </div>
+</section>

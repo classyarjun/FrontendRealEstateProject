@@ -1,0 +1,53 @@
+<section class="testimonial-section">
+  <div class="container">
+    <div class="header">
+      <h2>Our Clients Say!</h2>
+      <p>
+        Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd
+        vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.
+      </p>
+    </div>
+
+    <div class="slider-container">
+      <!-- Navigation Buttons -->
+      <button class="nav-button prev" (click)="prevSlide()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <!-- Slides Container -->
+      <div class="slides-wrapper">
+        <div class="slides" [style.transform]="getSlideTransform()">
+          <div class="slide" *ngFor="let testimonial of testimonials; let i = index">
+            <div class="card">
+              <p class="content">{{ testimonial.content }}</p>
+              <div class="client-info">
+                <img [src]="testimonial.avatar" [alt]="testimonial.name" class="avatar">
+                <div class="info">
+                  <h3>{{ testimonial.name }}</h3>
+                  <p>{{ testimonial.profession }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="nav-button next" (click)="nextSlide()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <!-- Dots Navigation -->
+      <div class="dots-nav">
+        <button
+          *ngFor="let _ of dotIndexes; let i = index"
+          class="dot"
+          [class.active]="currentSlideIndex === i"
+          (click)="goToSlide(i)"
+          [attr.aria-label]="'Go to slide ' + (i + 1)">
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+

@@ -1,0 +1,90 @@
+/* Background image for the slider */
+#carouselMultiItemExample {
+  background: url('https://mdbcdn.b-cdn.net/img/new/standard/nature/190.webp') no-repeat center center;
+  background-size: cover;
+  padding: 50px 0;
+  position: relative;
+}
+
+/* Main heading style */
+.carousel-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* Dark overlay for better text visibility */
+#carouselMultiItemExample::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: 1;
+}
+
+/* Carousel items */
+.carousel-item {
+  display: none;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  position: relative;
+  z-index: 2;
+}
+
+.carousel-item.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Fade-in effect */
+.fade-in {
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateX(50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+/* Card styling */
+.card {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .carousel-heading {
+      font-size: 2rem;
+  }
+
+  .carousel-item {
+      text-align: center;
+  }
+
+  .card {
+      margin: 0 auto;
+      max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-heading {
+      font-size: 1.5rem;
+  }
+}
+

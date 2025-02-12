@@ -1,0 +1,180 @@
+.property-types {
+  padding: 5rem 0;
+  background-color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+h2 {
+  text-align: center;
+  color: #1a1a1a;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.description {
+  text-align: center;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.property-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+}
+
+.property-card:hover {
+  border-color: #00C194;
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 193, 148, 0.1);
+}
+
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px dashed #00C194;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.property-icon {
+  width: 40px;
+  height: 40px;
+  color: #00C194;
+}
+
+h3 {
+  color: #1a1a1a;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.property-count {
+  color: #00C194;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .property-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .property-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .property-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .property-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .icon-circle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .property-icon {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+
+.property-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+}
+
+.property-card:hover {
+  border-color: #00C194;
+  background-color: rgba(6, 201, 71, 0.1); /* Light greenish background on hover */
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 193, 148, 0.2);
+}
+
+
+
+
+.property-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background-color: #fff; /* Default background */
+  position: relative; /* Required for pseudo-element */
+  z-index: 1;
+}
+
+.property-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: rgba(0, 193, 148, 0.1); /* Light greenish glow */
+  border-radius: 12px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.property-card:hover {
+  border-color: #00C194;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 193, 148, 0.3);
+}
+
+.property-card:hover::before {
+  opacity: 1; /* Show glow effect on hover */
+}
+
+
+
+
