@@ -35,12 +35,15 @@
             <span>Agents</span>
           </a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link fw-bold" data-bs-toggle="tab" href="#Property" role="tab">
             <i class="bi bi-map "></i>
             <span>Property</span>
           </a>
         </li>
+
+
         <li class="nav-item">
           <a class="nav-link fw-bold" data-bs-toggle="tab" href="#reports" role="tab">
             <i class="bi bi-bar-chart text-warning"></i>
@@ -148,8 +151,10 @@
                           <td>{{ property.yearBuilt}}</td>
                           <td>{{ property.status }}</td>
                           <td>
-                            <button class="btn btn-success btn-sm ms-1" (click)="approveProperty(property.tempPropertyId)">Approve</button>
-                            <button class="btn btn-danger btn-sm ms-1" (click)="rejectProperty(property.tempPropertyId)">Reject</button>
+                            <button class="btn btn-success btn-sm ms-1"
+                              (click)="approveProperty(property.propertyId)">Approve</button>
+                            <button class="btn btn-danger btn-sm ms-1"
+                              (click)="rejectProperty(property.propertyId)">Reject</button>
                           </td>
                         </tr>
                       </tbody>
@@ -166,6 +171,7 @@
               </div>
               <!--! All property listing -->
             </div>
+
           </div>
         </div>
 
@@ -217,7 +223,8 @@
                           <td>{{ agent.status}}</td>
                           <!-- <td>{{ agent.email}}</td> -->
                           <td>
-                            <button class="btn btn-success btn-sm ms-1" (click)="approveAgent(agent.id)">Approve</button>
+                            <button class="btn btn-success btn-sm ms-1"
+                              (click)="approveAgent(agent.id)">Approve</button>
                             <button class="btn btn-danger btn-sm ms-1" (click)="rejectAgent(agent.id)">Reject</button>
                           </td>
                         </tr>
@@ -234,94 +241,183 @@
                 </div>
               </div>
               <app-agent></app-agent>
-        </div>
+            </div>
+          </div>
 
-        <!-- property manage Tab -->
-        <div class="tab-pane fade" id="Property" role="tabpanel">
-           <app-property></app-property>
-        </div>
+          <!-- property manage Tab -->
+          <div class="tab-pane fade" id="Property" role="tabpanel">
 
 
-        <!-- Reports Tab -->
-        <div class="tab-pane fade" id="reports" role="tabpanel">
-          <div class="mt-4">
-            <h3>Reports Analytics</h3>
+            <app-property></app-property>
+          </div>
 
-            <div class="row mb-4">
-              <div class="col-md-6">
-                <div class="card">
-                  <div class="card-header">
-                    Sales Performance
+          <!-- Reports Tab -->
+          <div class="tab-pane fade" id="reports" role="tabpanel">
+            <div class="mt-4">
+              <h3>Reports Analytics</h3>
+
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      Sales Performance
+                    </div>
+                    <div class="card-body">
+                      <canvas id="salesChart"></canvas>
+                    </div>
                   </div>
-                  <div class="card-body">
-                    <canvas id="salesChart"></canvas>
+                </div>
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      Property Type Distribution
+                    </div>
+                    <div class="card-body">
+                      <canvas id="propertyTypeChart"></canvas>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="card">
-                  <div class="card-header">
-                    Property Type Distribution
+
+              <div class="row mb-4">
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-header">
+                      Key Metrics
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Average Days on Market
+                        <span class="badge bg-primary rounded-pill">45</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total Revenue (YTD)
+                        <span class="badge bg-success rounded-pill">$1.5M</span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Conversion Rate
+                        <span class="badge bg-info rounded-pill">12%</span>
+                      </li>
+                    </ul>
                   </div>
-                  <div class="card-body">
-                    <canvas id="propertyTypeChart"></canvas>
+                </div>
+                <div class="col-md-8">
+                  <div class="card">
+                    <div class="card-header">
+                      Top Performing Agents
+                    </div>
+                    <div class="card-body">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Agent</th>
+                            <th>Properties Sold</th>
+                            <th>Total Value</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>John Doe</td>
+                            <td>15</td>
+                            <td>$3.2M</td>
+                          </tr>
+                          <tr>
+                            <td>Jane Smith</td>
+                            <td>12</td>
+                            <td>$2.8M</td>
+                          </tr>
+                          <tr>
+                            <td>Mike Johnson</td>
+                            <td>10</td>
+                            <td>$2.5M</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      Generate Custom Reports
+                    </div>
+                    <div class="card-body">
+                      <form>
+                        <div class="row mb-3">
+                          <div class="col-md-4">
+                            <label for="reportType" class="form-label">Report Type</label>
+                            <select id="reportType" class="form-select">
+                              <option>Sales Summary</option>
+                              <option>Property Performance</option>
+                              <option>Client Acquisition</option>
+                              <option>Market Trends</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                            <label for="dateRange" class="form-label">Date Range</label>
+                            <select id="dateRange" class="form-select">
+                              <option>Last 30 days</option>
+                              <option>Last 3 months</option>
+                              <option>Last 6 months</option>
+                              <option>Last year</option>
+                              <option>Custom range</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4">
+                            <label for="format" class="form-label">Format</label>
+                            <select id="format" class="form-select">
+                              <option>PDF</option>
+                              <option>Excel</option>
+                              <option>CSV</option>
+                            </select>
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Generate Report</button>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="row mb-4">
-              <div class="col-md-4">
-                <div class="card">
-                  <div class="card-header">
-                    Key Metrics
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Average Days on Market
-                      <span class="badge bg-primary rounded-pill">45</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Total Revenue (YTD)
-                      <span class="badge bg-success rounded-pill">$1.5M</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                      Conversion Rate
-                      <span class="badge bg-info rounded-pill">12%</span>
-                    </li>
-                  </ul>
+          <!-- contatent tab -->
+          <div class="tab-pane fade" id="Content" role="tabpanel">
+            <div class="mt-4">
+              <h3>Edit Blog</h3>
+              <div class="card">
+                <div class="card-header">
+                  User List
                 </div>
-              </div>
-              <div class="col-md-8">
-                <div class="card">
-                  <div class="card-header">
-                    Top Performing Agents
-                  </div>
-                  <div class="card-body">
-                    <table class="table">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th>Agent</th>
-                          <th>Properties Sold</th>
-                          <th>Total Value</th>
+                          <th>Order ID</th>
+                          <th>Customer</th>
+                          <th>Date</th>
+                          <th>Status</th>
+                          <th>Total</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
+                          <td>#12345</td>
                           <td>John Doe</td>
-                          <td>15</td>
-                          <td>$3.2M</td>
+                          <td>2023-05-20</td>
+                          <td><span class="badge bg-success">Completed</span></td>
+                          <td>$150.00</td>
+                          <td class="d-flex align-items-center ">
+                            <button class='btn btn-success btn-sm'>A</button>
+                            <button class='btn btn-danger btn-sm mx-1'>d</button>
+                          </td>
                         </tr>
-                        <tr>
-                          <td>Jane Smith</td>
-                          <td>12</td>
-                          <td>$2.8M</td>
-                        </tr>
-                        <tr>
-                          <td>Mike Johnson</td>
-                          <td>10</td>
-                          <td>$2.5M</td>
-                        </tr>
+
                       </tbody>
                     </table>
                   </div>
@@ -329,130 +425,41 @@
               </div>
             </div>
 
-            <div class="row mb-4">
-              <div class="col-md-12">
-                <div class="card">
-                  <div class="card-header">
-                    Generate Custom Reports
-                  </div>
-                  <div class="card-body">
-                    <form>
-                      <div class="row mb-3">
-                        <div class="col-md-4">
-                          <label for="reportType" class="form-label">Report Type</label>
-                          <select id="reportType" class="form-select">
-                            <option>Sales Summary</option>
-                            <option>Property Performance</option>
-                            <option>Client Acquisition</option>
-                            <option>Market Trends</option>
-                          </select>
-                        </div>
-                        <div class="col-md-4">
-                          <label for="dateRange" class="form-label">Date Range</label>
-                          <select id="dateRange" class="form-select">
-                            <option>Last 30 days</option>
-                            <option>Last 3 months</option>
-                            <option>Last 6 months</option>
-                            <option>Last year</option>
-                            <option>Custom range</option>
-                          </select>
-                        </div>
-                        <div class="col-md-4">
-                          <label for="format" class="form-label">Format</label>
-                          <select id="format" class="form-select">
-                            <option>PDF</option>
-                            <option>Excel</option>
-                            <option>CSV</option>
-                          </select>
-                        </div>
-                      </div>
-                      <button type="submit" class="btn btn-primary">Generate Report</button>
-                    </form>
-                  </div>
+
+            <div class="mt-4">
+              <h3>Edit Contact</h3>
+              <div class="card">
+                <div class="card-header">
+                  User List
                 </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-
-        <!-- contatent tab -->
-        <div class="tab-pane fade" id="Content" role="tabpanel">
-          <div class="mt-4">
-            <h3>Edit Blog</h3>
-            <div class="card">
-              <div class="card-header">
-                User List
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>#12345</td>
-                        <td>John Doe</td>
-                        <td>2023-05-20</td>
-                        <td><span class="badge bg-success">Completed</span></td>
-                        <td>$150.00</td>
-                        <td class="d-flex align-items-center ">
-                          <button class='btn btn-success btn-sm'>A</button>
-                          <button class='btn btn-danger btn-sm mx-1'>d</button>
-                        </td>
-                      </tr>
-
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="mt-4">
-            <h3>Edit Contact</h3>
-            <div class="card">
-              <div class="card-header">
-                User List
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>#12345</td>
-                        <td>John Doe</td>
-                        <td>2023-05-20</td>
-                        <td><span class="badge bg-success">Completed</span></td>
-                        <td>$150.00</td>
-                        <td class="d-flex align-items-center ">
-                          <button class='btn btn-success btn-sm'>A</button>
-                          <button class='btn btn-danger btn-sm mx-1'>d</button>
-                        </td>
-                      </tr>
-
-                    </tbody>
-                  </table>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Order ID</th>
+                          <th>Customer</th>
+                          <th>Date</th>
+                          <th>Status</th>
+                          <th>Total</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>#12345</td>
+                          <td>John Doe</td>
+                          <td>2023-05-20</td>
+                          <td><span class="badge bg-success">Completed</span></td>
+                          <td>$150.00</td>
+                          <td class="d-flex align-items-center ">
+                            <button class='btn btn-success btn-sm'>A</button>
+                            <button class='btn btn-danger btn-sm mx-1'>d</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>

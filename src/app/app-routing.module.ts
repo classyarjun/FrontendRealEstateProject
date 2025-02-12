@@ -19,6 +19,7 @@ import { OtpverifyregisterComponent } from './otpverifyregister/otpverifyregiste
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { XyzComponent } from './xyz/xyz.component';
+import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 
 
 
@@ -35,7 +36,7 @@ const routes: Routes = [
   { path: 'agentregister', component: AgentregisterComponent},
   { path: 'adminregister', component: AdminregisterComponent},
   { path: 'adminlogin', component: AdminloginComponent},
-  { path: 'adminpanel', component: AdmindashboardComponent},
+  { path: 'ladminpanel', component: AdmindashboardComponent},
   { path: 'navbar', component: NavbarComponent},
   { path: 'contactus', component: ContactusComponent},
   { path: 'footer', component: FooterComponent},
@@ -45,6 +46,9 @@ const routes: Routes = [
   { path: 'otpverifyregister', component: OtpverifyregisterComponent},
   { path: 'reset-password', component: ResetpasswordComponent},
   { path: 'xyz', component: XyzComponent},
+  { path: 'search', component: SearchbarComponent},
+  { path: 'adminpanel', component: AdminpanelComponent},
+
 
 
 

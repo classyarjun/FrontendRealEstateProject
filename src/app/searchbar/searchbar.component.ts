@@ -1,8 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { PropertyService } from 'src/services/property.service';
-import { Property } from '../../modal/property';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AdminService } from './../../services/admin.service';
+import { Property } from 'src/modal/property';
+import { AgentService } from 'src/services/agent.service';
 
 @Component({
   selector: 'app-searchbar',
@@ -10,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./searchbar.component.css']
 })
 
-export class SearchbarComponent {
+export class SearchbarComponent{
 
+  }
 
-}

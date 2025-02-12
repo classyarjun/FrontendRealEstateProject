@@ -28,6 +28,7 @@ import { OtpverifyregisterComponent } from './otpverifyregister/otpverifyregiste
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { XyzComponent } from './xyz/xyz.component';
+import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 
 
 
@@ -55,6 +56,7 @@ import { XyzComponent } from './xyz/xyz.component';
     ResetpasswordComponent,
     SearchbarComponent,
     XyzComponent,
+    AdminpanelComponent,
   ],
   imports: [
     BrowserModule,

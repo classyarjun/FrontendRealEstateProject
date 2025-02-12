@@ -171,6 +171,7 @@ export class AdmindashboardComponent implements OnInit {
   property: Property[] = []
   isVisible = true;
 
+
   toggle() {
     this.isVisible = !this.isVisible;
   }
@@ -181,11 +182,11 @@ export class AdmindashboardComponent implements OnInit {
   constructor(private AdminService: AdminService,private PropertyService: PropertyService,private AgentService: AgentService) {}
 
   ngOnInit() {
-    this.createSalesChart();
-    this.createPropertyTypeChart();
     this.fetchPendingProperties();
     this.loadProperty()
     this.loadPendingAgents();
+    this.createSalesChart();
+    this.createPropertyTypeChart();
 
   }
 
@@ -243,52 +244,11 @@ export class AdmindashboardComponent implements OnInit {
   }
 
 
-  fetchPendingProperties(): void {
-    this.AdminService.getAllPendingProperties().subscribe({
-      next: (data: any[]) => {
-        this.pendingProperties = data;
-        console.log('Pending Properties:', data);
-      },
-      error: (err: any) => {
-        console.error('Error fetching pending properties:', err);
-      }
-    });
-  }
-
-  approveProperty(tempPropertyId: number): void {
-    const adminId = 1; //repalce your admin id here
-    this.AdminService.approveProperty(tempPropertyId, adminId).subscribe({
-      next: (response: string) => {
-        alert('Property Approved Successfully!');
-        this.fetchPendingProperties();
-      },
-      error: (err: any) => {
-        console.error('Error approving property:', err);
-        alert('Error approving property!');
-      }
-    });
-  }
-
-  rejectProperty(tempPropertyId: number): void {
-    const adminId = 1; //repalce your admin id here
-    this.AdminService.rejectProperty(tempPropertyId, adminId).subscribe({
-      next: (response: string) => {
-        alert('Property rejected successfully!');
-        this.fetchPendingProperties();
-      },
-      error: (err: any) => {
-        console.error('Error rejecting property:', err);
-        alert('Error rejecting property!');
-      }
-    });
-  }
-
-
   loadProperty(): void {
     this.PropertyService.getAllProperties().subscribe(
       (property) => {
         this.property = property;
-        // console.log("Fetched Properties:", this.property.length); // ✅ Console Log Added
+        console.log("Fetched Properties:", this.property.length); // ✅ Console Log Added
       },
       (error) => console.error("Error fetching property:", error)
     );
@@ -299,7 +259,7 @@ export class AdmindashboardComponent implements OnInit {
     this.AgentService.getAllPendingAgents().subscribe(
       (agents) => {
         this.pendingAgents = agents;
-        console.log('pending agents', agents);
+        // console.log('pending agents', agents);
       },
       (error) => {
         console.error('Error fetching agents:', error);
@@ -332,6 +292,45 @@ export class AdmindashboardComponent implements OnInit {
       }
     );
   }
+
+//? afftr this code we will add the code for approve and reject property
+
+fetchPendingProperties(): void {
+  this.PropertyService.getAllPendingProperties().subscribe({
+    next: (data: any[]) => {
+      this.pendingProperties = data;
+      // console.log('Pending Properties:', data);
+    },
+    error: (err: any) => {
+      console.error('Error fetching pending properties:', err);
+    }
+  });
+}
+
+approveProperty(propertyId: number): void {
+  this.PropertyService.approveProperty(propertyId).subscribe({
+    next: (response: string) => {
+      alert('Property Approved Successfully!');
+      this.fetchPendingProperties();
+    },
+    error: (err: any) => {
+      console.error('Error approving property:', err);
+      alert('Error approving property!');
+    }
+  });
+}
+
+rejectProperty(propertyId: number): void {
+  this.PropertyService.rejectProperty(propertyId).subscribe({
+    next: (response: string) => {
+      alert('Property rejected successfully!');
+      this.fetchPendingProperties();
+    },
+    error: (err: any) => {
+      console.error('Error rejecting property:', err);
+      alert('Error rejecting property!');
+    }
+  });
 }
 
 
@@ -340,14 +339,8 @@ export class AdmindashboardComponent implements OnInit {
 
 
 
+}
 
 
-
-
-
-
-
-
-
-
+//? testing
 
