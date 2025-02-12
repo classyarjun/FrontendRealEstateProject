@@ -34,7 +34,7 @@ export class AgentService {
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
-    return this.http.post(`${this.apiUrl}agents/loginAgent`, formData);
+    return this.http.post(`${this.apiUrl}/agents/loginAgent`, formData);
   }
 
   // Update Agent

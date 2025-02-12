@@ -8,39 +8,39 @@ import { Router } from '@angular/router';
   templateUrl: './agentlogin.component.html',
   styleUrls: ['./agentlogin.component.css']
 })
+
 export class AgentloginComponent {
-  loginForm: FormGroup;
-  showPassword: boolean = false;
+  username: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private agentService: AgentService, private router: Router) {
-    this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
+  constructor(private agentService: AgentService, private router: Router) {}
 
-  togglePasswordVisibility(): void {
-    this.showPassword = !this.showPassword;
-  }
-
-  closeLogin(): void {
-    this.router.navigate(['/']);
-  }
 
   loginAgent(): void {
-    if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      this.agentService.loginAgent(username, password).subscribe(
-        (data) => {
-          alert('Login successful!');
-          console.log('Logged in agent:', data);
-          this.router.navigate(['/agentpanel']);
-        },
-        (error) => {
-          console.error('Login failed:', error);
-          alert('Login failed. Please check your credentials.');
-        }
-      );
+    this.errorMessage = '';
+
+    if (!this.username || !this.password) {
+      this.errorMessage = 'Username and password are required.';
+      return;
     }
+
+    this.agentService.loginAgent(this.username, this.password).subscribe({
+      next: (response) => {
+        console.log('Agent login successful:', response);
+        alert('Login successful');
+        this.router.navigate(['/agentpanel']);
+      },
+      error: (error) => {
+        console.error('Login failed:', error);
+        this.errorMessage = 'Invalid credentials. Please try again.';
+      },
+    });
+  }
+  navigateToRegister(): void {
+    this.router.navigate(['/agentregister']);
   }
 }
+
+
+
