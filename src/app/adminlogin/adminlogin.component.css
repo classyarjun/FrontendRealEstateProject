@@ -1,18 +1,4 @@
-body {
-  margin: 0;
-  padding: 0;
-  /* font-family: Arial, sans-serif;
-  background-image: url('src/assets/userloginbg/UserRegistration.jpg'); /* Replace with your image URL */
-  /* background-size: cover;
-  background-position: center;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center; */
-}
-
-
-.parent{
+.parent {
   background-image: url('src/assets/userloginbg/UserRegistration.jpg'); /* Replace with your image URL */
   background-size: cover;
   background-position: center;
@@ -21,18 +7,20 @@ body {
   align-items: center;
   height: 100vh;
 }
+
 .container {
-  background: rgba(255, 255, 255, 0.8); /* White background with transparency */
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   width: 400px;
   text-align: center;
+  position: relative; /* Added to position the close button */
 }
 
 h2 {
   margin-bottom: 20px;
-  color: #333;
+  color: #000000;
 }
 
 form {
@@ -42,7 +30,7 @@ form {
 
 label {
   margin-bottom: 5px;
-  color: #555;
+  color: #060101;
   font-weight: 700;
   padding: 10px;
 }
@@ -61,9 +49,8 @@ input:focus {
   outline: none;
 }
 
-.a{
+.a {
   text-align: left;
-
 }
 
 button {
@@ -86,7 +73,7 @@ button:hover {
 }
 
 .register-link {
-  color: #007bff;
+  color: #000000;
   text-decoration: none;
 }
 
@@ -98,3 +85,46 @@ button:hover {
   color: red;
   margin-top: 10px;
 }
+
+/* Close Button with Red Color */
+.close-btn {
+  position: absolute;
+  top: 20px; /* Adjust this value as needed */
+  right: 20px; /* Adjust this value as needed */
+  font-size: 24px;
+  cursor: pointer;
+  color: red;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  color: darkred;
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px; /* Space for the eye icon */
+}
+
+.password-container i {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #007bff;
+  font-size: 18px;
+}
+
+.password-container i:hover {
+  color: #0056b3;
+}
+
+
+

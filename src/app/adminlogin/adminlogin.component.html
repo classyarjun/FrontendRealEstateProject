@@ -1,28 +1,28 @@
 
-<div class="parent">
-<div class="container">
-  <h2>Admin Login</h2>
-
-  <form (ngSubmit)="loginAdmin()">
-
-    <div class="a">
-
-      <label for="username">Username:</label>
-      <input id="username" [(ngModel)]="username" name="username" required />
+    <div class="parent">
+        <div class="container">
+            <h2>Admin Login</h2>
+            <form (ngSubmit)="loginAdmin()">
+                <span class="close-btn" (click)="closeLogin()">&times;</span>
+                <div class="a">
+                    <label for="username">Username:</label>
+                    <input id="username" [(ngModel)]="username" name="username" required />
+                </div>
+                <div class="a">
+                    <label for="password">Password:</label>
+                    <div class="password-container">
+                        <input id="password" [(ngModel)]="password" name="password" [type]="showPassword ? 'text' : 'password'" required />
+                        <i class="fa fa-eye" id="togglePassword" (click)="togglePassword()" [ngClass]="{'fa-eye-slash': showPassword, 'fa-eye': !showPassword}"></i>
+                    </div>
+                </div>
+                <button type="submit">Login</button>
+                <div class="register-section">
+                    <p>Don't have an account? <a routerLink="/adminregister" class="register-link">Register here</a></p>
+                </div>
+                <div class="register-section">
+                    <a routerLink="/reset-password" class="register-link">Reset password</a>
+                </div>
+                <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+            </form>
+        </div>
     </div>
-
-    <div class="a">
-      <label for="password">Password:</label>
-      <input id="password" [(ngModel)]="password" name="password" type="password" required />
-    </div>
-
-    <button type="submit">Login</button>
-
-    <div class="register-section">
-      <p>Don't have an account? <a routerLink="/adminregister" class="register-link">Register here</a></p>
-    </div>
-
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-  </form>
-</div>
-</div>

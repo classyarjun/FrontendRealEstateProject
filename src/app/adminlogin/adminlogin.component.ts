@@ -36,4 +36,15 @@ export class AdminloginComponent {
         },
       });
   }
+  showPassword: boolean = false;
+
+togglePassword() {
+  this.showPassword = !this.showPassword;
 }
+
+   // Close login modal (Navigate to Home)
+   closeLogin(): void {
+    this.router.navigate(['/']);
+  }
+}
+
