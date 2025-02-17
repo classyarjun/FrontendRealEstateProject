@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-clientsay',
   templateUrl: './clientsay.component.html',
   styleUrls: ['./clientsay.component.css']
 })
-
 
 export class ClientsayComponent {
   testimonials = [
@@ -14,7 +13,7 @@ export class ClientsayComponent {
     { content: "Transparent dealings and a great selection of properties. I'm glad I chose them for my first investment!", name: "Ankit Verma", profession: "Business Owner", avatar: "/assets/profile pic/office-happy-man-work.jpg", rating: 5 },
     { content: "Customer support was excellent! They patiently answered all my queries and helped me make an informed decision!", name: "Neha Kapoor", profession: "Doctor", avatar: "/assets/profile pic/portrait-caucasian-woman-smiling.jpg", rating: 4 },
     { content: "A fantastic experience! The team was professional and guided me through every step of the property purchase. Highly recommend!", name: "Sarah Smith", profession: "HR Manager", avatar: "/assets/profile pic/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair.jpg", rating: 4 },
-    { content: "A hassle-free experience from start to finish. I got exactly what I was looking for. Great job!", name: "Amit Saxena", profession: "Software Engineer", avatar: "/assets/profile pic/office-happy-man-work.jpg", rating: 5 },
+    { content: "A hassle-free experience from start to finish. I got exactly what I was looking for. Great job!", name: "Amit Saxena", profession: "Software Engineer", avatar: "/assets/profile pic/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair.jpg", rating: 5 },
   ];
 
   currentSlideIndex = 0;
@@ -23,12 +22,19 @@ export class ClientsayComponent {
   dotIndexes: number[] = [];
 
   ngOnInit() {
+    this.calculateSlidesToShow();
     this.calculateDots();
     this.startAutoSlide();
   }
 
   ngOnDestroy() {
     this.stopAutoSlide();
+  }
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.calculateSlidesToShow();
+    this.calculateDots();
   }
 
   private startAutoSlide(): void {
@@ -64,7 +70,17 @@ export class ClientsayComponent {
   }
 
   getSlideTransform(): string {
-    return `translateX(-${this.currentSlideIndex * 100}%)`;
+    return `translateX(-${this.currentSlideIndex * (100 / this.slidesToShow)}%)`;
+  }
+
+  private calculateSlidesToShow(): void {
+    if (window.innerWidth < 768) {
+      this.slidesToShow = 1;
+    } else if (window.innerWidth < 992) {
+      this.slidesToShow = 2;
+    } else {
+      this.slidesToShow = 3;
+    }
   }
 
   private calculateDots(): void {
