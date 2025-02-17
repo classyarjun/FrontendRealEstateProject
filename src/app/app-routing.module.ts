@@ -10,7 +10,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { AgentdashboardComponent } from './agentdashboard/agentdashboard.component';
 import { TestingComponent } from './testing/testing.component';
 import { PropertyComponent } from './property/property.component';
@@ -44,7 +43,6 @@ const routes: Routes = [
   { path: 'agentregister', component: AgentregisterComponent},
   { path: 'adminregister', component: AdminregisterComponent},
   { path: 'adminlogin', component: AdminloginComponent},
-  { path: 'ladminpanel', component: AdmindashboardComponent},
   { path: 'navbar', component: NavbarComponent},
   { path: 'contactus', component: ContactusComponent},
   { path: 'footer', component: FooterComponent},
@@ -62,7 +60,7 @@ const routes: Routes = [
   { path: 'property-agent', component: PropertyAgentComponent},
   { path: 'client-say', component: ClientsayComponent},
   { path: 'side-maps', component: SideMapsComponent},
-  
+
   { path: 'terms-conditions', component: TermsConditionsComponent},
   { path: 'privacy-policy', component: PrivacyPolicyComponent},
 

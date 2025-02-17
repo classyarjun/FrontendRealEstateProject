@@ -13,6 +13,7 @@ Chart.register(...registerables);
 
 export class AdminpanelComponent implements OnInit {
   pendingProperties: any[] = [];
+  propertylength:number = 0;
   pendingAgents: any[] = [];
   isVisible = true;
   toggle() {
@@ -31,7 +32,6 @@ export class AdminpanelComponent implements OnInit {
     this.createPropertyTypeChart();
     this.loadPendingAgents();
     this.fetchPendingProperties();
-
   }
 
   createSalesChart() {
@@ -88,53 +88,13 @@ export class AdminpanelComponent implements OnInit {
   }
 
 
-  // fetchPendingProperties(): void {
-  //   this.AdminService.getAllPendingProperties().subscribe({
-  //     next: (data: any[]) => {
-  //       this.pendingProperties = data;
-  //       console.log('Pending Properties:', data);
-  //     },
-  //     error: (err: any) => {
-  //       console.error('Error fetching pending properties:', err);
-  //     }
-  //   });
-  // }
-
-  // approveProperty(tempPropertyId: number): void {
-  //   const adminId = 1; //repalce your admin id here
-  //   this.AdminService.approveProperty(tempPropertyId, adminId).subscribe({
-  //     next: (response: string) => {
-  //       alert('Property Approved Successfully!');
-  //       this.fetchPendingProperties();
-  //     },
-  //     error: (err: any) => {
-  //       console.error('Error approving property:', err);
-  //       alert('Error approving property!');
-  //     }
-  //   });
-  // }
-
-  // rejectProperty(tempPropertyId: number): void {
-  //   const adminId = 1; //repalce your admin id here
-  //   this.AdminService.rejectProperty(tempPropertyId, adminId).subscribe({
-  //     next: (response: string) => {
-  //       alert('Property rejected successfully!');
-  //       this.fetchPendingProperties();
-  //     },
-  //     error: (err: any) => {
-  //       console.error('Error rejecting property:', err);
-  //       alert('Error rejecting property!');
-  //     }
-  //   });
-  // }
-
 // ! Agents manage code
 
   loadPendingAgents(): void {
     this.AgentService.getAllPendingAgents().subscribe(
       (agents) => {
         this.pendingAgents = agents;
-        console.log('Admin panel Pending agents', agents);
+        // console.log('Admin panel Pending agents', agents);
       },
       (error) => {
         console.error('Error fetching agents:', error);
@@ -166,18 +126,21 @@ export class AdminpanelComponent implements OnInit {
     );
   }
 
-// ! properties manage code
+
   fetchPendingProperties(): void {
     this.PropertyService.getAllPendingProperties().subscribe({
-      next: (data: any[]) => {
-        this.pendingProperties = data;
-        console.log('Admin panel Pending Properties:', data);
+      next: (data: any[] | null) => {
+        this.pendingProperties = data || [];
+        this.propertylength = this.pendingProperties.length;
       },
       error: (err: any) => {
         console.error('Error fetching pending properties:', err);
+        this.pendingProperties = [];
+        this.propertylength = 0;
       }
     });
   }
+
 
   approveProperty(propertyId: number): void {
     this.PropertyService.approveProperty(propertyId).subscribe({
@@ -204,14 +167,6 @@ export class AdminpanelComponent implements OnInit {
       }
     });
   }
-
-
-
-
-
-
-
-
 }
 
 

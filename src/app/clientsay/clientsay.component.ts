@@ -9,16 +9,16 @@ import { Component } from '@angular/core';
 
 export class ClientsayComponent {
   testimonials = [
-    { content: "Testimonial 1", name: "Client 1", profession: "Designer", avatar: "assets/team/team-1.jpg" },
-    { content: "Testimonial 2", name: "Client 2", profession: "Developer", avatar: "assets/team/team-2.jpg" },
-    { content: "Testimonial 3", name: "Client 3", profession: "Manager", avatar: "assets/team/team-3.jpg" },
-    { content: "Testimonial 4", name: "Client 4", profession: "CEO", avatar: "assets/team/team-4.jpg" },
-    { content: "Testimonial 5", name: "Client 5", profession: "HR", avatar: "assets/team/team-4.jpg" },
-    { content: "Testimonial 6", name: "Client 6", profession: "Engineer", avatar: "assets/team/team-4.jpg" },
+    { content: "The Nest Propify helped me find my dream home effortlessly. The process was smooth, and their team was highly professional!", name: "Rahul Mehta", profession: "IT Consultant", avatar: "/assets/profile pic/close-up-portrait-young-bearded-man-white-shirt-jacket-posing-camera-with-broad-smile-isolated-gray (1).jpg", rating: 5 },
+    { content: "I was skeptical about investing in real estate, but their expert guidance made everything so easy. Highly recommended!", name: "Priya Sharma", profession: "Marketing Manager", avatar: "/assets/profile pic/closeup-young-female-professional-making-eye-contact-against-colored-background (1).jpg", rating: 4 },
+    { content: "Transparent dealings and a great selection of properties. I'm glad I chose them for my first investment!", name: "Ankit Verma", profession: "Business Owner", avatar: "/assets/profile pic/office-happy-man-work.jpg", rating: 5 },
+    { content: "Customer support was excellent! They patiently answered all my queries and helped me make an informed decision!", name: "Neha Kapoor", profession: "Doctor", avatar: "/assets/profile pic/portrait-caucasian-woman-smiling.jpg", rating: 4 },
+    { content: "A fantastic experience! The team was professional and guided me through every step of the property purchase. Highly recommend!", name: "Sarah Smith", profession: "HR Manager", avatar: "/assets/profile pic/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair.jpg", rating: 4 },
+    { content: "A hassle-free experience from start to finish. I got exactly what I was looking for. Great job!", name: "Amit Saxena", profession: "Software Engineer", avatar: "/assets/profile pic/office-happy-man-work.jpg", rating: 5 },
   ];
 
   currentSlideIndex = 0;
-  slidesToShow = 2;  // Showing 2 cards per slide
+  slidesToShow = 3;
   autoSlideInterval: any;
   dotIndexes: number[] = [];
 
@@ -69,6 +69,10 @@ export class ClientsayComponent {
 
   private calculateDots(): void {
     this.dotIndexes = Array.from({ length: Math.ceil(this.testimonials.length / this.slidesToShow) }, (_, i) => i);
+  }
+
+  getStars(rating: number) {
+    return Array(rating).fill(0);
   }
 }
 

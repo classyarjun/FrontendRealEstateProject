@@ -6,7 +6,6 @@
     </button>
   </div>
   <div class="card-body">
-    <!-- <div class="table-responsive"> -->
     <div class="table-responsive" style="height: 500px; overflow-y: auto;">
 
       <table class="table table-striped">
@@ -38,9 +37,23 @@
             <td>{{ property.bathrooms }}</td>
             <td>{{ property.status }}</td>
             <td>
-              <button class="btn btn-primary btn-sm me-1">View</button>
-              <button class="btn btn-success btn-sm me-1" (click)="loadProperty(property.propertyId!)"
-                data-bs-toggle="modal" data-bs-target="#updatePropertyModal">Update</button>
+
+              <!-- <butto class="btn btn-primary btn-sm me-1">View</butto
+                n> -->
+                <button class="btn btn-primary btn-sm me-1"
+                (click)="viewProperty(property.propertyId!)"
+                data-bs-toggle="modal"
+                data-bs-target="#viewPropertyModal">
+                View
+              </button>
+
+              <button class="btn btn-success btn-sm me-1"
+               (click)="loadProperty(property.propertyId!)"
+                data-bs-toggle="modal"
+                data-bs-target="#updatePropertyModal">
+                Update
+              </button>
+
               <button class="btn btn-danger btn-sm me-1" (click)="deleteProperty(property.propertyId!)">Delete</button>
             </td>
           </tr>
@@ -88,19 +101,12 @@
             <input type="number" class="form-control" formControlName="yearBuilt" required>
           </div>
 
-          <!-- <div class="mb-3">
-                                <label class="form-label">Property Type</label>
-                                <input type="text" class="form-control" formControlName="propertyType" required>
-                            </div> -->
           <div class="mb-3">
             <label class="form-label">Property Type</label>
             <select class="form-control" formControlName="propertyType" required>
               <option value="" disabled selected>Select Property Type</option>
-              <option value="Apartment">Apartment</option>
-              <option value="House">House</option>
-              <option value="Condo">Condo</option>
-              <option value="Townhouse">Townhouse</option>
-              <option value="Villa">Villa</option>
+              <option value="Resdental">Resdental</option>
+              <option value="Industrial">Industrial</option>
               <option value="Commercial">Commercial</option>
               <option value="Land">Land</option>
             </select>
@@ -129,8 +135,8 @@
           <div class="mb-3">
             <label class="form-label">Status</label>
             <select class="form-control" formControlName="status">
-              <option value="PENDING">Pending</option>
               <option value="ACTIVE">Active</option>
+              <option value="PENDING">Pending</option>
               <option value="REJECTED">Rejected</option>
             </select>
           </div>
@@ -163,8 +169,37 @@
 </div>
 
 
-<!--! // Bootstrap Modal for Update Property //=======================  -->
+<!--! // Bootstrap Modal for View Property //=======================  -->
 
+
+<!-- View Property Modal -->
+<div class="modal fade" id="viewPropertyModal" tabindex="-1" aria-labelledby="viewPropertyModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewPropertyModalLabel">Property Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Title:</strong> {{ selectedProperty?.title }}</p>
+        <p><strong>Category:</strong> {{ selectedProperty?.propertyType }}</p>
+        <p><strong>Size:</strong> {{ selectedProperty?.size }}</p>
+        <p><strong>Price:</strong> {{ selectedProperty?.price }}</p>
+        <p><strong>Year Built:</strong> {{ selectedProperty?.yearBuilt }}</p>
+        <p><strong>Location:</strong> {{ selectedProperty?.address }}</p>
+        <p><strong>Bedrooms:</strong> {{ selectedProperty?.bedrooms }}</p>
+        <p><strong>Bathrooms:</strong> {{ selectedProperty?.bathrooms }}</p>
+        <p><strong>Status:</strong> {{ selectedProperty?.status }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--! // Bootstrap Modal for Update Property //=======================  -->
 
 <!-- Update Property Modal -->
 <div class="modal fade" id="updatePropertyModal" tabindex="-1" aria-hidden="true">
@@ -175,8 +210,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <!-- <form [formGroup]="updateForm" (ngSubmit)="updateProperty()">
-
+        <form [formGroup]="updateForm" (ngSubmit)="updateProperty()">
           <div class="mb-3">
             <label class="form-label">Property Title</label>
             <input type="text" class="form-control" formControlName="title" placeholder="Enter Property Title">
@@ -252,7 +286,7 @@
           </div>
 
           <button type="submit" class="btn btn-success">Update Property</button>
-        </form> -->
+        </form>
       </div>
     </div>
   </div>

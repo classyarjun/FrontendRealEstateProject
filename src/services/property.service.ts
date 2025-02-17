@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Property } from '../modal/property';
 import { environment } from '../environments/environment'; // Import environment
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,27 +12,20 @@ export class PropertyService {
 
   private apiUrl = environment.apiUrl; //?  apiUrl: 'http://localhost:8080/api',
 
-  constructor(private http: HttpClient) {}
 
-  //! oudated service
-  saveProperty(
-    property: Property,
-    files?: FileList,
-    agentId?: number,
-    recipientEmail?: string
-  ): Observable<any> {
-    const formData = new FormData();
-    formData.append('property', JSON.stringify(property));
+  // ✅ State management ke liye BehaviorSubject
+  private propertiesSubject = new BehaviorSubject<Property[]>([]);
+  properties$ = this.propertiesSubject.asObservable();
 
-    if (files) {
-      Array.from(files).forEach((file) => {
-        formData.append('profilePictures', file);
-      });
-    }
+  constructor(private http: HttpClient) {
+    this.loadProperties(); // ✅ Initialize data
+  }
 
-    return this.http.post<any>(
-      `${this.apiUrl}/properties/addProperty/${agentId}`,
-      formData
+  /** ✅ Get All Properties & Update Subject */
+  private loadProperties(): void {
+    this.getAllProperties().subscribe(
+      (data) => this.propertiesSubject.next(data),
+      (error) => console.error('Error fetching properties:', error)
     );
   }
 
@@ -51,12 +44,21 @@ export class PropertyService {
     );
   }
 
-  approveProperty(propertyId: number): Observable<string> {
-    return this.http.put<string>(
-      `${this.apiUrl}/properties/approveProperty/${propertyId}`,
-      {}
-    );
-  }
+  // approveProperty(propertyId: number): Observable<string> {
+  //   return this.http.put<string>(
+  //     `${this.apiUrl}/properties/approveProperty/${propertyId}`,
+  //     {}
+  //   );
+  // }
+
+
+    /** ✅ Approve Property & Refresh List */
+    approveProperty(propertyId: number): Observable<string> {
+      return this.http.put<string>(`${this.apiUrl}/properties/approveProperty/${propertyId}`, {})
+        .pipe(
+          tap(() => this.loadProperties()) // ✅ Auto refresh state
+        );
+    }
 
   /** Reject Property */
   rejectProperty(propertyId: number): Observable<string> {
@@ -84,14 +86,8 @@ export class PropertyService {
     );
   }
 
-  updateProperty(
-    propertyId: number,
-    propertyData: FormData
-  ): Observable<Property> {
-    return this.http.put<Property>(
-      `${this.apiUrl}/properties/updateProperty/${propertyId}`,
-      propertyData
-    );
+  updateProperty(propertyId: number, propertyData: FormData ): Observable<Property> {
+    return this.http.put<Property>(`${this.apiUrl}/properties/updateProperty/${propertyId}`,propertyData);
   }
 
   deleteProperty(propertyId: number): Observable<any> {

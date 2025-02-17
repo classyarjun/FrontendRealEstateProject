@@ -17,7 +17,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { UserComponent } from './user/user.component';
 import { AgentComponent } from './agent/agent.component';
 import { AgentdashboardComponent } from './agentdashboard/agentdashboard.component';
@@ -37,6 +36,7 @@ import { ClientsayComponent } from './clientsay/clientsay.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 import { SideMapsComponent } from './side-maps/side-maps.component';
+import { BlogComponent } from './blog/blog.component';
 
 
 
@@ -53,7 +53,6 @@ import { SideMapsComponent } from './side-maps/side-maps.component';
     ContactusComponent,
     FooterComponent,
     HomeComponent,
-    AdmindashboardComponent,
     UserComponent,
     AgentComponent,
     AgentdashboardComponent,
@@ -73,6 +72,7 @@ import { SideMapsComponent } from './side-maps/side-maps.component';
     PrivacyPolicyComponent,
     TermsConditionsComponent,
     SideMapsComponent,
+    BlogComponent,
   ],
   imports: [
     BrowserModule,

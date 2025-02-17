@@ -158,10 +158,15 @@
 
               <div class="card">
                 <div class="card-header">
-                  
                   <div class="row ">
-                    <div class="col-md-6">
+
+
+                    <!-- <div class="col-md-6">
                       <input type="text" class="form-control" placeholder="Search properties..." />
+                    </div> -->
+
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" placeholder="Search properties..." (input)="onSearch($event)" />
                     </div>
 
                     <div class="col-md-2">
@@ -178,10 +183,11 @@
 
                     </div>
                   </div>
-
                 </div>
+
                 <div class="card-body">
-                  <div class="table-responsive">
+                  <div class="table-responsive" style="height: 500px; overflow-y: auto;">
+
                     <table class="table table-striped">
                       <thead>
                         <tr>
@@ -199,7 +205,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let property of properties">
+                        <tr *ngFor="let property of filteredProperties">
                           <td>{{ property.propertyId }}</td>
                           <td>{{ property.title }}</td>
                           <td>{{ property.propertyType }}</td>
@@ -210,16 +216,31 @@
                           <td>{{ property.bedrooms }}</td>
                           <td>{{ property.bathrooms }}</td>
                           <td>{{ property.status }}</td>
-                           <td>
-                            <button class="btn btn-danger btn-sm" (click)="deleteProperty(property.propertyId!)" [disabled]="!property.propertyId">Delete</button>
+                          <td>
+
+                            <!-- <butto class="btn btn-primary btn-sm me-1">View</butto
+                              n> -->
+                            <button class="btn btn-primary btn-sm me-1" (click)="viewProperty(property.propertyId!)"
+                              data-bs-toggle="modal" data-bs-target="#viewPropertyModal">
+                              View
+                            </button>
+
+                            <button class="btn btn-success btn-sm me-1" (click)="loadProperty(property.propertyId!)"
+                              data-bs-toggle="modal" data-bs-target="#updatePropertyModal">
+                              Update
+                            </button>
+
+                            <button class="btn btn-danger btn-sm me-1"
+                              (click)="deleteProperty(property.propertyId!)">Delete</button>
                           </td>
                         </tr>
                       </tbody>
                     </table>
-
                   </div>
                 </div>
+
               </div>
+
 
               <!--! // Bootstrap Modal for Adding Property //=======================  -->
 
@@ -231,8 +252,144 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                      <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
 
+                      <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                        <div class="mb-3">
+                          <label class="form-label">Title</label>
+                          <input type="text" class="form-control" formControlName="title" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Price</label>
+                          <input type="number" class="form-control" formControlName="price" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Size</label>
+                          <input type="number" class="form-control" formControlName="size" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Address</label>
+                          <input type="text" class="form-control" formControlName="address" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Year Built</label>
+                          <input type="number" class="form-control" formControlName="yearBuilt" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Property Type</label>
+                          <select class="form-control" formControlName="propertyType" required>
+                            <option value="" disabled selected>Select Property Type</option>
+                            <option value="Resdental">Resdental</option>
+                            <option value="Industrial">Industrial</option>
+                            <option value="Commercial">Commercial</option>
+                            <option value="Land">Land</option>
+                          </select>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Bedrooms</label>
+                          <input type="number" class="form-control" formControlName="bedrooms" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Bathrooms</label>
+                          <input type="number" class="form-control" formControlName="bathrooms" required>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Amenities (Comma Separated)</label>
+                          <input type="text" class="form-control" formControlName="amenities">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Features</label>
+                          <input type="text" class="form-control" formControlName="features">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Status</label>
+                          <select class="form-control" formControlName="status">
+                            <option value="ACTIVE">Active</option>
+                            <option value="PENDING">Pending</option>
+                            <option value="REJECTED">Rejected</option>
+                          </select>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Availability</label>
+                          <select class="form-control" formControlName="availability">
+                            <option value="AVAILABLE">Available</option>
+                            <option value="RENTED">Rented</option>
+                            <option value="SOLD">Sold</option>
+                          </select>
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Proximity</label>
+                          <input type="text" class="form-control" formControlName="proximity">
+                        </div>
+
+                        <div class="mb-3">
+                          <label class="form-label">Upload Images</label>
+                          <input type="file" class="form-control" (change)="onFileSelected($event)" multiple>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Add Property</button>
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!--! // Bootstrap Modal for View Property //=======================  -->
+
+
+              <!-- View Property Modal -->
+              <div class="modal fade" id="viewPropertyModal" tabindex="-1" aria-labelledby="viewPropertyModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="viewPropertyModalLabel">Property Details</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p><strong>Title:</strong> {{ selectedProperty?.title }}</p>
+                      <p><strong>Category:</strong> {{ selectedProperty?.propertyType }}</p>
+                      <p><strong>Size:</strong> {{ selectedProperty?.size }}</p>
+                      <p><strong>Price:</strong> {{ selectedProperty?.price }}</p>
+                      <p><strong>Year Built:</strong> {{ selectedProperty?.yearBuilt }}</p>
+                      <p><strong>Location:</strong> {{ selectedProperty?.address }}</p>
+                      <p><strong>Bedrooms:</strong> {{ selectedProperty?.bedrooms }}</p>
+                      <p><strong>Bathrooms:</strong> {{ selectedProperty?.bathrooms }}</p>
+                      <p><strong>Status:</strong> {{ selectedProperty?.status }}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!--! // Bootstrap Modal for Update Property //=======================  -->
+
+              <!-- Update Property Modal -->
+              <div class="modal fade" id="updatePropertyModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Update Property</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form [formGroup]="updateForm" (ngSubmit)="updateProperty()">
                         <div class="mb-3">
                           <label class="form-label">Property Title</label>
                           <input type="text" class="form-control" formControlName="title"
@@ -304,23 +461,19 @@
                           <label class="form-label">Status</label>
                           <select class="form-control" formControlName="status">
                             <option value="ACTIVE">ACTIVE</option>
-
+                            <option value="SOLD">SOLD</option>
+                            <option value="PENDING">PENDING</option>
                           </select>
                         </div>
 
                         <div class="mb-3">
-                          <!-- <label class="form-label">Gallery Images</label> -->
                           <label class="form-label">Upload Images</label>
                           <input type="file" class="form-control" (change)="onFileSelected($event)" multiple>
                         </div>
 
-                        <button type="submit" class="btn btn-success">Save Property</button>
+                        <button type="submit" class="btn btn-success">Update Property</button>
                       </form>
-
                     </div>
                   </div>
                 </div>
               </div>
-
-
-              <!--! // Bootstrap Modal for Update Property //=======================  -->

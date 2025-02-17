@@ -142,6 +142,10 @@
 
                   <div class="table-responsive" style="height: 200px; overflow-y: auto;">
                     <table class="table table-striped" *ngIf="pendingAgents.length > 0; else noPendingAgent">
+
+
+
+
                       <thead>
                         <tr>
                           <th>Id</th>
@@ -204,7 +208,8 @@
                 </div>
                 <div class="card-body">
                   <div class="table-responsive" style="height: 200px; overflow-y: auto;">
-                    <table class="table table-striped" *ngIf="pendingProperties.length > 0; else noPending">
+                    <table class="table table-striped" *ngIf="propertylength > 0; else noPending">
+                    <!-- <table class="table table-striped" > -->
                       <thead>
                         <tr>
                           <th>ID</th>
@@ -226,8 +231,10 @@
                           <td>{{ property.yearBuilt}}</td>
                           <td>{{ property.status }}</td>
                           <td>
-                            <button class="btn btn-success btn-sm ms-1" (click)="approveProperty(property.propertyId)">Approve</button>
-                            <button class="btn btn-danger btn-sm ms-1" (click)="rejectProperty(property.propertyId)">Reject</button>
+                            <button class="btn btn-success btn-sm ms-1"
+                              (click)="approveProperty(property.propertyId)">Approve</button>
+                            <button class="btn btn-danger btn-sm ms-1"
+                              (click)="rejectProperty(property.propertyId)">Reject</button>
                           </td>
                         </tr>
                       </tbody>
@@ -384,87 +391,16 @@
         </div>
 
 
-        <!-- contatent tab -->
+        <!-- admin dashord in add this code -->
         <div class="tab-pane fade" id="Content" role="tabpanel">
           <div class="mt-4">
-            <h3>Edit Blog</h3>
-            <div class="card">
-              <div class="card-header">
-                User List
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>#12345</td>
-                        <td>John Doe</td>
-                        <td>2023-05-20</td>
-                        <td><span class="badge bg-success">Completed</span></td>
-                        <td>$150.00</td>
-                        <td class="d-flex align-items-center ">
-                          <button class='btn btn-success btn-sm'>A</button>
-                          <button class='btn btn-danger btn-sm mx-1'>d</button>
-                        </td>
-                      </tr>
-
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="mt-4">
-            <h3>Edit Contact</h3>
-            <div class="card">
-              <div class="card-header">
-                User List
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Total</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>#12345</td>
-                        <td>John Doe</td>
-                        <td>2023-05-20</td>
-                        <td><span class="badge bg-success">Completed</span></td>
-                        <td>$150.00</td>
-                        <td class="d-flex align-items-center ">
-                          <button class='btn btn-success btn-sm'>A</button>
-                          <button class='btn btn-danger btn-sm mx-1'>d</button>
-                        </td>
-                      </tr>
-
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+            <h3>Blog Manage</h3>
+            <app-blog></app-blog>
           </div>
         </div>
+
+
+
       </div>
     </div>
   </div>

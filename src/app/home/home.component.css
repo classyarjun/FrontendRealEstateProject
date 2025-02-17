@@ -208,3 +208,14 @@ padding: 2rem;
 .cat-item:hover div * {
   color: #FFFFFF !important;
 }
+
+
+.container-xxl {
+  background:linear-gradient(to right, #f4f5f7, #5db6fb);
+
+}
+
+.container-xxl .container {
+  padding: 2rem 0;  /* Add some padding if needed */
+}
+ 

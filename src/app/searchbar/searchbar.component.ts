@@ -4,6 +4,9 @@ import { PropertyService } from 'src/services/property.service';
 import { AdminService } from './../../services/admin.service';
 import { Property } from 'src/modal/property';
 import { AgentService } from 'src/services/agent.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-searchbar',
@@ -11,7 +14,6 @@ import { AgentService } from 'src/services/agent.service';
   styleUrls: ['./searchbar.component.css']
 })
 
-export class SearchbarComponent{
-
-  }
-
+export class SearchbarComponent {
+  
+}

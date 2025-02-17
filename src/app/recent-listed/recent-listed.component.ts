@@ -17,15 +17,15 @@ export class RecentListedComponent implements OnInit{
     constructor(private PropertyService: PropertyService) {}
 
     ngOnInit(): void {
-      this.loadProperty()
+      // this.loadProperty()
     }
 
-    loadProperty(): void {
-      this.PropertyService.getAllProperties().subscribe(
-        (property) => (this.property = property),
-        (error) => console.error("Error fetching property:", error),
-      )
-    }
+    // loadProperty(): void {
+    //   this.PropertyService.getAllProperties().subscribe(
+    //     (property) => (this.property = property),
+    //     (error) => console.error("Error fetching property:", error),
+    //   )
+    // }
 
 
 }

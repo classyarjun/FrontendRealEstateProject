@@ -2,6 +2,7 @@
 // }
 
 export interface Property {
+  id: number; // Add this line
   propertyId?: number;
   title: string;
   price: number;
@@ -18,3 +19,22 @@ export interface Property {
   proximity: string;        // Nearby locations info
   admin: { adminId: number }; // Admin details
 }
+
+
+
+// export interface Property {
+//   id: number; // Add this line
+//   title: string;
+//   price: number;
+//   size: number;
+//   address: string;
+//   yearBuilt: number | null;
+//   propertyType: string;
+//   bedrooms: number;
+//   bathrooms: number;
+//   amenities: string[];
+//   features: string[];
+//   status: string;
+//   availability: string;
+//   proximity: string;
+// }
