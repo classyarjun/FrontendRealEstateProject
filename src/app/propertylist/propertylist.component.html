@@ -1,0 +1,154 @@
+<!-- <div class="container-fluid">
+  <div class="container my-4 mx-auto">
+    <div class="row">
+      <div class="col-md-3" *ngFor="let property of properties" (click)="openModal(property)">
+        <div class="card shadow-sm">
+          <img [src]="property.images[0]" class="card-img-top" alt="Property Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ property.title }}</h5>
+            <p class="card-text">Price: {{ property.price }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header mx-3">
+        <h3 class="modal-title fw-bold" id="propertyModalLabel">{{ selectedProperty?.title }}</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="row">
+
+          <div class="col-md-6 ">
+            <img [src]="selectedImage || selectedProperty?.images[0]" class="img-fluid w-100 main-image"
+              alt="Property Image">
+
+            <div class="d-flex mt-2 flex-wrap">
+              <img *ngFor="let img of selectedProperty?.images" [src]="img" class="img-thumbnail me-2"
+                [ngClass]="{'active-thumbnail': selectedImage === img}" (mouseover)="selectedImage = img"
+                [style.width.px]="80" [style.height.px]="80" [style.cursor]="'pointer'"
+                [style.border]="'2px solid ' + (selectedImage === img ? '#007bff' : 'transparent')"
+                [style.transition]="'border 0.3s'">
+            </div>
+
+
+
+          </div>
+          <div class="col-md-6 col-12 ">
+            <h3 class="fw-bold">{{ selectedProperty?.title }}</h3>
+            <h6>{{ selectedProperty?.description }}</h6>
+            <h6> Size :{{ selectedProperty?.size }}</h6>
+            <h6>Address: {{ selectedProperty?.address }}</h6>
+            <h6>YearBuilt : {{ selectedProperty?.yearBuilt }}</h6>
+            <h6>PropertyType : {{ selectedProperty?.propertyType }}</h6>
+            <h6>Bedrooms : {{ selectedProperty?.bedrooms }}</h6>
+            <h6>Bathrooms : {{ selectedProperty?.bathrooms }}</h6>
+            <h6>Amenities : {{ selectedProperty?.amenities }}</h6>
+            <h6>Features : {{ selectedProperty?.features }}</h6>
+            <h6>Status : {{ selectedProperty?.status }}</h6>
+            <h6>Availability : {{ selectedProperty?.availability }}</h6>
+            <h6>Proximity: {{ selectedProperty?.proximity }}</h6>
+
+            <h4 class="text-success">Price: {{ selectedProperty?.price }}</h4>
+            <button type="button" class="btn btn-warning mt-3">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ -->
+
+
+ <div class="container-fluid">
+  <div class="container my-4 mx-auto">
+    <div class="row">
+      <div class="col-md-3" *ngFor="let property of properties" (click)="openModal(property)">
+        <div class="card shadow-sm">
+          <img [src]="property.images[0]" class="card-img-top" alt="Property Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ property.title }}</h5>
+            <p class="card-text">Price: {{ property.price }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header mx-3">
+        <h3 class="modal-title fw-bold" id="propertyModalLabel">{{ selectedProperty?.title }}</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Bootstrap Carousel -->
+            <!-- add for autoslide data-bs-ride="carousel" -->
+            <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+              <div class="carousel-inner">
+                <div *ngFor="let img of selectedProperty?.images; let i = index"
+                     class="carousel-item"
+                     [ngClass]="{'active': selectedImage === img}">
+                  <img [src]="img" class="d-block w-100 main-image" alt="Property Image">
+                </div>
+              </div>
+              <!-- Previous & Next Buttons -->
+              <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+            <!-- Thumbnail Images -->
+            <div class="d-flex mt-2 flex-wrap">
+              <img *ngFor="let img of selectedProperty?.images; let i = index"
+                   [src]="img"
+                   class="img-thumbnail me-2 thumbnail-img"
+                   [ngClass]="{'active-thumbnail': selectedImage === img}"
+                   (click)="changeImage(i)">
+            </div>
+          </div>
+          <div class="col-md-6 col-12">
+            <h3 class="fw-bold">{{ selectedProperty?.title }}</h3>
+            <h6>{{ selectedProperty?.description }}</h6>
+            <h6>Size :{{ selectedProperty?.size }}</h6>
+            <h6>Address: {{ selectedProperty?.address }}</h6>
+            <h6>YearBuilt : {{ selectedProperty?.yearBuilt }}</h6>
+            <h6>PropertyType : {{ selectedProperty?.propertyType }}</h6>
+            <h6>Bedrooms : {{ selectedProperty?.bedrooms }}</h6>
+            <h6>Bathrooms : {{ selectedProperty?.bathrooms }}</h6>
+            <h6>Amenities : {{ selectedProperty?.amenities }}</h6>
+            <h6>Features : {{ selectedProperty?.features }}</h6>
+            <h6>Status : {{ selectedProperty?.status }}</h6>
+            <h6>Availability : {{ selectedProperty?.availability }}</h6>
+            <h6>Proximity: {{ selectedProperty?.proximity }}</h6>
+
+            <h4 class="text-success">Price: {{ selectedProperty?.price }}</h4>
+            <button type="button" class="btn btn-warning mt-3">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

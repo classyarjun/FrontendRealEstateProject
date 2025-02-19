@@ -1,0 +1,16 @@
+.thumbnail-img {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  /* transition: border 0.3s ease-in-out; */
+}
+
+.active-thumbnail {
+  border: 3px solid #007bff !important; /* Blue Border for Active Image */
+}
+
+.carousel-inner img {
+  max-height: 400px; /* Adjust Image Height */
+  object-fit: cover;
+}

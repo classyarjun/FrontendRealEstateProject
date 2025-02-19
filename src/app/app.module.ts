@@ -37,6 +37,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 import { SideMapsComponent } from './side-maps/side-maps.component';
 import { BlogComponent } from './blog/blog.component';
+import { PropertylistComponent } from './propertylist/propertylist.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 
 
@@ -73,6 +75,8 @@ import { BlogComponent } from './blog/blog.component';
     TermsConditionsComponent,
     SideMapsComponent,
     BlogComponent,
+    PropertylistComponent,
+    SearchResultComponent,
   ],
   imports: [
     BrowserModule,

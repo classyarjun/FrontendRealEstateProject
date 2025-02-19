@@ -1,64 +1,64 @@
+<div class="parent">
+  <div class="form-container">
+    <form [formGroup]="agentForm" (ngSubmit)="submitForm()" class="agent-form" enctype="multipart/form-data">
 
-
-<div class="form-container">
-  <form [formGroup]="agentForm" (ngSubmit)="submitForm()" class="agent-form" enctype="multipart/form-data">
-
-    <div class="input-group">
-      <div class="input-field">
-        <label>User Name:</label>
-        <input type="text" formControlName="userName" required />
+        <h2 class="d-flex justify-content-center m-3 fw-bold">Agent Register</h2>
+      <div class="input-group">
+        <div class="input-field">
+          <label>User Name:</label>
+          <input type="text" formControlName="userName" required />
+        </div>
+        <div class="input-field">
+          <label>Full Name:</label>
+          <input type="text" formControlName="fullName" required />
+        </div>
       </div>
-      <div class="input-field">
-        <label>Full Name:</label>
-        <input type="text" formControlName="fullName" required />
-      </div>
-    </div>
 
-    <div class="input-group">
-      <div class="input-field">
-        <label>Email:</label>
-        <input type="email" formControlName="email" required />
+      <div class="input-group">
+        <div class="input-field">
+          <label>Email:</label>
+          <input type="email" formControlName="email" required />
+        </div>
+        <div class="input-field">
+          <label>Password:</label>
+          <input type="password" formControlName="password" required />
+        </div>
       </div>
-      <div class="input-field">
-        <label>Password:</label>
-        <input type="password" formControlName="password" required />
+
+      <div class="input-group">
+        <div class="input-field">
+          <label>Mobile No:</label>
+          <input type="text" formControlName="mobileNo" required />
+        </div>
+        <div class="input-field">
+          <label>Experience:</label>
+          <input type="number" formControlName="experience" required />
+        </div>
       </div>
-    </div>
 
-    <div class="input-group">
-      <div class="input-field">
-        <label>Mobile No:</label>
-        <input type="text" formControlName="mobileNo" required />
+      <div class="input-group">
+        <div class="input-field">
+          <label>Rating:</label>
+          <input type="number" formControlName="rating" step="0.1" required />
+        </div>
+        <div class="input-field">
+          <label>Status:</label>
+          <select formControlName="status">
+            <option value="ACTIVE">Active</option>
+            <option value="INACTIVE">Inactive</option>
+          </select>
+        </div>
       </div>
-      <div class="input-field">
-        <label>Experience:</label>
-        <input type="number" formControlName="experience" required />
+
+      <label>Bio:</label>
+      <textarea formControlName="bio"></textarea>
+
+      <div class="border-1">
+        <label>Profile Picture:</label>
+        <input type="file" (change)="onFileSelected($event)" />
       </div>
-    </div>
 
-    <div class="input-group">
-      <div class="input-field">
-        <label>Rating:</label>
-        <input type="number" formControlName="rating" step="0.1" required />
-      </div>
-      <div class="input-field">
-        <label>Status:</label>
-        <select formControlName="status">
-          <option value="ACTIVE">Active</option>
-          <option value="INACTIVE">Inactive</option>
-        </select>
-      </div>
-    </div>
-
-    <label>Bio:</label>
-    <textarea formControlName="bio"></textarea>
-
-    <div class="border-1">
-      <label>Profile Picture:</label>
-      <input type="file" (change)="onFileSelected($event)" />
-    </div>
-
-    <button type="submit" [disabled]="agentForm.invalid">Register</button>
-
-  </form>
+      <button type="submit" [disabled]="agentForm.invalid">Register</button>
+    </form>
+  </div>
 </div>

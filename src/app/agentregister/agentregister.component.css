@@ -1,10 +1,24 @@
 /* Container for the form */
+
+/* General styles */
+.parent {
+  background: url('src/assets/userloginbg/agent Registration.jpg') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+
+}
+
 .form-container {
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   height: 100vh; /* Full viewport height */
-  background-color: #f4f4f4; /* Light background color */
+  border-radius: 10px; /* Optional: Add rounded corners */
+  padding: 20px; /* Optional: Add some padding */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
 }
 
 /* Form styling */
@@ -14,6 +28,8 @@
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   width: 600px; /* Fixed width for the form */
+  background-color: rgba(244, 244, 244, 0.7); /* Light background color with transparency */
+  backdrop-filter: blur(10px); /* Apply blur effect */
 }
 
 /* Input group styling */

@@ -27,6 +27,8 @@ import { ClientsayComponent } from './clientsay/clientsay.component';
 import { TermsConditionsComponent } from './terms-conditions/terms-conditions.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { SideMapsComponent } from './side-maps/side-maps.component';
+import { PropertylistComponent } from './propertylist/propertylist.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 
 
@@ -63,6 +65,11 @@ const routes: Routes = [
 
   { path: 'terms-conditions', component: TermsConditionsComponent},
   { path: 'privacy-policy', component: PrivacyPolicyComponent},
+  { path: 'pl', component: PropertylistComponent},
+
+  { path: 'search-results', component: SearchResultComponent },
+  { path: 'search-results-wildcardroute', redirectTo: 'search-results' },
+
 
 ];
 

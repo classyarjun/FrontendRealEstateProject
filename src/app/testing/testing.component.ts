@@ -33,7 +33,6 @@ export class TestingComponent implements OnInit {
     });
   }
 
-
   approveProperty(tempPropertyId: number): void {
     const adminId = 1; //repalce your admin id here
     this.adminService.approveProperty(tempPropertyId, adminId).subscribe({

@@ -39,6 +39,9 @@ export class AgentregisterComponent implements OnInit {
     this.selectedFile = event.target.files[0];
   }
 
+  closeForm() {
+    
+  }
   // Submit Form
   submitForm() {
     if (this.agentForm.invalid) {

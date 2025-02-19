@@ -1,11 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { PropertyService } from 'src/services/property.service';
-import { AdminService } from './../../services/admin.service';
-import { Property } from 'src/modal/property';
-import { AgentService } from 'src/services/agent.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,5 +10,34 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class SearchbarComponent {
-  
+
+  selectedType: string = 'buy';  // Default Buy
+  selectedProperty: string = '';
+  location: string = '';
+  propertyOptions: string[] = [];
+
+  constructor(private router: Router) {
+    this.updatePropertyTypes(); // Initialize property options
+  }
+
+  // Update property dropdown based on Buy/Rent selection
+  updatePropertyTypes() {
+    if (this.selectedType === 'buy') {
+      this.propertyOptions = ['Residential', 'Commercial', 'Luxury Property', 'Land'];
+    } else {
+      this.propertyOptions = ['Apartment', 'Villa', 'Office Space'];
+    }
+    this.selectedProperty = ''; // Reset selected property
+  }
+
+  // Navigate to search results page
+  searchProperties() {
+    this.router.navigate(['/search-results'], {
+      queryParams: {
+        type: this.selectedType,
+        property: this.selectedProperty,
+        location: this.location
+      }
+    });
+  }
 }

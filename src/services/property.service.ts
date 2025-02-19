@@ -44,12 +44,6 @@ export class PropertyService {
     );
   }
 
-  // approveProperty(propertyId: number): Observable<string> {
-  //   return this.http.put<string>(
-  //     `${this.apiUrl}/properties/approveProperty/${propertyId}`,
-  //     {}
-  //   );
-  // }
 
 
     /** ✅ Approve Property & Refresh List */
@@ -96,9 +90,19 @@ export class PropertyService {
     );
   }
 
-  searchProperties(keyword: string): Observable<Property[]> {
-    return this.http.get<Property[]>(
-      `${this.apiUrl}/properties/search/${keyword}`
-    );
+  // searchProperties(keyword: string): Observable<Property[]> {
+  //   return this.http.get<Property[]>(
+  //     `${this.apiUrl}/properties/search/${keyword}`
+  //   );
+  // }
+
+
+  searchProperties(propertyType: string, ): Observable<Property[]> {
+    return this.http.get<Property[]>(`${this.apiUrl}/properties/searchProperty`, {
+      params: {
+        propertyType: propertyType,
+
+      }
+    });
   }
 }

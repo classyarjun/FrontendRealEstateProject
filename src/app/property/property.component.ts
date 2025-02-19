@@ -21,7 +21,7 @@ export class PropertyComponent implements OnInit {
   updateForm: FormGroup;
   isVisible = true;
 
-  agentId: number = 9;
+  agentId: number = 1;
 
   constructor(private fb: FormBuilder, private propertyService: PropertyService) {
     // Property form initialization
