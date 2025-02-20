@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AgentregisterComponent } from './agentregister/agentregister.component';
 import { AgentloginComponent } from './agentlogin/agentlogin.component';
 import { AdminregisterComponent } from './adminregister/adminregister.component';
-import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar'; // Import this
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -39,8 +38,9 @@ import { SideMapsComponent } from './side-maps/side-maps.component';
 import { BlogComponent } from './blog/blog.component';
 import { PropertylistComponent } from './propertylist/propertylist.component';
 import { SearchResultComponent } from './search-result/search-result.component';
-
-
+import { AdminLoginComponent } from './adminlogin/adminlogin.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,6 @@ import { SearchResultComponent } from './search-result/search-result.component';
     AgentregisterComponent,
     AgentloginComponent,
     AdminregisterComponent,
-    AdminloginComponent,
     NavbarComponent,
     ContactusComponent,
     FooterComponent,
@@ -77,6 +76,8 @@ import { SearchResultComponent } from './search-result/search-result.component';
     BlogComponent,
     PropertylistComponent,
     SearchResultComponent,
+    AdminLoginComponent
+
   ],
   imports: [
     BrowserModule,
@@ -88,7 +89,11 @@ import { SearchResultComponent } from './search-result/search-result.component';
     BrowserAnimationsModule,
 
   ],
-  providers: [],
+
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

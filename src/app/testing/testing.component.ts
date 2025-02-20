@@ -8,62 +8,62 @@ import { AuthService } from 'src/services/auth.service';
   templateUrl: './testing.component.html',
   styleUrls: ['./testing.component.css']
 })
-export class TestingComponent implements OnInit {
-  pendingProperties: any[] = [];
+export class TestingComponent  {
+  // pendingProperties: any[] = [];
 
 
-  adminId: number | null = null;
+  // adminId: number | null = null;
 
-  constructor(private adminService: AdminService, private authService: AuthService) {}
+  // constructor(private adminService: AdminService, private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.adminId = this.authService.getAdminId();
-    this.fetchPendingProperties();
-  }
+  // ngOnInit(): void {
+  //   this.adminId = this.authService.getAdminId();
+  //   this.fetchPendingProperties();
+  // }
 
-  fetchPendingProperties(): void {
-    this.adminService.getAllPendingProperties().subscribe({
-      next: (data: any[]) => {
-        this.pendingProperties = data;
-        // console.log('Pending Properties:', data);
-      },
-      error: (err: any) => {
-        console.error('Error fetching pending properties:', err);
-      }
-    });
-  }
+  // fetchPendingProperties(): void {
+  //   this.adminService.getAllPendingProperties().subscribe({
+  //     next: (data: any[]) => {
+  //       this.pendingProperties = data;
+  //       // console.log('Pending Properties:', data);
+  //     },
+  //     error: (err: any) => {
+  //       console.error('Error fetching pending properties:', err);
+  //     }
+  //   });
+  // }
 
-  approveProperty(tempPropertyId: number): void {
-    const adminId = 1; //repalce your admin id here
-    this.adminService.approveProperty(tempPropertyId, adminId).subscribe({
-      next: (response: string) => {
-        alert('Property Approved Successfully!');
-        this.fetchPendingProperties();
-      },
-      error: (err: any) => {
-        console.error('Error approving property:', err);
-        alert('Error approving property!');
-      }
-    });
-  }
+  // approveProperty(tempPropertyId: number): void {
+  //   const adminId = 1; //repalce your admin id here
+  //   this.adminService.approveProperty(tempPropertyId, adminId).subscribe({
+  //     next: (response: string) => {
+  //       alert('Property Approved Successfully!');
+  //       this.fetchPendingProperties();
+  //     },
+  //     error: (err: any) => {
+  //       console.error('Error approving property:', err);
+  //       alert('Error approving property!');
+  //     }
+  //   });
+  // }
 
 
-  rejectProperty(tempPropertyId: number): void {
-    if (!this.adminId) {
-      alert('Admin ID not found!');
-      return;
-    }
-    this.adminService.rejectProperty(tempPropertyId, this.adminId).subscribe({
-      next: () => {
-        alert('Property rejected successfully!');
-      },
-      error: (err) => {
-        console.error('Error rejecting property:', err);
-        alert('Error rejecting property!');
-      }
-    });
-  }
-}
+//   rejectProperty(tempPropertyId: number): void {
+//     if (!this.adminId) {
+//       alert('Admin ID not found!');
+//       return;
+//     }
+//     this.adminService.rejectProperty(tempPropertyId, this.adminId).subscribe({
+//       next: () => {
+//         alert('Property rejected successfully!');
+//       },
+//       error: (err) => {
+//         console.error('Error rejecting property:', err);
+//         alert('Error rejecting property!');
+//       }
+//     });
+//   }
+// }
 
 
   // rejectProperty(tempPropertyId: number): void {
@@ -82,3 +82,4 @@ export class TestingComponent implements OnInit {
 
 
 
+}

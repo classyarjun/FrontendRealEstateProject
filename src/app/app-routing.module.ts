@@ -5,7 +5,7 @@ import { UserregisterComponent } from './userregister/userregister.component';
 import { AgentloginComponent } from './agentlogin/agentlogin.component';
 import { AgentregisterComponent } from './agentregister/agentregister.component';
 import { AdminregisterComponent } from './adminregister/adminregister.component';
-import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { AdminLoginComponent} from './adminlogin/adminlogin.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { FooterComponent } from './footer/footer.component';
@@ -29,6 +29,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { SideMapsComponent } from './side-maps/side-maps.component';
 import { PropertylistComponent } from './propertylist/propertylist.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 
 
@@ -38,13 +39,9 @@ import { SearchResultComponent } from './search-result/search-result.component';
 const routes: Routes = [
 
   { path: '', component: HomeComponent},
-  { path: 'userlogin', component: UserloginComponent},
   { path: 'userregister', component: UserregisterComponent},
-  { path: 'agentpanel', component: AgentdashboardComponent},
   { path: 'agentlogin', component: AgentloginComponent},
   { path: 'agentregister', component: AgentregisterComponent},
-  { path: 'adminregister', component: AdminregisterComponent},
-  { path: 'adminlogin', component: AdminloginComponent},
   { path: 'navbar', component: NavbarComponent},
   { path: 'contactus', component: ContactusComponent},
   { path: 'footer', component: FooterComponent},
@@ -55,7 +52,6 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetpasswordComponent},
   { path: 'xyz', component: XyzComponent},
   { path: 'search', component: SearchbarComponent},
-  { path: 'adminpanel', component: AdminpanelComponent},
   { path: 'about-us', component: AboutUsComponent},
   { path: 'servicepage', component: ServicepageComponent},
   { path: 'property-type', component: PropertyTypeComponent},
@@ -65,10 +61,26 @@ const routes: Routes = [
 
   { path: 'terms-conditions', component: TermsConditionsComponent},
   { path: 'privacy-policy', component: PrivacyPolicyComponent},
+
   { path: 'pl', component: PropertylistComponent},
 
   { path: 'search-results', component: SearchResultComponent },
   { path: 'search-results-wildcardroute', redirectTo: 'search-results' },
+
+  { path: 'userlogin', component: UserloginComponent},
+  // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  // { path: '**', redirectTo: '/userlogin' },
+
+  { path: 'adminregister', component: AdminregisterComponent},
+  { path: 'adminlogin', component: AdminLoginComponent},
+  { path: 'adminpanel', component: AdminpanelComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '/adminlogin' },
+
+
+
+  // { path: 'agentlogin', component: AgentdashboardComponent},
+  // { path: 'agentpanel', component: HomeComponent, canActivate: [AuthGuard] },
+  // { path: '**', redirectTo: '/agentlogin' },
 
 
 ];
@@ -80,4 +92,4 @@ const routes: Routes = [
 export class AppRoutingModule {
 
 
- }
+}

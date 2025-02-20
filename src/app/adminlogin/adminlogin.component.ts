@@ -1,102 +1,83 @@
+
+
+
 // import { Component } from '@angular/core';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { AuthService } from '../../services/auth.service';
 // import { Router } from '@angular/router';
-// import { HttpClient, HttpParams } from '@angular/common/http';
 
 // @Component({
 //   selector: 'app-adminlogin',
 //   templateUrl: './adminlogin.component.html',
 //   styleUrls: ['./adminlogin.component.css'],
 // })
-// export class AdminloginComponent {
+
+// export class AdminLoginComponent {
 //   username: string = '';
 //   password: string = '';
 //   errorMessage: string = '';
 
-//   constructor(private http: HttpClient, private router: Router) {}
-//   loginAdmin(): void {
-//     const params = new HttpParams()
-//       .set('username', this.username)
-//       .set('password', this.password);
+//   constructor(private authService: AuthService, private router: Router) {}
 
-//     this.http
-//       .post('http://localhost:8080/api/admin/loginAdmin', params)
-//       .subscribe({
-//         next: (response) => {
-//           console.log('Login successful:', response);
-//           alert('Login successful');
+//   login() {
+//     this.authService.login(this.username, this.password).subscribe({
+//       next: (response) => {
+//         if (response.data && response.data.token) {
+//           this.authService.setToken(response.data.token);
 //           this.router.navigate(['/adminpanel']);
-//         },
-//         error: (error) => {
-//           console.error('Login failed:', error);
-//           if (error.status === 401) {
-//             this.errorMessage = 'Invalid credentials. Please try again.';
-//           } else {
-//             this.errorMessage = 'An error occurred. Please try again later.';
-//           }
-//         },
-//       });
-//   }
-//   showPassword: boolean = false;
-
-// togglePassword() {
-//   this.showPassword = !this.showPassword;
-// }
-
-//    // Close login modal (Navigate to Home)
-//    closeLogin(): void {
-//     this.router.navigate(['/']);
+//         }
+//       },
+//       error: (error) => {
+//         this.errorMessage = 'Invalid username or password!';
+//       }
+//     });
 //   }
 // }
 
 
+//? ================//  second testing  ===============================
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-adminlogin',
   templateUrl: './adminlogin.component.html',
   styleUrls: ['./adminlogin.component.css'],
 })
-export class AdminloginComponent {
-  username: string = '';
-  password: string = '';
+export class AdminLoginComponent implements OnInit {
+  adminLoginForm!: FormGroup;
   errorMessage: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
-  loginAdmin(): void {
-    const params = new HttpParams()
-      .set('username', this.username)
-      .set('password', this.password);
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
-    this.http
-      .post('http://localhost:8080/api/admin/loginAdmin', params)
-      .subscribe({
-        next: (response) => {
-          console.log('Login successful:', response);
-          alert('Login successful');
+  ngOnInit() {
+    this.adminLoginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+
+  login() {
+    if (this.adminLoginForm.invalid) {
+      this.errorMessage = 'Please enter valid credentials!';
+      return;
+    }
+
+    const { username, password } = this.adminLoginForm.value;
+
+    this.authService.adminLogin(username, password).subscribe({
+      next: (response) => {
+        if (response.data && response.data.token) {
+          this.authService.setToken(response.data.token);
           this.router.navigate(['/adminpanel']);
-        },
-        error: (error) => {
-          console.error('Login failed:', error);
-          if (error.status === 401) {
-            this.errorMessage = 'Invalid credentials. Please try again.';
-          } else {
-            this.errorMessage = 'An error occurred. Please try again later.';
-          }
-        },
-      });
-  }
-  showPassword: boolean = false;
-
-togglePassword() {
-  this.showPassword = !this.showPassword;
-}
-
-   // Close login modal (Navigate to Home)
-   closeLogin(): void {
-    this.router.navigate(['/']);
+        }
+      },
+      error: () => {
+        this.errorMessage = 'Invalid username or password!';
+      }
+    });
   }
 }
-
