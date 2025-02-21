@@ -30,18 +30,14 @@ import { SideMapsComponent } from './side-maps/side-maps.component';
 import { PropertylistComponent } from './propertylist/propertylist.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { AuthGuard } from 'src/guards/auth.guard';
-
-
-
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 
 const routes: Routes = [
 
   { path: '', component: HomeComponent},
-  { path: 'userregister', component: UserregisterComponent},
-  { path: 'agentlogin', component: AgentloginComponent},
-  { path: 'agentregister', component: AgentregisterComponent},
+
   { path: 'navbar', component: NavbarComponent},
   { path: 'contactus', component: ContactusComponent},
   { path: 'footer', component: FooterComponent},
@@ -67,22 +63,20 @@ const routes: Routes = [
   { path: 'search-results', component: SearchResultComponent },
   { path: 'search-results-wildcardroute', redirectTo: 'search-results' },
 
-  { path: 'userlogin', component: UserloginComponent},
-  // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  // { path: '**', redirectTo: '/userlogin' },
-
+  { path: 'userregister', component: UserregisterComponent},
+  { path: 'agentregister', component: AgentregisterComponent},
   { path: 'adminregister', component: AdminregisterComponent},
+
   { path: 'adminlogin', component: AdminLoginComponent},
-  { path: 'adminpanel', component: AdminpanelComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '/adminlogin' },
+  { path: 'userlogin', component: UserloginComponent},
+  { path: 'agentlogin', component: AgentloginComponent},
 
+  { path: 'adminpanel', component: AdminpanelComponent,canActivate: [AuthGuard], data: { role: 'ADMIN' } },
+  { path: 'home', component: HomeComponent,  canActivate: [AuthGuard], data: { role: 'USER' } },
+  { path: 'agentpanel',component: AgentdashboardComponent, canActivate: [AuthGuard],data: { role: 'AGENT' } },
+  { path: 'unauthorized', component: NotFoundComponent },
 
-
-  // { path: 'agentlogin', component: AgentdashboardComponent},
-  // { path: 'agentpanel', component: HomeComponent, canActivate: [AuthGuard] },
-  // { path: '**', redirectTo: '/agentlogin' },
-
-
+  { path: '**', redirectTo: 'unauthorized' }
 ];
 
 @NgModule({

@@ -1,21 +1,4 @@
-<!-- components/agent-login/agent-login.component.html -->
-<!-- <h2>Login Agent</h2>
-<form (ngSubmit)="loginAgent()">
-  <div>
-    <label>Username:</label>
-    <input type="text" [(ngModel)]="username" name="username" required />
-  </div>
-  <div>
-    <label>Password:</label>
-    <input type="password" [(ngModel)]="password" name="password" required />
-  </div>
-  <button type="submit">Login</button>
-
-  <div class="register-section">
-    <p>Don't have an account? <a routerLink="/agentregister" class="register-link">Register here</a></p>
-  </div>
-</form> -->
-
+<!--
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
@@ -58,5 +41,54 @@
   </div>
 </body>
 
+ -->
 
- 
+
+
+ <div class="parent">
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-5 rounded" style="max-width: 400px; width: 100%;">
+      <h2 class="text-center mb-4 text-dark fw-bold ">Agent Login</h2>
+
+      <form [formGroup]="agentLoginForm" (ngSubmit)="login()">
+        <!-- Username -->
+        <div class="mb-3">
+          <label class="form-label lablestyle ">Username</label>
+          <input type="text" class="form-control" formControlName="username" placeholder="Enter username" />
+          <div *ngIf="agentLoginForm.get('username')?.invalid && agentLoginForm.get('username')?.touched" class="text-danger small">
+            Username is required.
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label class="form-label lablestyle ">Password</label>
+          <input type="password" class="form-control" formControlName="password" placeholder="Enter password" />
+          <div *ngIf="agentLoginForm.get('password')?.invalid && agentLoginForm.get('password')?.touched" class="text-danger small">
+            Password must be at least 6 characters long.
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        <p *ngIf="errorMessage" class="error-message text-center ">{{ errorMessage }}</p>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100" [disabled]="agentLoginForm.invalid">
+          Login
+        </button>
+
+        <div class="register-section">
+          <p>Don't have an account? <a routerLink="/agentregister" class="register-link">Register here</a></p>
+        </div>
+
+        <div class="register-section">
+          <p>Forget password? <a routerLink="/reset-password" class="register-link">Reset Password</a></p>
+       </div>
+
+
+      </form>
+    </div>
+  </div>
+  </div>
+
+

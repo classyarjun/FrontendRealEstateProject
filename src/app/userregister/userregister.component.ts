@@ -14,6 +14,9 @@ export class UserregisterComponent {
   fileSizeError: boolean = false;
   fileFormatError: boolean = false;
 
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
@@ -37,6 +40,14 @@ export class UserregisterComponent {
     return null;
   }
 
+
+  togglePasswordVisibility(field: string) {
+    if (field === 'password') {
+      this.showPassword = !this.showPassword;
+    } else if (field === 'confirmPassword') {
+      this.showConfirmPassword = !this.showConfirmPassword;
+    }
+  }
   // Handle file selection with validation
   onFileSelected(event: any): void {
     const file = event.target.files[0];

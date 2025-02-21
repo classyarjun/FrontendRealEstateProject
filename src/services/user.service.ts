@@ -34,18 +34,18 @@ export class UserService {
     );
   }
 
-  loginUser(username: string, password: string): Observable<any> {
-    const loginDetails = { username, password };
+  // loginUser(username: string, password: string): Observable<any> {
+  //   const loginDetails = { username, password };
 
-    // Set the Content-Type header to 'application/json'
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
+  //   // Set the Content-Type header to 'application/json'
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //   });
 
-    return this.http.post(`${this.apiUrl}/loginUser`, loginDetails, {
-      headers,
-    });
-  }
+  //   return this.http.post(`${this.apiUrl}/loginUser`, loginDetails, {
+  //     headers,
+  //   });
+  // }
 
   //Get All Users
   getAllUsers(): Observable<any> {

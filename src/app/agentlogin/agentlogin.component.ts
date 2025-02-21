@@ -1,47 +1,46 @@
 
-
-
-import { Component } from '@angular/core';
-import { AgentService } from 'src/services/agent.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-agentlogin',
   templateUrl: './agentlogin.component.html',
   styleUrls: ['./agentlogin.component.css']
 })
-export class AgentloginComponent {
-  username: string = '';
-  password: string = '';
-  showPassword: boolean = false; // Password visibility state
+export class AgentloginComponent implements OnInit {
+  agentLoginForm!: FormGroup;
+  errorMessage: string = '';
 
-  constructor(private agentService: AgentService, private router: Router) {}
+  constructor(private fb: FormBuilder, private AuthService: AuthService, private router: Router) {}
 
-  // Toggle password visibility
-  togglePasswordVisibility(): void {
-    this.showPassword = !this.showPassword;
+  ngOnInit() {
+    this.agentLoginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
 
-  // Close login modal (Navigate to Home)
-  closeLogin(): void {
-    this.router.navigate(['/']);
-  }
+  login() {
+    if (this.agentLoginForm.invalid) {
+      this.errorMessage = 'Please enter valid credentials!';
+      return;
+    }
 
-  // Submit login
-  loginAgent(): void {
-    this.agentService.loginAgent(this.username, this.password).subscribe(
-      (data) => {
-        alert('Login successful!');
-        console.log('Logged in agent:', data);
-        this.router.navigate(['/agentpanel']); // Redirect after login
+    const { username, password } = this.agentLoginForm.value;
+
+    this.AuthService.agentLogin(username, password,'AGENT').subscribe({
+      next: (response) => {
+        // console.log("Agentlognrespons",response);
+        if (response.data && response.data.token) {
+          this.AuthService.setToken(response.data.token,'agent_token');
+          this.router.navigate(['/agentpanel']);
+        }
       },
-      (error) => {
-        console.error('Login failed:', error);
-        alert('Login failed. Please check your credentials.');
+      error: () => {
+        this.errorMessage = 'Invalid username or password!';
       }
-    );
+    });
   }
 }
-
-
- 

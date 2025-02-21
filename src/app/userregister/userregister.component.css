@@ -1,128 +1,80 @@
-.parent {
-  font-family: Arial, sans-serif;
-  background-image: url('../../assets/userloginbg/UserRegistration.jpg');
-  /* height: 200vh; */
-  padding: 3rem;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
+.parent{
+background-image: url('src/assets/userloginbg/admin login..jpg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
 }
 
-
-/* Register Container */
-.register-container {
-  width: 100%;
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #fffefe74;
-  border-radius: 18px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: relative;
-  top: -100px; /* Moves the container upward */
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+
+.register-container{
+background-color: rgba(255, 255, 255, 0.776);
+backdrop-filter: blur(10px);
+}
+
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #000000;
-  font-size:35px;
+  color: #333; /* Keep text visible */
 }
 
-/* Form Fields */
-div {
-  margin-bottom: 15px;
+input,
+select {
+  background: rgba(255, 255, 255, 0.5); /* Semi-transparent input fields */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #333;
 }
 
 label {
-  font-size: 14px;
   font-weight: bold;
-  display: block;
-  margin-bottom: 8px;
-  color: #363535;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-select,
-input[type="file"] {
-  width: 100%;
-  padding: 12px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 25px; /* Rounded corners */
-  box-sizing: border-box;
-  outline: none;
-  transition: 0.3s;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-select:focus,
-input[type="file"]:focus {
-  border-color: #007BFF;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-}
-
-/* Button styling */
-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #007BFF;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 25px; /* Rounded button */
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-button:hover {
-  background-color: #0056b3;
 }
 
 
-/* Error Message */
 .error-message {
-  color: #f13c36;
+  grid-column: span 2;
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+.alert {
+  color: red;
   font-size: 12px;
   margin-top: 5px;
 }
 
-/* Agreement Checkbox */
-label input[type="checkbox"] {
-  width: auto;
-  margin-right: 8px;
+.password-input {
+  padding-right: 10px; /* Ensure space for the icon */
 }
 
-label {
-  display: inline-block;
-  font-size: 14px;
-  color: #555;
+/* Password Input Field Styles */
+.input-group {
+  position: relative;
 }
 
-.agreement-section {
-  margin-top: 10px;
+.input-group .btn-outline-secondary {
+  border-left: none;
+  box-shadow: none;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-  .register-container {
-    margin: 20px;
-    padding: 15px;
-  }
-
-  button {
-    font-size: 14px;
-    padding: 10px;
-  }
+.input-group .btn-outline-secondary:hover,
+.input-group .btn-outline-secondary:focus {
+  /* background-color: #f8f9fa; */
+  border-color: #ced4da;
 }
 
+.input-group .bi {
+  font-size: 16px;
+}
+
+/* Error Message Styling */
+.text-danger.small {
+  font-size: 13px;
+  margin-top: 5px;
+}

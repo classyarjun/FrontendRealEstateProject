@@ -1,166 +1,46 @@
-/* General styles */
-body {
-  background: url('src/assets/userloginbg/agent Registration.jpg') no-repeat center center/cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-}
+.parent{
+  background-image: url('src/assets/userloginbg/admin login..jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+   }
 
-.login-container {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-  backdrop-filter: blur(5px);
-  position: relative;
-  transition: transform 0.3s ease-in-out;
-}
-
-.login-container:hover {
-  transform: scale(1.02);
-}
-
-/* Black text color */
-h2, label, p {
-  color: black !important;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 5px;
-  outline: none;
-  color: black;
-  transition: all 0.3s ease;
-  font-size: 16px;
-}
-
-input::placeholder {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-/* Password field with eye icon */
-.password-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.password-container input {
-  padding-right: 40px;
-}
-
-.toggle-password {
-  position: absolute;
-  right: 10px;
-  cursor: pointer;
-  color: black;
-  font-size: 18px;
-}
-
-.toggle-password:hover {
-  color: #6a11cb;
-}
-
-button {
-  background: linear-gradient(45deg, #2575fc, #6a11cb);
-  color: white;
-  padding: 12px;
-  width: 100%;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background: linear-gradient(45deg, #6a11cb, #2575fc);
-  box-shadow: 0 4px 10px rgba(37, 117, 252, 0.3);
-}
-
-.register-section {
-  margin-top: 15px;
-}
-
-.register-link {
-  color: black;
-  font-weight: bold;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.register-link:hover {
-  text-decoration: underline;
-  color: #6a11cb;
-}
-
-/* Close Button with Red Color */
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
-  color: red;
-  transition: 0.3s;
-  font-weight: bold;
-}
-
-.close-btn:hover {
-  color: darkred;
-}
-
-/* Responsive Design */
-@media screen and (max-width: 600px) {
-  .login-container {
-    width: 95%;
-    padding: 20px;
+   .card {
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.765); /* Increased transparency */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px); /* Increased blur effect */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for clarity */
   }
-  input {
-    font-size: 14px;
+
+
+
+  input:focus {
+    border-color: #007bff !important;
+    box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.3) !important;
+  }
+
+  input{
+    border-radius: 10px;
     padding: 10px;
   }
+
   button {
-    font-size: 14px;
+    transition: all 0.3s ease;
     padding: 10px;
   }
-  .toggle-password {
-    font-size: 16px;
-  }
-}
 
-@media screen and (max-width: 400px) {
-  .login-container {
-    padding: 15px;
+  button:hover {
+    background-color: #0056b3 !important;
   }
-  h2 {
-    font-size: 20px;
-  }
-  label {
-    font-size: 14px;
-  }
-  input {
-    font-size: 12px;
-  }
-  button {
-    font-size: 12px;
-    padding: 8px;
-  }
-  .toggle-password {
-    font-size: 14px;
-  }
-}
 
- 
+  .lablestyle{
+    --bs-text-opacity: 1;
+    color: rgb(0 0 0) ;
+  }
+
+  .error-message{
+  color: rgb(255, 0, 0);
+  }

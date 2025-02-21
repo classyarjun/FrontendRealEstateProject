@@ -41,6 +41,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
 import { AdminLoginComponent } from './adminlogin/adminlogin.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
     BlogComponent,
     PropertylistComponent,
     SearchResultComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    NotFoundComponent
 
   ],
   imports: [
@@ -91,8 +93,9 @@ import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
   ],
 
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } // ✅ Register Interceptor
   ],
+
   bootstrap: [AppComponent]
 
 })

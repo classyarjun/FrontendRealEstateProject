@@ -30,12 +30,12 @@ export class AgentService {
   // }
 
 
-  loginAgent(username: string, password: string): Observable<any> {
-    const formData = new FormData();
-    formData.append('username', username);
-    formData.append('password', password);
-    return this.http.post(`${this.apiUrl}/agents/loginAgent`, formData);
-  }
+  // loginAgent(username: string, password: string): Observable<any> {
+  //   const formData = new FormData();
+  //   formData.append('username', username);
+  //   formData.append('password', password);
+  //   return this.http.post(`${this.apiUrl}/agents/loginAgent`, formData);
+  // }
 
   // Update Agent
   updateAgent(agentId: number, agent: FormData): Observable<any> {

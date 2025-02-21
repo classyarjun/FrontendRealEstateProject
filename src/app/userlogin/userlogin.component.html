@@ -1,33 +1,45 @@
+
 <div class="parent">
-  <div class="login-container">
-    <h2>User Login</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label>Username:</label>
-        <input type="text" formControlName="username" />
-      </div>
-      <div>
-        <label>Password:</label>
-        <div class="password-container">
-          <input [type]="showPassword ? 'text' : 'password'" formControlName="password" />
-          <i class="toggle-password" [class]="showPassword ? 'icon-eye-close' : 'icon-eye-open'"
-            (click)="togglePasswordVisibility()"></i>
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-5 rounded" style="max-width: 400px; width: 100%;">
+      <h2 class="text-center mb-4 text-dark fw-bold ">User Login</h2>
+
+      <form [formGroup]="userLoginForm" (ngSubmit)="login()">
+        <!-- Username -->
+        <div class="mb-3">
+          <label class="form-label lablestyle ">Username</label>
+          <input type="text" class="form-control" formControlName="username" placeholder="Enter username" />
+          <div *ngIf="userLoginForm.get('username')?.invalid && userLoginForm.get('username')?.touched" class="text-danger small">
+            Username is required.
+          </div>
         </div>
-      </div>
 
-      <button type="submit" [disabled]="loginForm.invalid">Login</button>
-    </form>
+        <!-- Password -->
+        <div class="mb-3">
+          <label class="form-label lablestyle ">Password</label>
+          <input type="password" class="form-control" formControlName="password" placeholder="Enter password" />
+          <div *ngIf="userLoginForm.get('password')?.invalid && userLoginForm.get('password')?.touched" class="text-danger small">
+            Password must be at least 6 characters long.
+          </div>
+        </div>
 
-    <div class="register-section">
-      <p>
-        Don't have an account?
-        <a routerLink="/userregister" class="register-link">Register here</a>
-      </p>
+        <!-- Error Message -->
+        <p *ngIf="errorMessage" class="error-message text-center ">{{ errorMessage }}</p>
 
-      <div class="forgot-password">
-        <a routerLink="/reset-password" class="forgot-link">Forgot Password?</a>
-      </div>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100" [disabled]="userLoginForm.invalid">
+          Login
+        </button>
 
+        <div class="register-section">
+          <p>Don't have an account? <a routerLink="/userregister" class="register-link">Register here</a></p>
+        </div>
+
+        <div class="register-section">
+          <p>Forget password? <a routerLink="/reset-password" class="register-link">Reset Password</a></p>
+       </div>
+
+      </form>
     </div>
   </div>
-</div>
+  </div>

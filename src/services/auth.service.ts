@@ -1,41 +1,59 @@
 
 
-//! first testing
-
+// //? testing success
 // import { Injectable } from '@angular/core';
 // import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { Router } from '@angular/router';
+// import { Observable } from 'rxjs';
 
 // @Injectable({
-//   providedIn: 'root',
+//   providedIn: 'root'
 // })
 // export class AuthService {
 
-//   private apiUrl = 'http://localhost:8080/api'; // Backend API URL
+//   private apiUrl = 'http://localhost:8080/api/admin/loginAdmin'; // Backend Admin Login API
 
-//   constructor(private http: HttpClient, private router: Router) {}
+//   constructor(private http: HttpClient) {}
 
-//   //// ? Login function
-//   adminLogin(credentials: { username: string; password: string }) {
-//     return this.http.post(`${this.apiUrl}/admin/loginAdmin`, credentials, { withCredentials: true });
+//   // Admin Login
+//   adminLogin(username: string, password: string): Observable<any> {
+//     return this.http.post<any>(this.apiUrl, { username, password });
 //   }
 
-//   // Logout function
-//   logout() {
-//     this.http.post(`${this.apiUrl}/logout`, {}, { withCredentials: true }).subscribe(() => {
-//       this.router.navigate(['/login']);
-//     });
+//   userLogin(username: string, password: string): Observable<any> {
+//     return this.http.post<any>(this.apiUrl, { username, password });
 //   }
 
-//   // Check if admin is logged in
-//   isLoggedIn(): boolean {
-//     return document.cookie.includes('jwt_token');
+//   agentLogin(username: string, password: string): Observable<any> {
+//     return this.http.post<any>(this.apiUrl, { username, password });
+//   }
+
+//   // Token Store Karna
+//   setToken(token: string): void {
+//     localStorage.setItem('admin-token', token);
+//   }
+
+//   // Token Retrieve Karna
+//   getToken(): string | null {
+//     return localStorage.getItem('admin-token');
+//   }
+
+//   // Token Hatana (Logout)
+//   logout(): void {
+//     localStorage.removeItem('admin-token');
+//   }
+
+//   // Admin Logged in hai ya nahi
+//   isAuthenticated(): boolean {
+//     return this.getToken() !== null;
 //   }
 // }
 
-//? third testing
+
+
+
+ //? testing in progredss
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -43,40 +61,74 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080/api/admin/loginAdmin'; // Backend Admin Login API
+  private apiUrl = 'http://localhost:8080/api'; // ✅ Backend ke common login API ka use karo
 
   constructor(private http: HttpClient) {}
 
-  // Admin Login
-  adminLogin(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { username, password });
+  // ✅ Common Login Function (role ke sath)
+  adminLogin(username: string, password: string, role: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/admin/loginAdmin`, { username, password, role });
   }
 
-  userLogin(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { username, password });
+  userLogin(username: string, password: string, role: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/users/loginUser`, { username, password, role });
   }
 
-  agentLogin(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { username, password });
+
+  agentLogin(username: string, password: string, role: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/agents/loginAgent`, { username, password, role });
   }
 
-  // Token Store Karna
-  setToken(token: string): void {
-    localStorage.setItem('admin-token', token);
+
+  // loginAgent(username: string, password: string): Observable<any> {
+  //   const formData = new FormData();
+  //   formData.append('username', username);
+  //   formData.append('password', password);
+  //   return this.http.post(`${this.apiUrl}/agents/loginAgent`, formData);
+  // }
+
+
+
+
+  // ✅ Token Store Karna (Role wise)
+  setToken(token: string, role: string): void {
+    localStorage.setItem(`${role}-token`, token); // ✅ Role-wise token store
   }
 
-  // Token Retrieve Karna
-  getToken(): string | null {
-    return localStorage.getItem('admin-token');
+  // ✅ Token Retrieve Karna
+  getToken(role: string): string | null {
+    return localStorage.getItem(`${role}-token`);
   }
 
-  // Token Hatana (Logout)
-  logout(): void {
-    localStorage.removeItem('admin-token');
+  // ✅ Logout (Role Wise)
+  logout(role: string): void {
+    localStorage.removeItem(`${role}-token`);
   }
 
-  // Admin Logged in hai ya nahi
-  isAuthenticated(): boolean {
-    return this.getToken() !== null;
+  // ✅ JWT Token Decode Karke Role Nikalna
+  getUserRole(): string | null {
+
+    const token =
+    this.getToken('admin_token')||
+    this.getToken('user_token') ||
+    this.getToken('agent_token');
+
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1])); // JWT Decode
+        console.log("payload",payload);
+
+        return payload.role; // ✅ Token ke andar "role" key honi chahiye
+      } catch (error) {
+        console.error('Invalid Token:', error);
+        return null;
+      }
+    }
+    return null;
+  }
+
+  // ✅ Check Authenticated User
+  isAuthenticated(role: string): boolean {
+    return this.getToken(role) !== null;
   }
 }
