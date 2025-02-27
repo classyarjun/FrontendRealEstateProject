@@ -44,6 +44,7 @@ import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BlogPageComponent } from './blog-page/blog-page.component';
 import { FeaturePropertyComponent } from './feature-property/feature-property.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { FeaturePropertyComponent } from './feature-property/feature-property.co
     AdminLoginComponent,
     NotFoundComponent,
     BlogPageComponent,
-    FeaturePropertyComponent
+    FeaturePropertyComponent,
+    SubscriptionComponent
 
   ],
   imports: [

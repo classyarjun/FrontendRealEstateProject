@@ -1,9 +1,10 @@
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { PropertyService } from '../../services/property.service';
 import { Property } from '../../modal/property';
+import { SubscriptionService } from 'src/services/subscription.service';
 
 @Component({
   selector: 'app-search-result',
@@ -18,9 +19,13 @@ export class SearchResultComponent implements OnInit {
   loading: boolean = false;
   error: string = '';
 
+  isSubscribed: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
-    private propertyService: PropertyService
+    private propertyService: PropertyService,
+    private subscriptionService: SubscriptionService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -29,6 +34,11 @@ export class SearchResultComponent implements OnInit {
       this.property = params['property'];
       this.location = params['location'];
       this.searchProperties();
+
+      this.subscriptionService.isSubscribed$.subscribe(status => {
+        this.isSubscribed = status;
+      });
+
     });
   }
 
@@ -71,7 +81,9 @@ export class SearchResultComponent implements OnInit {
         '/assets/homeimages/7.png',
         '/assets/homeimages/9.png'
       ],
-      rating: 4.5
+      rating: 4.5,
+      agent: 'Bunny Rajput',
+      contact: '7057895181'
     }
   ];
 
@@ -111,4 +123,14 @@ export class SearchResultComponent implements OnInit {
       carousel.to(index); // Move carousel to clicked image
     }
   }
+
+//* subcription ka funda hai bhai uper
+//* nginit me status check karo ki user subscribe hai ya nahi agar nahi hai to redirect kardo subscribe page pe
+
+viewAgentContact() {
+  if (!this.isSubscribed) {
+    this.router.navigate(['/subscribe']); // Redirect to subscription page
+  }
+}
+
 }

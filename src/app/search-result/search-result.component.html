@@ -129,7 +129,15 @@
             <h6>Proximity: {{ selectedProperty?.proximity }}</h6>
 
             <h4 class="text-success">Price: {{ selectedProperty?.price }}</h4>
-            <button type="button" class="btn btn-warning mt-3">Buy Now</button>
+            <!-- Show Contact if Subscribed -->
+          <p *ngIf="isSubscribed" class="mb-2"><strong>Contact:</strong> {{ selectedProperty.contact }}</p>
+            <!-- <button type="button" class="btn btn-warning mt-3">Buy Now</button> -->
+            <div  *ngIf="!isSubscribed" class="Subscribe">
+              <button  class="btn btn-outline-success" (click)="viewAgentContact()">
+                Subscribe to View Contact
+              </button>
+            </div>
+
           </div>
         </div>
       </div>

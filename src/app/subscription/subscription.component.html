@@ -1,0 +1,28 @@
+<div class="parent">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let plan of subscriptionPlans">
+        <div class="card subscription-card hover-shadow">
+          <div class="card-header bg-gradient-primary text-white py-4">
+            <h2 class="card-title mb-0">{{ plan.name }}</h2>
+          </div>
+          <div class="card-body p-4 d-flex flex-column">
+            <div class="flex-grow-1">
+              <p class="subscription-text lead mb-4">{{ plan.description }}</p>
+            </div>
+            <div class="price-display bg-light rounded-pill p-3 mb-4">
+              <span class="h3 text-dark">₹{{ plan.price / 100 }}</span>
+              <span class="text-muted">/month</span>
+            </div>
+            <button class="btn btn-lg btn-gradient-primary"
+                    (click)="selectPlan(plan); subscribe()">
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
