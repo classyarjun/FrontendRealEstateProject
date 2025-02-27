@@ -80,17 +80,7 @@ export class AuthService {
   }
 
 
-  // loginAgent(username: string, password: string): Observable<any> {
-  //   const formData = new FormData();
-  //   formData.append('username', username);
-  //   formData.append('password', password);
-  //   return this.http.post(`${this.apiUrl}/agents/loginAgent`, formData);
-  // }
-
-
-
-
-  // ✅ Token Store Karna (Role wise)
+  // ✅ Store token (Role wise)
   setToken(token: string, role: string): void {
     localStorage.setItem(`${role}-token`, token); // ✅ Role-wise token store
   }

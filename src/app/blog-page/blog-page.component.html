@@ -1,0 +1,43 @@
+<section class="blog-section ">
+  <div class="hero-header mb-5 text-center"
+    style="
+      background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url(https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?q=80&w=1470&auto=format&fit=crop);
+      background-position: center;
+      background-size: cover;
+      padding: 50px 0;
+      color: white;
+    ">
+    <div class="container">
+      <h6 class="text-primary text-uppercase fw-bold mb-2">Our Blog</h6>
+      <h2 class="display-4 fw-bold mb-4">Latest News & Articles</h2>
+      <div class="divider mx-auto bg-primary" style="width: 60px; height: 3px;"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-12 col-sm-6 col-md-4" *ngFor="let blog of blogs; let i = index">
+        <div class="card h-100 blog-card border-0 shadow-sm hover-shadow transition-all"
+             style="border-radius: 12px; overflow: hidden;">
+          <div class="card-img-wrapper">
+            <img [src]="blog.imagePath" alt="{{ blog.title }}" class="img-fluid transition-all"
+            alt="" style="height: 240px; width: 100%; object-fit: cover;">
+
+            <!-- <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1528&auto=format&fit=crop"
+                 class="img-fluid transition-all" alt="" style="height: 240px; width: 100%; object-fit: cover;"/> -->
+          </div>
+          <div class="card-body p-4">
+            <div class="post-date mb-2">
+              <small class="text-muted">{{ blog.date | date:'mediumDate' }}</small>
+            </div>
+            <h5 class="card-title fw-bold mb-3">{{ blog.title }}</h5>
+            <p class="card-text text-muted mb-4">{{ blog.description }}</p>
+            <a href="#" class="btn btn-primary rounded-pill px-4">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

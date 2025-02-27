@@ -31,13 +31,15 @@ import { PropertylistComponent } from './propertylist/propertylist.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { BlogPageComponent } from './blog-page/blog-page.component';
+import { FeaturePropertyComponent } from './feature-property/feature-property.component';
 
 
 
 const routes: Routes = [
 
   { path: '', component: HomeComponent},
-
+  { path: 'home', component: HomeComponent},
   { path: 'navbar', component: NavbarComponent},
   { path: 'contactus', component: ContactusComponent},
   { path: 'footer', component: FooterComponent},
@@ -47,21 +49,21 @@ const routes: Routes = [
   { path: 'otpverifyregister', component: OtpverifyregisterComponent},
   { path: 'reset-password', component: ResetpasswordComponent},
   { path: 'xyz', component: XyzComponent},
-  { path: 'search', component: SearchbarComponent},
   { path: 'about-us', component: AboutUsComponent},
   { path: 'servicepage', component: ServicepageComponent},
   { path: 'property-type', component: PropertyTypeComponent},
   { path: 'property-agent', component: PropertyAgentComponent},
   { path: 'client-say', component: ClientsayComponent},
   { path: 'side-maps', component: SideMapsComponent},
-
   { path: 'terms-conditions', component: TermsConditionsComponent},
   { path: 'privacy-policy', component: PrivacyPolicyComponent},
 
-  { path: 'pl', component: PropertylistComponent},
+  { path: 'blogpage', component: BlogPageComponent},
+
+  { path: 'search', component: SearchbarComponent},
 
   { path: 'search-results', component: SearchResultComponent },
-  { path: 'search-results-wildcardroute', redirectTo: 'search-results' },
+  { path: 'search-results', redirectTo: 'search-results' },
 
   { path: 'userregister', component: UserregisterComponent},
   { path: 'agentregister', component: AgentregisterComponent},
@@ -71,11 +73,20 @@ const routes: Routes = [
   { path: 'userlogin', component: UserloginComponent},
   { path: 'agentlogin', component: AgentloginComponent},
 
-  { path: 'adminpanel', component: AdminpanelComponent,canActivate: [AuthGuard], data: { role: 'ADMIN' } },
-  { path: 'home', component: HomeComponent,  canActivate: [AuthGuard], data: { role: 'USER' } },
-  { path: 'agentpanel',component: AgentdashboardComponent, canActivate: [AuthGuard],data: { role: 'AGENT' } },
-  { path: 'unauthorized', component: NotFoundComponent },
+  { path: 'adminpanel', component: AdminpanelComponent,
+    canActivate: [AuthGuard],data: { role: 'ADMIN' }},
 
+  { path: 'home', component: HomeComponent,
+    canActivate: [AuthGuard],data: { role: 'USER' }},
+
+  { path: 'agentpanel',component: AgentdashboardComponent,
+    canActivate: [AuthGuard],data: { role: 'AGENT' }},
+
+  // { path: 'search-result', component: PropertylistComponent},
+
+  { path: 'feature-property', component: FeaturePropertyComponent},
+
+  { path: 'unauthorized', component: NotFoundComponent },
   { path: '**', redirectTo: 'unauthorized' }
 ];
 

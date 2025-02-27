@@ -42,6 +42,8 @@ import { AdminLoginComponent } from './adminlogin/adminlogin.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { BlogPageComponent } from './blog-page/blog-page.component';
+import { FeaturePropertyComponent } from './feature-property/feature-property.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     PropertylistComponent,
     SearchResultComponent,
     AdminLoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    BlogPageComponent,
+    FeaturePropertyComponent
 
   ],
   imports: [

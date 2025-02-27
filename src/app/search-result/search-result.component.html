@@ -1,7 +1,5 @@
-
-
 <div class="container mt-4">
-  <h2>Search Results</h2>
+  <h2>Search Awesome Properties</h2>
 
   <div *ngIf="loading" class="text-center">
     <div class="spinner-border" role="status">
@@ -28,6 +26,115 @@
           <p class="card-text">Price: ${{ property.price }}</p>
           <button class="btn btn-primary" [routerLink]="['/property', property.id]">View Details</button>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- //? static card not functionlity working  -->
+
+<div class="container-fluid">
+  <div class="container my-4 mx-auto">
+    <div class="row">
+      <div class="row g-4">
+        <div class="col-md-4 mb-5" *ngFor="let property of properties" (click)="openModal(property)">
+          <div class="card property-card h-100">
+            <img [src]="property.images[0]" class="card-img-top" alt="Property Image">
+            <div class="card-body">
+              <div class="price mb-3">
+                <h5>{{ property.price }}</h5>
+              </div>
+              <h3 class="card-title h5">{{ property.title }}</h3>
+
+              <p class="location">
+                <i class="bi bi-geo-alt-fill"></i>
+               {{property.address}}
+              </p>
+
+
+              <!-- <p class="location">
+                <a href="https://www.google.com/maps/search/?api=1&query={{property.latitude}},{{property.longitude}}" target="_blank">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    {{property.address}}
+                </a>
+            </p> -->
+
+              <div class="property-features">
+                <span><i class="bi bi-arrow-up-right-square"></i>{{property.propertyType}}&nbsp;</span>
+                <span><i class="bi bi-door-open"></i>{{property.bedrooms}} Beds &nbsp;</span>
+                <span><i class="bi bi-droplet"></i> {{property.bathrooms}} Baths &nbsp;</span>
+                <span><i class="bi bi-arrows-angle-expand"></i> {{property.size}} sqft </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header mx-3">
+        <h3 class="modal-title fw-bold" id="propertyModalLabel">{{ selectedProperty?.title }}</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Bootstrap Carousel -->
+
+            <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+              <div class="carousel-inner">
+                <div *ngFor="let img of selectedProperty?.images; let i = index" class="carousel-item"
+                  [ngClass]="{'active': selectedImage === img}">
+                  <img [src]="img" class="d-block w-100 main-image" alt="Property Image">
+                </div>
+              </div>
+              <!-- Previous & Next Buttons -->
+              <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+            <!-- Thumbnail Images -->
+            <div class="d-flex mt-2 flex-wrap">
+              <img *ngFor="let img of selectedProperty?.images; let i = index" [src]="img"
+                class="img-thumbnail me-2 thumbnail-img" [ngClass]="{'active-thumbnail': selectedImage === img}"
+                (click)="changeImage(i)">
+            </div>
+          </div>
+          <div class="col-md-6 col-12">
+            <h3 class="fw-bold">{{ selectedProperty?.title }}</h3>
+            <h6>{{ selectedProperty?.description }}</h6>
+            <h6>Size :{{ selectedProperty?.size }}</h6>
+            <h6>Address: {{ selectedProperty?.address }}</h6>
+            <h6>YearBuilt : {{ selectedProperty?.yearBuilt }}</h6>
+            <h6>PropertyType : {{ selectedProperty?.propertyType }}</h6>
+            <h6>Bedrooms : {{ selectedProperty?.bedrooms }}</h6>
+            <h6>Bathrooms : {{ selectedProperty?.bathrooms }}</h6>
+            <h6>Amenities : {{ selectedProperty?.amenities }}</h6>
+            <h6>Features : {{ selectedProperty?.features }}</h6>
+            <h6>Status : {{ selectedProperty?.status }}</h6>
+            <h6>Availability : {{ selectedProperty?.availability }}</h6>
+            <h6>Proximity: {{ selectedProperty?.proximity }}</h6>
+
+            <h4 class="text-success">Price: {{ selectedProperty?.price }}</h4>
+            <button type="button" class="btn btn-warning mt-3">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

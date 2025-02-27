@@ -41,19 +41,22 @@ export class BlogComponent implements OnInit {
     }
   }
 
+
+
   loadBlogs(): void {
-    this.blogService.getAllBlogs().subscribe(
-      (data) => {
-        this.blogs = data;
-        console.log('Blogs:', this.blogs);
-      },
-      (error) => {
-        console.error('Error fetching blogs:', error);
-      }
-    );
+    this.blogService.getAllBlogs().subscribe((data: Blog[]) => {
+        this.blogs = data.map(blog => {
+        blog.imagePath = `data:image/jpeg;base64,${blog.imagePath}`;
+        console.log(blog.imagePath);
+        return blog;
+      });
+    });
   }
 
+
+
   deleteBlog(id: number): void {
+    if(confirm('Are you sure you want to delete this blog?')){
     this.blogService.deleteBlog(id).subscribe(
       () => {
         this.blogs = this.blogs.filter((blog) => blog.id !== id);
@@ -65,3 +68,5 @@ export class BlogComponent implements OnInit {
     this.loadBlogs();
   }
 }
+};
+

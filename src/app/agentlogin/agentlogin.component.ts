@@ -32,9 +32,10 @@ export class AgentloginComponent implements OnInit {
 
     this.AuthService.agentLogin(username, password,'AGENT').subscribe({
       next: (response) => {
-        // console.log("Agentlognrespons",response);
+        console.log(response);
         if (response.data && response.data.token) {
           this.AuthService.setToken(response.data.token,'agent_token');
+          alert('Agent Login successfully!');
           this.router.navigate(['/agentpanel']);
         }
       },

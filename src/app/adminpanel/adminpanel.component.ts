@@ -1,8 +1,10 @@
+import { BlogService } from 'src/services/blog.service';
 import { AgentService } from 'src/services/agent.service';
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 // import { AdminService } from './../../services/admin.service';
 import { PropertyService } from 'src/services/property.service';
+import { Blog } from 'src/modal/blog';
 Chart.register(...registerables);
 
 @Component({
@@ -23,15 +25,26 @@ export class AdminpanelComponent implements OnInit {
   salesChart: any;
   propertyTypeChart: any;
 
-  constructor( private AgentService: AgentService, private PropertyService:PropertyService) { }
 
+  blogs: Blog[] = [];
 
+    blog: Blog = {
+      title: '',
+      date: new Date(),
+      description: '',
+    };
+    imageFile?: File;
+
+  constructor( private AgentService: AgentService,
+     private PropertyService: PropertyService,
+     private blogService: BlogService) { }
 
   ngOnInit() {
     this.createSalesChart();
     this.createPropertyTypeChart();
     this.loadPendingAgents();
     this.fetchPendingProperties();
+    this.loadBlogs();
   }
 
   createSalesChart() {
@@ -87,7 +100,9 @@ export class AdminpanelComponent implements OnInit {
     });
   }
 
-
+  onFileChange(event: any): void {
+    this.imageFile = event.target.files[0];
+  }
 // ! Agents manage code
 
   loadPendingAgents(): void {
@@ -167,6 +182,56 @@ export class AdminpanelComponent implements OnInit {
       }
     });
   }
+
+
+
+saveBlog(): void {
+    if (this.imageFile) {
+      this.blogService.saveBlog(this.blog, this.imageFile).subscribe(
+        (data) => {
+          alert('Blog saved successfully:');
+          console.log('Blog saved successfully:', data);
+        },
+        (error) => {
+          console.error('Error saving blog:', error);
+        }
+      );
+      this.loadBlogs();
+    }
+  }
+
+
+
+  loadBlogs(): void {
+    this.blogService.getAllBlogs().subscribe((data: Blog[]) => {
+        this.blogs = data.map(blog => {
+        blog.imagePath = `data:image/jpeg;base64,${blog.imagePath}`;
+        console.log(blog.imagePath);
+        return blog;
+      });
+    });
+  }
+
+
+
+  deleteBlog(id: number): void {
+    if(confirm('Are you sure you want to delete this blog?')){
+    this.blogService.deleteBlog(id).subscribe(
+      () => {
+        this.blogs = this.blogs.filter((blog) => blog.id !== id);
+      },
+      (error) => {
+        console.error('Error deleting blog:', error);
+      }
+    );
+    this.loadBlogs();
+  }
+}
+
+
+
+
+
 }
 
 
