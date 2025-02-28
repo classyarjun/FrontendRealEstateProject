@@ -129,8 +129,11 @@ export class SearchResultComponent implements OnInit {
 
 viewAgentContact() {
   if (!this.isSubscribed) {
-    this.router.navigate(['/subscribe']); // Redirect to subscription page
+    this.router.navigate(['/subscribe']).then(() => {
+      window.location.reload();  // Page ko refresh karo
+    });
   }
 }
+
 
 }
