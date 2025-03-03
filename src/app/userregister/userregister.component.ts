@@ -112,5 +112,9 @@ export class UserregisterComponent {
       }
     );
   }
+
+  closeFormss() {
+    this.router.navigate(['/']); // Redirect to the Home page
+  }
 }
 

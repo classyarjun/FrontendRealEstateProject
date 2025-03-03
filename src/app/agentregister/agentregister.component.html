@@ -1,64 +1,80 @@
 <div class="parent">
   <div class="form-container">
+    <!-- Close Button -->
+
+
     <form [formGroup]="agentForm" (ngSubmit)="submitForm()" class="agent-form" enctype="multipart/form-data">
 
-        <h2 class="d-flex justify-content-center m-3 fw-bold">Agent Register</h2>
+      <i class="bi bi-x-lg text-danger fs-4 cursor-pointer d-flex justify-content-end" (click)="closeForm()"></i>
+      <h2 class="d-flex justify-content-center m-3 fw-bold">Agent Register</h2>
+
+
       <div class="input-group">
         <div class="input-field">
           <label>User Name:</label>
-          <input type="text" formControlName="userName" required />
+          <input type="text" formControlName="userName" />
+          <small class="text-danger" *ngIf="agentForm.controls['userName'].touched && agentForm.controls['userName'].hasError('required')">User Name is required.</small>
+          <small class="text-danger" *ngIf="agentForm.controls['userName'].hasError('minlength')">Minimum 3 characters required.</small>
         </div>
+
         <div class="input-field">
           <label>Full Name:</label>
-          <input type="text" formControlName="fullName" required />
+          <input type="text" formControlName="fullName" />
+          <small class="text-danger" *ngIf="agentForm.controls['fullName'].touched && agentForm.controls['fullName'].hasError('required')">Full Name is required.</small>
+          <small class="text-danger" *ngIf="agentForm.controls['fullName'].hasError('minlength')">Minimum 3 characters required.</small>
         </div>
       </div>
 
       <div class="input-group">
         <div class="input-field">
           <label>Email:</label>
-          <input type="email" formControlName="email" required />
+          <input type="email" formControlName="email" />
+          <small class="text-danger" *ngIf="agentForm.controls['email'].touched && agentForm.controls['email'].hasError('required')">Email is required.</small>
+          <small class="text-danger" *ngIf="agentForm.controls['email'].hasError('email')">Invalid email format.</small>
         </div>
-        <div class="input-field">
+
+        <div class="input-field position-relative">
           <label>Password:</label>
-          <input type="password" formControlName="password" required />
+          <div class="position-relative">
+            <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control pe-5" />
+            <i class="bi position-absolute top-50 end-0 translate-middle-y me-3"
+               [ngClass]="{'bi-eye': !showPassword, 'bi-eye-slash': showPassword}"
+               (click)="togglePassword()" style="cursor: pointer;">
+            </i>
+          </div>
+          <small class="text-danger" *ngIf="agentForm.controls['password'].touched && agentForm.controls['password'].hasError('required')">Password is required.</small>
+          <small class="text-danger" *ngIf="agentForm.controls['password'].hasError('minlength')">Minimum 6 characters required.</small>
+          <small class="text-danger" *ngIf="agentForm.controls['password'].hasError('pattern')">Must have 1 uppercase, 1 number, and 1 special character.</small>
         </div>
       </div>
 
       <div class="input-group">
         <div class="input-field">
           <label>Mobile No:</label>
-          <input type="text" formControlName="mobileNo" required />
+          <input type="text" formControlName="mobileNo" />
+          <small class="text-danger" *ngIf="agentForm.controls['mobileNo'].touched && agentForm.controls['mobileNo'].hasError('required')">Mobile number is required.</small>
+          <small class="text-danger" *ngIf="agentForm.controls['mobileNo'].hasError('pattern')">Enter a valid 10-digit number.</small>
         </div>
+
         <div class="input-field">
           <label>Experience:</label>
-          <input type="number" formControlName="experience" required />
-        </div>
-      </div>
-
-      <div class="input-group">
-        <div class="input-field">
-          <label>Rating:</label>
-          <input type="number" formControlName="rating" step="0.1" required />
-        </div>
-        <div class="input-field">
-          <label>Status:</label>
-          <select formControlName="status">
-            <option value="ACTIVE">Active</option>
-            <option value="INACTIVE">Inactive</option>
-          </select>
+          <input type="number" formControlName="experience" />
+          <small class="text-danger" *ngIf="agentForm.controls['experience'].touched && agentForm.controls['experience'].hasError('required')">Experience is required.</small>
+          <small class="text-danger" *ngIf="agentForm.controls['experience'].hasError('min')">Experience cannot be negative.</small>
         </div>
       </div>
 
       <label>Bio:</label>
       <textarea formControlName="bio"></textarea>
+      <small class="text-danger" *ngIf="agentForm.controls['bio'].hasError('maxLength')">Maximum 500 characters allowed.</small>
 
       <div class="border-1">
         <label>Profile Picture:</label>
         <input type="file" (change)="onFileSelected($event)" />
+        <small class="text-danger">{{ fileError }}</small>
       </div>
 
-      <button type="submit" [disabled]="agentForm.invalid">Register</button>
+      <button type="submit" [disabled]="agentForm.invalid || fileError">Register</button>
     </form>
   </div>
 </div>

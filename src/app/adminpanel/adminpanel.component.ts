@@ -5,6 +5,9 @@ import { Chart, registerables } from 'chart.js';
 // import { AdminService } from './../../services/admin.service';
 import { PropertyService } from 'src/services/property.service';
 import { Blog } from 'src/modal/blog';
+import { Property } from 'src/modal/property';
+import { AuthService } from 'src/services/auth.service';
+import { Router } from '@angular/router';
 Chart.register(...registerables);
 
 @Component({
@@ -15,6 +18,7 @@ Chart.register(...registerables);
 
 export class AdminpanelComponent implements OnInit {
   pendingProperties: any[] = [];
+  allProperties: Property[] = [];
   propertylength:number = 0;
   pendingAgents: any[] = [];
   isVisible = true;
@@ -37,7 +41,8 @@ export class AdminpanelComponent implements OnInit {
 
   constructor( private AgentService: AgentService,
      private PropertyService: PropertyService,
-     private blogService: BlogService) { }
+     private blogService: BlogService,
+    private AuthService:AuthService, private router: Router) { }
 
   ngOnInit() {
     this.createSalesChart();
@@ -45,6 +50,7 @@ export class AdminpanelComponent implements OnInit {
     this.loadPendingAgents();
     this.fetchPendingProperties();
     this.loadBlogs();
+    this.loadProperties();
   }
 
   createSalesChart() {
@@ -229,7 +235,23 @@ saveBlog(): void {
 }
 
 
+loadProperties(): void {
+    this.PropertyService.getAllProperties().subscribe(
+      (data: Property[]) => {
+        this.allProperties = data || [];
+        console.log('AllProperties:', data);
+      },
+      (error) => console.error("Error fetching properties:", error)
+    );
+  }
 
+  logout() {
+    if(confirm('Are you sure you want to logout?')){
+      this.AuthService.logout('admin_token');
+      alert('Logged out successfully');
+      this.router.navigate(['']);
+    }
+  }
 
 
 }

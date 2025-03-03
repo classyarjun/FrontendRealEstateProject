@@ -13,7 +13,7 @@ background-repeat: no-repeat;
 }
 
 .register-container{
-background-color: rgba(255, 255, 255, 0.776);
+background-color: rgba(255, 255, 255, 0.925);
 backdrop-filter: blur(10px);
 }
 
@@ -22,13 +22,13 @@ h2 {
   text-align: center;
   color: #333; /* Keep text visible */
 }
-
+/*
 input,
 select {
-  background: rgba(255, 255, 255, 0.5); /* Semi-transparent input fields */
+  background: rgba(255, 255, 255, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: #333;
-}
+} */
 
 label {
   font-weight: bold;
@@ -54,7 +54,7 @@ label {
 }
 
 /* Password Input Field Styles */
-.input-group {
+ .input-group {
   position: relative;
 }
 
@@ -63,18 +63,20 @@ label {
   box-shadow: none;
 }
 
-.input-group .btn-outline-secondary:hover,
-.input-group .btn-outline-secondary:focus {
-  /* background-color: #f8f9fa; */
-  border-color: #ced4da;
-}
+
 
 .input-group .bi {
   font-size: 16px;
+
 }
 
 /* Error Message Styling */
 .text-danger.small {
   font-size: 13px;
   margin-top: 5px;
+}
+
+.eyeback
+{
+  background-color: #ffffff !important;
 }

@@ -20,7 +20,6 @@ export class PropertyComponent implements OnInit {
   propertyForm: FormGroup;
   updateForm: FormGroup;
   isVisible = true;
-
   agentId: number = 1;
 
   constructor(private fb: FormBuilder, private propertyService: PropertyService) {

@@ -1,9 +1,11 @@
+import { AuthService } from 'src/services/auth.service';
 import { Component,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AgentService } from 'src/services/agent.service';
 import { Chart, registerables } from 'chart.js';
 import { PropertyService } from 'src/services/property.service';
 import { Property } from '../../modal/property';
+import { Router } from '@angular/router';
 
 Chart.register(...registerables);
 
@@ -24,12 +26,13 @@ export class AgentdashboardComponent implements OnInit {
   selectedFiles: File[] = [];
   propertyForm: FormGroup;
   updateForm: FormGroup;
-  agentId: number = 9;
+  agentId: number = 1;
 
   searchQuery: string = '';
 
 
-  constructor(private fb: FormBuilder, private PropertyService: PropertyService) {
+  constructor(private fb: FormBuilder, private PropertyService: PropertyService,
+    private AuthService:AuthService, private router: Router) {
     // Property form initialization
     this.propertyForm = this.fb.group({
       title: ['', Validators.required],
@@ -206,6 +209,14 @@ get filteredProperties(): Property[] {
   );
 }
 
+
+logout() {
+  if(confirm('Are you sure you want to logout?')){
+    this.AuthService.logout('agent_token');
+    alert('Logged out successfully');
+    this.router.navigate(['']);
+  }
+}
 }
 
 
