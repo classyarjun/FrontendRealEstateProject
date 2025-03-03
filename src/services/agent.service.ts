@@ -21,21 +21,7 @@ export class AgentService {
     );
   }
 
-  // // // Login Agent
-  // loginAgent(credentials: {
-  //   username: string;
-  //   password: string;
-  // }): Observable<any> {
-  //   return this.http.post(`${this.apiUrl}/agents/loginAgent`, credentials);
-  // }
 
-
-  // loginAgent(username: string, password: string): Observable<any> {
-  //   const formData = new FormData();
-  //   formData.append('username', username);
-  //   formData.append('password', password);
-  //   return this.http.post(`${this.apiUrl}/agents/loginAgent`, formData);
-  // }
 
   // Update Agent
   updateAgent(agentId: number, agent: FormData): Observable<any> {

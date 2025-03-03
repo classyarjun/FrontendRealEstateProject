@@ -35,9 +35,10 @@ export class AdminLoginComponent implements OnInit {
 
     this.authService.adminLogin(username, password,'ADMIN').subscribe({
       next: (response) => {
-        // console.log("adminlognrespons",response);
+        console.log("adminlognrespons",response);
         if (response.data && response.data.token) {
           this.authService.setToken(response.data.token,'admin_token');
+          this.authService.setRoleId(response.data.adminId,'adminId');
           this.router.navigate(['/adminpanel']);
         }
       },

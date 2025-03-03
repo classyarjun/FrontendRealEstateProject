@@ -3,13 +3,14 @@
   <nav *ngIf="isVisible" id="sidebar" class="bg-light border-dark">
     <div class="sidebar-header p-3">
       <div class="d-flex align-items-center flex-column">
-        <img
-          src="https://images.unsplash.com/7/sunset-hair.jpg?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Profile Avatar" class="rounded-circle" width="70" height="70" />
-        <div class="p-2">
-          <h6 class="">John Doe</h6>
-          <small class="text-muted">Agent Dashboard</small>
+        <div *ngIf="agentData">
+          <img [src]="getProfileImage()" alt="Profile Picture" class="profile-picture" width="100" height="100" />
+          <div class="p-2">
+            <h6 class="">{{ agentData.fullName  }}</h6>
+            <small class="text-muted">Agent Dashboard</small>
+          </div>
         </div>
+
       </div>
     </div>
 
@@ -166,7 +167,8 @@
                     </div> -->
 
                     <div class="col-md-6">
-                      <input type="text" class="form-control" placeholder="Search properties..." (input)="onSearch($event)" />
+                      <input type="text" class="form-control" placeholder="Search properties..."
+                        (input)="onSearch($event)" />
                     </div>
 
                     <div class="col-md-2">
@@ -272,8 +274,8 @@
                         <div class="mb-3">
                           <label class="form-label">Address</label>
                           <input type="text" class="form-control" formControlName="address"
-                          placeholder="Enter Address : Street: 123 Main St, City, State, PostalCode, Country"
-                          required>
+                            placeholder="Enter Address : Street: 123 Main St, City, State, PostalCode, Country"
+                            required>
                         </div>
 
                         <div class="mb-3">

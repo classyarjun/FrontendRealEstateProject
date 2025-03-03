@@ -1,3 +1,4 @@
+import { UserService } from 'src/services/user.service';
 import { BlogService } from 'src/services/blog.service';
 import { AgentService } from 'src/services/agent.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +9,7 @@ import { Blog } from 'src/modal/blog';
 import { Property } from 'src/modal/property';
 import { AuthService } from 'src/services/auth.service';
 import { Router } from '@angular/router';
+import { User } from '../Modals/user';
 Chart.register(...registerables);
 
 @Component({
@@ -21,6 +23,7 @@ export class AdminpanelComponent implements OnInit {
   allProperties: Property[] = [];
   propertylength:number = 0;
   pendingAgents: any[] = [];
+  allUsers:User[] = [];
   isVisible = true;
   toggle() {
     this.isVisible = !this.isVisible;
@@ -42,7 +45,10 @@ export class AdminpanelComponent implements OnInit {
   constructor( private AgentService: AgentService,
      private PropertyService: PropertyService,
      private blogService: BlogService,
-    private AuthService:AuthService, private router: Router) { }
+    private UserService:UserService,
+    private AuthService:AuthService,
+
+    private router: Router) { }
 
   ngOnInit() {
     this.createSalesChart();
@@ -51,6 +57,7 @@ export class AdminpanelComponent implements OnInit {
     this.fetchPendingProperties();
     this.loadBlogs();
     this.loadProperties();
+    this. loadAllUsers();
   }
 
   createSalesChart() {
@@ -212,7 +219,6 @@ saveBlog(): void {
     this.blogService.getAllBlogs().subscribe((data: Blog[]) => {
         this.blogs = data.map(blog => {
         blog.imagePath = `data:image/jpeg;base64,${blog.imagePath}`;
-        console.log(blog.imagePath);
         return blog;
       });
     });
@@ -239,11 +245,23 @@ loadProperties(): void {
     this.PropertyService.getAllProperties().subscribe(
       (data: Property[]) => {
         this.allProperties = data || [];
-        console.log('AllProperties:', data);
+        // console.log('AllProperties:', data);
       },
       (error) => console.error("Error fetching properties:", error)
     );
   }
+
+
+  loadAllUsers():void {
+    this.UserService.getAllUsers().subscribe(
+      (data:User[])=>{
+      this.allUsers=data || [];
+      // console.log("Allusers:", data);
+    },
+     (error) => console.error("Error fetching users:", error))
+
+    }
+
 
   logout() {
     if(confirm('Are you sure you want to logout?')){

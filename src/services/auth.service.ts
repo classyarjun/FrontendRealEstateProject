@@ -42,6 +42,8 @@ export class AuthService {
   // ✅ Logout (Role Wise)
   logout(role: string): void {
     localStorage.removeItem(`${role}-token`);
+    localStorage.removeItem(`${role}-id`);
+
   }
 
   // ✅ JWT Token Decode Karke Role Nikalna
@@ -55,8 +57,7 @@ export class AuthService {
     if (token) {
       try {
         const payload = JSON.parse(atob(token.split('.')[1])); // JWT Decode
-        console.log("payload",payload);
-
+        // console.log("payload",payload);
         return payload.role; // ✅ Token ke andar "role" key honi chahiye
       } catch (error) {
         console.error('Invalid Token:', error);
@@ -70,4 +71,15 @@ export class AuthService {
   isAuthenticated(role: string): boolean {
     return this.getToken(role) !== null;
   }
+
+  // ! i have testing
+  setRoleId(roleId: string, role: string): void {
+    localStorage.setItem(`${role}`, roleId); // ✅ Role-wise token store
+  }
+
+  // ✅ Token Retrieve Karna
+  getRoleId(role: string): string | null {
+    return localStorage.getItem(`${role}`);
+  }
+
 }

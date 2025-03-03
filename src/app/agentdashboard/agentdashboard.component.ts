@@ -26,13 +26,15 @@ export class AgentdashboardComponent implements OnInit {
   selectedFiles: File[] = [];
   propertyForm: FormGroup;
   updateForm: FormGroup;
-  agentId: number = 1;
-
+  agentId: any;
+  agentData:any;
   searchQuery: string = '';
 
 
   constructor(private fb: FormBuilder, private PropertyService: PropertyService,
-    private AuthService:AuthService, private router: Router) {
+    private AuthService:AuthService,
+    private AgentService:AgentService,
+    private router: Router) {
     // Property form initialization
     this.propertyForm = this.fb.group({
       title: ['', Validators.required],
@@ -69,7 +71,29 @@ export class AgentdashboardComponent implements OnInit {
 
 
 ngOnInit(): void {
-  this.loadProperties()
+  const agentId = this.AuthService.getRoleId('agentId'); // ✅ Role-wise ID retrieve karein
+  // console.log(agentId);
+  //  this.agentId = agentId ? +agentId : 0;
+   this.agentId = agentId;
+  if (agentId) {
+    this.AgentService.getAgentById(+agentId).subscribe({
+      next: (data) => {
+        this.agentData = data;
+        console.log('Agent All Data:', data);
+      },
+      error: (err) => console.error('Error fetching agent profile:', err)
+    });
+  }
+
+this.loadProperties();
+
+}
+
+getProfileImage(): string {
+  if (this.agentData?.profilePicture) {
+    return `data:image/jpeg;base64,${this.agentData.profilePicture}`;
+  }
+  return 'https://via.placeholder.com/100'; // Default Image
 }
 
   toggle() {
@@ -101,7 +125,7 @@ loadProperties(): void {
   this.PropertyService.getAllProperties().subscribe(
     (data: Property[]) => {
       this.allProperties = data;
-      console.log('agent panel getAllProperties:', data);
+      // console.log('agent panel getAllProperties:', data);
     },
     (error) => console.error("Error fetching properties:", error)
   );
@@ -209,7 +233,6 @@ get filteredProperties(): Property[] {
   );
 }
 
-
 logout() {
   if(confirm('Are you sure you want to logout?')){
     this.AuthService.logout('agent_token');
@@ -217,6 +240,11 @@ logout() {
     this.router.navigate(['']);
   }
 }
+
+
+
+
+
 }
 
 
