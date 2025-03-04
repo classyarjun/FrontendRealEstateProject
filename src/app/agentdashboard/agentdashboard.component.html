@@ -3,11 +3,11 @@
   <nav *ngIf="isVisible" id="sidebar" class="bg-light border-dark">
     <div class="sidebar-header p-3">
       <div class="d-flex align-items-center flex-column">
-        
+
         <div *ngIf="agentData">
           <img [src]="getProfileImage()" alt="Profile Picture" class="profile-picture" width="100" height="100" />
           <div class="p-2">
-            <h6 class="">{{ agentData.fullName  }}</h6>
+            <h6 class="">{{ agentData.fullName }}</h6>
             <small class="text-muted">Agent Dashboard</small>
           </div>
         </div>
@@ -27,9 +27,17 @@
         <li class="nav-item">
           <a class="nav-link fw-bold" data-bs-toggle="tab" href="#Property" role="tab">
             <i class="bi bi-map"></i>
-            <span>Property</span>
+            <span> Listed Property</span>
           </a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link fw-bold" data-bs-toggle="tab" href="#PropertyPending" role="tab">
+            <i class="bi bi-map"></i>
+            <span> Pending Property</span>
+          </a>
+        </li>
+
       </ul>
     </div>
   </nav>
@@ -151,13 +159,64 @@
         </div>
 
 
+        <div class="tab-pane fade" id="PropertyPending" role="tabpanel">
+          <div class="mt-4">
+            <div class="container mt-4">
+              <h3 class="mb-4">Pending Properties</h3>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="row ">
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive" style="height: 500px; overflow-y: auto;">
+
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Title</th>
+                          <th>Category</th>
+                          <th>Size</th>
+                          <th>Price</th>
+                          <th>Year Built</th>
+                          <th>Location</th>
+                          <th>bedrooms</th>
+                          <th>bathrooms</th>
+                          <th>Status</th>
+                          <!-- <th>Actions</th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let property of pendingPropertiesByAgent">
+                          <td>{{ property.propertyId }}</td>
+                          <td>{{ property.title }}</td>
+                          <td>{{ property.propertyType }}</td>
+                          <td>{{ property.size }}</td>
+                          <td>{{ property.price }}</td>
+                          <td>{{ property.yearBuilt }}</td>
+                          <td>{{ property.address }}</td>
+                          <td>{{ property.bedrooms }}</td>
+                          <td>{{ property.bathrooms }}</td>
+                          <td>{{ property.status }}</td>
+                          <td>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- property manage Tab -->
         <div class="tab-pane fade" id="Property" role="tabpanel">
           <div class="mt-4">
             <div class="container mt-4">
               <h3 class="mb-4">Property Management</h3>
-
               <div class="card">
                 <div class="card-header">
                   <div class="row ">
@@ -241,7 +300,6 @@
                     </table>
                   </div>
                 </div>
-
               </div>
 
 
@@ -354,7 +412,6 @@
 
               <!--! // Bootstrap Modal for View Property //=======================  -->
 
-
               <!-- View Property Modal -->
               <div class="modal fade" id="viewPropertyModal" tabindex="-1" aria-labelledby="viewPropertyModalLabel"
                 aria-hidden="true">
@@ -362,7 +419,8 @@
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="viewPropertyModalLabel">Property Details</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                      </button>
                     </div>
                     <div class="modal-body">
                       <p><strong>Title:</strong> {{ selectedProperty?.title }}</p>

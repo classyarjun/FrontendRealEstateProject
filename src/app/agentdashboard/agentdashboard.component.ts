@@ -18,7 +18,6 @@ Chart.register(...registerables);
 // =======================================
 export class AgentdashboardComponent implements OnInit {
 
-  pendingProperties: any[] = [];
   isVisible = true;
   property: Property[] = [];
   allProperties: Property[] = [];
@@ -30,6 +29,7 @@ export class AgentdashboardComponent implements OnInit {
   agentData:any;
   searchQuery: string = '';
 
+  pendingPropertiesByAgent:any;
 
   constructor(private fb: FormBuilder, private PropertyService: PropertyService,
     private AuthService:AuthService,
@@ -86,6 +86,7 @@ ngOnInit(): void {
   }
 
 this.loadProperties();
+this.loadPendingProperties();
 
 }
 
@@ -130,7 +131,6 @@ loadProperties(): void {
     (error) => console.error("Error fetching properties:", error)
   );
 }
-
 
 
 // Delete a property by ID
@@ -241,8 +241,28 @@ logout() {
   }
 }
 
+// loadPendingProperties(): void {
+//   this.PropertyService.getPendingPropertiesByAgent(this.agentId).subscribe(
+//     (property: Property) => {
+//       this.pendingPropertiesByAgent =[property];
+//       console.log('Pending Properties:', this.pendingPropertiesByAgent);
 
+//     },
+//     (error) => {
+//       console.error('Error fetching pending properties:', error);
+//     }
+//   );
+// }
 
+loadPendingProperties(): void {
+  this.PropertyService.getPendingPropertiesByAgent(this.agentId).subscribe(
+      (property: Property) => {
+        this.pendingPropertiesByAgent = property;
+        console.log('getPendingPropertiesByAgent:', property);
+      },
+      (error) => console.error("Error fetching properties:", error)
+    );
+}
 
 
 }

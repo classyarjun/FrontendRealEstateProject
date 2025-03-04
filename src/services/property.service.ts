@@ -44,8 +44,6 @@ export class PropertyService {
     );
   }
 
-
-
     /** ✅ Approve Property & Refresh List */
     approveProperty(propertyId: number): Observable<string> {
       return this.http.put<string>(`${this.apiUrl}/properties/approveProperty/${propertyId}`, {})
@@ -71,14 +69,7 @@ export class PropertyService {
       `${this.apiUrl}/properties/getPropertyByIds/${propertyId}`
     );
   }
-  getPendingPropertiesByAgent(
-    propertyId: number,
-    agentId: number
-  ): Observable<Property> {
-    return this.http.get<Property>(
-      `${this.apiUrl}/properties/getPendingPropertiesByAgent/${propertyId}/${agentId}`
-    );
-  }
+
 
   updateProperty(propertyId: number, propertyData: FormData ): Observable<Property> {
     return this.http.put<Property>(`${this.apiUrl}/properties/updateProperty/${propertyId}`,propertyData);
@@ -90,12 +81,6 @@ export class PropertyService {
     );
   }
 
-  // searchProperties(keyword: string): Observable<Property[]> {
-  //   return this.http.get<Property[]>(
-  //     `${this.apiUrl}/properties/search/${keyword}`
-  //   );
-  // }
-
 
   searchProperties(propertyType: string, ): Observable<Property[]> {
     return this.http.get<Property[]>(`${this.apiUrl}/properties/searchProperty`, {
@@ -105,4 +90,11 @@ export class PropertyService {
       }
     });
   }
+
+    getPendingPropertiesByAgent(agentId: number): Observable<Property> {
+    return this.http.get<Property>(
+      `${this.apiUrl}/properties/getPendingPropertiesByAgent/${agentId}`
+    );
+  }
+
 }
