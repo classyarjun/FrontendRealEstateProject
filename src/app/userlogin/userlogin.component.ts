@@ -1,43 +1,3 @@
-// import { Component } from '@angular/core';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { UserService } from '../../services/user.service';
-// import { Router } from '@angular/router';
-
-// @Component({
-//   selector: 'app-userlogin',
-//   templateUrl: './userlogin.component.html',
-//   styleUrls: ['./userlogin.component.css']
-// })
-// export class UserloginComponent {
-
-//   loginForm: FormGroup;
-//   showPassword = false; // Track password visibility state
-
-//   constructor(private fb: FormBuilder, private router: Router) {
-//     this.loginForm = this.fb.group({
-//       username: ['', Validators.required],
-//       password: ['', Validators.required]
-//     });
-//   }
-
-
-
-//   togglePasswordVisibility(): void {
-//     this.showPassword = !this.showPassword; // Toggle visibility state
-//   }
-
-//   onSubmit(): void {
-//     if (this.loginForm.valid) {
-//       console.log('Login successful:', this.loginForm.value);
-//       alert('User successfully logged in!');
-//       this.router.navigate(['/']);
-//       // Add your login logic here, such as calling a service for authentication.
-//     } else {
-//       alert('Please fill out all required fields correctly.');
-//     }
-//   }
-
-// }
 
 
 import { Component, OnInit } from '@angular/core';
@@ -55,6 +15,7 @@ export class UserloginComponent implements OnInit {
 
   userLoginForm!: FormGroup;
   errorMessage: string = '';
+  showPassword: boolean = false;
 
   constructor(private fb: FormBuilder, private AuthService: AuthService, private router: Router) {}
 
@@ -63,6 +24,17 @@ export class UserloginComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+  }
+
+
+  closeForm(){
+    this.router.navigate(['/']);
+  }
+
+
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 
   login() {

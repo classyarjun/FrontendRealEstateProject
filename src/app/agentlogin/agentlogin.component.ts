@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AgentloginComponent implements OnInit {
   agentLoginForm!: FormGroup;
   errorMessage: string = '';
+  showPassword: boolean = true;
 
   constructor(private fb: FormBuilder, private AuthService: AuthService, private router: Router) {}
 
@@ -45,4 +46,17 @@ export class AgentloginComponent implements OnInit {
       }
     });
   }
+
+
+
+  closeForm(){
+    this.router.navigate(["/"])
+  }
+
+
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+
 }

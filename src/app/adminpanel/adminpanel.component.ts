@@ -3,7 +3,7 @@ import { BlogService } from 'src/services/blog.service';
 import { AgentService } from 'src/services/agent.service';
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-// import { AdminService } from './../../services/admin.service';
+import { AdminService } from 'src/services/admin.service';
 import { PropertyService } from 'src/services/property.service';
 import { Blog } from 'src/modal/blog';
 import { Property } from 'src/modal/property';
@@ -25,13 +25,17 @@ export class AdminpanelComponent implements OnInit {
   pendingAgents: any[] = [];
   allUsers:User[] = [];
   isVisible = true;
+
+
+  adminId: any;
+  adminData:any;
+
   toggle() {
     this.isVisible = !this.isVisible;
   }
 
   salesChart: any;
   propertyTypeChart: any;
-
 
   blogs: Blog[] = [];
 
@@ -47,10 +51,29 @@ export class AdminpanelComponent implements OnInit {
      private blogService: BlogService,
     private UserService:UserService,
     private AuthService:AuthService,
+    private AdminService:AdminService,
+
 
     private router: Router) { }
 
   ngOnInit() {
+
+
+    const adminId = this.AuthService.getRoleId('adminId'); // ✅ Role-wise ID retrieve karein
+  // console.log(adminId);
+  //  this.adminId = adminId ? +adminId : 0;
+   this.adminId = adminId;
+  if (adminId) {
+    this.AdminService.getAdminById(+adminId).subscribe({
+      next: (data) => {
+        this.adminData = data;
+        // console.log('Admin All Data:', data);
+      },
+      error: (err) => console.error('Error fetching agent profile:', err)
+    });
+  }
+
+
     this.createSalesChart();
     this.createPropertyTypeChart();
     this.loadPendingAgents();
@@ -59,6 +82,14 @@ export class AdminpanelComponent implements OnInit {
     this.loadProperties();
     this. loadAllUsers();
   }
+
+  getProfileImage(): string {
+    if (this.adminData?.profilePicture) {
+      return `data:image/jpeg;base64,${this.adminData.profilePicture}`;
+    }
+    return 'https://via.placeholder.com/100';
+  }
+
 
   createSalesChart() {
     this.salesChart = new Chart('salesChart', {

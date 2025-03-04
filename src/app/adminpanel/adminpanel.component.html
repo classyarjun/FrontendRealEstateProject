@@ -4,12 +4,20 @@
     <div class="sidebar-header p-3">
       <div class="d-flex align-items-center flex-column">
 
-        <img
+        <!-- <img
           src="https://images.unsplash.com/7/sunset-hair.jpg?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Profile Avatar" class="rounded-circle" width="70" height="70" />
         <div class="p-2">
           <h6 class="">John Doe</h6>
           <small class="text-muted">Administrator</small>
+        </div> -->
+
+        <div *ngIf="adminData">
+          <img [src]="getProfileImage()" alt="Profile Picture" class="profile-picture" width="100" height="100" />
+          <div class="p-2">
+            <h6 class="">{{ adminData.fullname  }}</h6>
+            <small class="text-muted">Admin Dashboard</small>
+          </div>
         </div>
       </div>
     </div>

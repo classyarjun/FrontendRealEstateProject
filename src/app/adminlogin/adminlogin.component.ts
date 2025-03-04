@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class AdminLoginComponent implements OnInit {
   adminLoginForm!: FormGroup;
   errorMessage: string = '';
+  showPassword: boolean = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
@@ -49,5 +50,12 @@ export class AdminLoginComponent implements OnInit {
 
 
 
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+  closeForm(){
+    this.router.navigate(["/"])
   }
 }

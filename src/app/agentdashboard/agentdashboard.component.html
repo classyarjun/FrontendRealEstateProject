@@ -3,6 +3,7 @@
   <nav *ngIf="isVisible" id="sidebar" class="bg-light border-dark">
     <div class="sidebar-header p-3">
       <div class="d-flex align-items-center flex-column">
+        
         <div *ngIf="agentData">
           <img [src]="getProfileImage()" alt="Profile Picture" class="profile-picture" width="100" height="100" />
           <div class="p-2">

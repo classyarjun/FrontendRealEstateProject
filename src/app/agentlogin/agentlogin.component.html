@@ -1,53 +1,11 @@
-<!--
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-<body>
-  <div class="login-container">
-    <span class="close-btn" (click)="closeLogin()">&times;</span>
-    <h2>Agent Login</h2>
-    <form (ngSubmit)="loginAgent()">
-      <div>
-        <label>Username:</label>
-        <input type="text" [(ngModel)]="username" name="username" required />
-      </div>
-      <div>
-        <label>Password:</label>
-        <div class="password-container">
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            [(ngModel)]="password"
-            name="password"
-            required
-          />
-          <i
-            class="toggle-password fa"
-            [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
-            (click)="togglePasswordVisibility()"
-          ></i>
-        </div>
-      </div>
-      <button type="submit">Login</button>
-
-      <div class="register-section">
-        <p>Don't have an account? <a routerLink="/agentregister" class="register-link">Register here</a></p>
-      </div>
-
-      <div class="register-section">
-        <a routerLink="/reset-password" class="register-link">Reset password</a>
-     </div>
-
-    </form>
-  </div>
-</body>
-
- -->
 
 
 
  <div class="parent">
   <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-lg p-5 rounded" style="max-width: 400px; width: 100%;">
+    <div class="card shadow-lg p-3 px-3 rounded" style="max-width: 400px; width: 100%;">
+      <i class="bi bi-x-lg text-danger fs-4 cursor-pointer d-flex justify-content-end" (click)="closeForm()"></i>
+
       <h2 class="text-center mb-4 text-dark fw-bold ">Agent Login</h2>
 
       <form [formGroup]="agentLoginForm" (ngSubmit)="login()">
@@ -61,10 +19,35 @@
         </div>
 
         <!-- Password -->
-        <div class="mb-3">
+        <!-- <div class="mb-3">
           <label class="form-label lablestyle ">Password</label>
           <input type="password" class="form-control" formControlName="password" placeholder="Enter password" />
           <div *ngIf="agentLoginForm.get('password')?.invalid && agentLoginForm.get('password')?.touched" class="text-danger small">
+            Password must be at least 6 characters long.
+          </div>
+        </div> -->
+
+        <div class="mb-3">
+          <label class="form-label lablestyle">Password</label>
+          <div class="input-group">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              class="form-control"
+              formControlName="password"
+              placeholder="Enter password"
+            />
+            <span class="input-group-text">
+              <i
+                [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"
+                (click)="togglePassword()"
+                style="cursor: pointer;"
+              ></i>
+            </span>
+          </div>
+          <div
+            *ngIf="agentLoginForm.get('password')?.invalid && agentLoginForm.get('password')?.touched"
+            class="text-danger small"
+          >
             Password must be at least 6 characters long.
           </div>
         </div>
