@@ -1,0 +1,109 @@
+body {
+    background: linear-gradient(to right, #007bff, #00d4ff); /* Blue gradient */
+    min-height: 100vh;
+}
+
+.why-choose-us,
+.services,
+.testimonials,
+.faq {
+    padding: 4rem 2rem;
+    border-radius: 12px;
+}
+
+/* Card Styling */
+.card {
+    height: 150px; /* Fixed height for uniform size */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.9); /* Light transparent white background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card p {
+    flex-grow: 1;
+    font-size: 14px;
+}
+
+.card h5 {
+    font-weight: bold;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Gradient Background for Sections */
+.why-choose-us {
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Orange gradient */
+}
+
+.services {
+    background: linear-gradient(to right, #42e695, #3bb2b8); /* Green gradient */
+}
+
+.testimonials {
+    background: linear-gradient(to right, #ff6a88, #ff99ac); /* Pink gradient */
+}
+
+.faq {
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Purple-Blue gradient */
+}
+
+
+.why-choose-us,
+.services,
+.testimonials,
+.faq {
+    padding: 4rem 2rem;
+    border-radius: 12px;
+}
+
+/* Card Styling */
+.card {
+    height: 150px; /* Fixed height for uniform size */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out;
+    background: rgba(255, 255, 255, 0.9); /* Light transparent white background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card p {
+    flex-grow: 1;
+    font-size: 14px;
+}
+
+.card h5 {
+    font-weight: bold;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Gradient Background for Sections */
+.why-choose-us {
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Orange gradient */
+}
+
+.services {
+    background: linear-gradient(to right, #42e695, #3bb2b8); /* Green gradient */
+}
+
+.testimonials {
+    background: linear-gradient(to right, #ff6a88, #ff99ac); /* Pink gradient */
+}
+
+.faq {
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Purple-Blue gradient */
+}

@@ -45,6 +45,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { BlogPageComponent } from './blog-page/blog-page.component';
 import { FeaturePropertyComponent } from './feature-property/feature-property.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { ReadComponent } from './read/read.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { SubscriptionComponent } from './subscription/subscription.component';
     NotFoundComponent,
     BlogPageComponent,
     FeaturePropertyComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    ReadComponent
 
   ],
   imports: [

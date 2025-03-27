@@ -34,11 +34,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { BlogPageComponent } from './blog-page/blog-page.component';
 import { FeaturePropertyComponent } from './feature-property/feature-property.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
-
+import { ReadComponent } from './read/read.component';
 
 
 const routes: Routes = [
-
+  { path: 'read', component: ReadComponent},
   { path: '', component: HomeComponent},
   { path: 'home', component: HomeComponent},
   { path: 'navbar', component: NavbarComponent},
