@@ -22,6 +22,7 @@ export class AgentdashboardComponent implements OnInit {
   property: Property[] = [];
   allProperties: Property[] = [];
   selectedProperty: Property | null = null;
+
   selectedFiles: File[] = [];
   propertyForm: FormGroup;
   updateForm: FormGroup;
@@ -179,7 +180,6 @@ onSubmit() {
   }
 }
 
-
 viewProperty(propertyId: number): void {
   this.PropertyService.getPropertyById(propertyId).subscribe(
     (property) => {
@@ -188,8 +188,6 @@ viewProperty(propertyId: number): void {
     (error) => console.error('Error fetching property:', error)
   );
 }
-
-
 
 // Update an existing property
 updateProperty() {
@@ -241,24 +239,13 @@ logout() {
   }
 }
 
-// loadPendingProperties(): void {
-//   this.PropertyService.getPendingPropertiesByAgent(this.agentId).subscribe(
-//     (property: Property) => {
-//       this.pendingPropertiesByAgent =[property];
-//       console.log('Pending Properties:', this.pendingPropertiesByAgent);
 
-//     },
-//     (error) => {
-//       console.error('Error fetching pending properties:', error);
-//     }
-//   );
-// }
 
 loadPendingProperties(): void {
   this.PropertyService.getPendingPropertiesByAgent(this.agentId).subscribe(
       (property: Property) => {
         this.pendingPropertiesByAgent = property;
-        console.log('getPendingPropertiesByAgent:', property);
+        // console.log('getPendingPropertiesByAgent:', property);
       },
       (error) => console.error("Error fetching properties:", error)
     );

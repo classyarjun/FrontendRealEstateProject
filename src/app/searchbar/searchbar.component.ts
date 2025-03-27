@@ -23,7 +23,7 @@ export class SearchbarComponent {
   // Update property dropdown based on Buy/Rent selection
   updatePropertyTypes() {
     if (this.selectedType === 'buy') {
-      this.propertyOptions = ['Residential', 'Commercial', 'Luxury Property', 'Land'];
+      this.propertyOptions = ['Residential', 'Commercial', 'Luxury Property', 'Land','Apartment', 'Villa', 'Office Space'];
     } else {
       this.propertyOptions = ['Apartment', 'Villa', 'Office Space'];
     }

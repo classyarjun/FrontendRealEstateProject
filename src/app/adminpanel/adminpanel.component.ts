@@ -73,14 +73,13 @@ export class AdminpanelComponent implements OnInit {
     });
   }
 
-
-    this.createSalesChart();
-    this.createPropertyTypeChart();
+    // this.createSalesChart();
     this.loadPendingAgents();
     this.fetchPendingProperties();
     this.loadBlogs();
     this.loadProperties();
     this. loadAllUsers();
+    this.createSalesChart();
   }
 
   getProfileImage(): string {
@@ -114,35 +113,8 @@ export class AdminpanelComponent implements OnInit {
     });
   }
 
-  createPropertyTypeChart() {
-    this.propertyTypeChart = new Chart('propertyTypeChart', {
-      type: 'pie',
-      data: {
-        labels: ['Residential', 'Commercial', 'Industrial', 'Land'],
-        datasets: [{
-          data: [60, 25, 10, 5],
-          backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)'
-          ]
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Property Type Distribution'
-          }
-        }
-      }
-    });
-  }
+
+
 
   onFileChange(event: any): void {
     this.imageFile = event.target.files[0];
@@ -272,15 +244,78 @@ saveBlog(): void {
 }
 
 
+// loadProperties(): void {
+//     this.PropertyService.getAllProperties().subscribe(
+//       (data: Property[]) => {
+//         this.allProperties = data || [];
+//         // console.log('AllProperties:', data);
+//       },
+//       (error) => console.error("Error fetching properties:", error)
+//     );
+//   }
+
+
 loadProperties(): void {
-    this.PropertyService.getAllProperties().subscribe(
-      (data: Property[]) => {
-        this.allProperties = data || [];
-        // console.log('AllProperties:', data);
-      },
-      (error) => console.error("Error fetching properties:", error)
-    );
+  this.PropertyService.getAllProperties().subscribe(
+    (data: Property[]) => {
+      this.allProperties = data || [];
+
+      // Property Type Count Extract Karna
+      const typeCounts = {
+        Residential: 0,
+        Commercial: 0,
+        Industrial: 0,
+        Land: 0
+      };
+
+      this.allProperties.forEach(property => {
+        if (typeCounts.hasOwnProperty(property.propertyType)) {
+          typeCounts[property.propertyType as keyof typeof typeCounts]++;
+        }
+      });
+
+
+      this.createPropertyTypeChart(Object.values(typeCounts));
+    },
+    (error) => console.error("Error fetching properties:", error)
+  );
+}
+
+createPropertyTypeChart(dataCounts: number[]): void {
+  if (this.propertyTypeChart) {
+    this.propertyTypeChart.destroy();
   }
+
+  this.propertyTypeChart = new Chart('propertyTypeChart', {
+    type: 'pie',
+    data: {
+      labels: ['Residential', 'Commercial', 'Industrial', 'Land'],
+      datasets: [{
+        data: dataCounts,
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Property Type Distribution'
+        }
+      }
+    }
+  });
+}
+
+
 
 
   loadAllUsers():void {
@@ -301,6 +336,7 @@ loadProperties(): void {
       this.router.navigate(['']);
     }
   }
+
 
 
 }

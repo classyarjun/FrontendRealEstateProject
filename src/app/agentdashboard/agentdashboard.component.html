@@ -222,9 +222,7 @@
                   <div class="row ">
 
 
-                    <!-- <div class="col-md-6">
-                      <input type="text" class="form-control" placeholder="Search properties..." />
-                    </div> -->
+
 
                     <div class="col-md-6">
                       <input type="text" class="form-control" placeholder="Search properties..."
@@ -280,8 +278,7 @@
                           <td>{{ property.status }}</td>
                           <td>
 
-                            <!-- <butto class="btn btn-primary btn-sm me-1">View</butto
-                              n> -->
+                            <!-- <button class="btn btn-primary btn-sm me-1">View</button> -->
                             <button class="btn btn-primary btn-sm me-1" (click)="viewProperty(property.propertyId!)"
                               data-bs-toggle="modal" data-bs-target="#viewPropertyModal">
                               View
@@ -345,10 +342,14 @@
                           <label class="form-label">Property Type</label>
                           <select class="form-control" formControlName="propertyType" required>
                             <option value="" disabled selected>Select Property Type</option>
-                            <option value="Resdental">Resdental</option>
-                            <option value="Industrial">Industrial</option>
+                            <option value="Residential">Residential</option>
                             <option value="Commercial">Commercial</option>
+                            <option value="Industrial">Industrial</option>
+                            <option value="Luxury Property">Luxury Property</option>
                             <option value="Land">Land</option>
+                            <option value="Apartment">Apartment</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Office Space">Office Space</option>
                           </select>
                         </div>
 
