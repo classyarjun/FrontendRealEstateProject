@@ -15,6 +15,7 @@
           <input type="text" formControlName="userName" />
           <small class="text-danger" *ngIf="agentForm.controls['userName'].touched && agentForm.controls['userName'].hasError('required')">User Name is required.</small>
           <small class="text-danger" *ngIf="agentForm.controls['userName'].hasError('minlength')">Minimum 3 characters required.</small>
+          <small class="text-danger" *ngIf="agentForm.controls['userName'].hasError('pattern')">Only lowercase letters are allowed.</small>
         </div>
 
         <div class="input-field">
@@ -74,7 +75,19 @@
         <small class="text-danger">{{ fileError }}</small>
       </div>
 
-      <button type="submit" [disabled]="agentForm.invalid || fileError">Register</button>
+      <!-- <button type="submit" [disabled]="agentForm.invalid || fileError">Register</button> -->
+
+      <button type="submit" class="btn btn-primary w-100"
+      [disabled]="agentForm.invalid || !selectedFile || loading">
+      <span *ngIf="!loading">Register</span>
+      <span *ngIf="loading">
+        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+       Registering...
+      </span>
+    </button>
+
+
+
     </form>
   </div>
 </div>

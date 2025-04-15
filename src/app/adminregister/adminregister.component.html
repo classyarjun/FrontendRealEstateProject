@@ -1,7 +1,4 @@
 
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> -->
-
-
 <body>
   <div class="container">
     <h2>Admin Registration</h2>
@@ -9,11 +6,28 @@
 
     <form (ngSubmit)="registerAdmin()" #adminForm="ngForm">
 
-      <div>
+      <!-- <div>
         <label for="username">Username:</label>
         <input id="username" [(ngModel)]="admin.username" name="username" required
           [placeholder]="getPlaceholderText('username', 'Enter Username')" />
+      </div> -->
+
+      <div>
+        <label for="username">Username:</label>
+        <input id="username"
+               name="username"
+               [(ngModel)]="admin.username"
+               #usernameRef="ngModel"
+               required
+               pattern="^[a-z]+$"
+               [placeholder]="getPlaceholderText('username', 'Enter Username')" />
+
+        <div *ngIf="usernameRef.invalid && (usernameRef.dirty || usernameRef.touched)" class="text-danger">
+          <div *ngIf="usernameRef.errors?.['required']">Username is required.</div>
+          <div *ngIf="usernameRef.errors?.['pattern']">Only lowercase letters are allowed.</div>
+        </div>
       </div>
+
 
       <div>
         <label for="fullname">Full Name:</label>
@@ -46,7 +60,6 @@
         <select id="role" [(ngModel)]="admin.role" name="role" required>
           <option value="">Select Role</option>
           <option value="ADMIN">Admin</option>
-          <option value="USER">User</option>
         </select>
       </div>
 
@@ -61,7 +74,7 @@
 
       <div>
         <label for="profilePicture">Profile Picture:</label>
-        <input type="file" (change)="onFileChange($event)" />
+        <input type="file" (change)="onFileChange($event)" accept=".png,.jpg,.jpeg" />
       </div>
 
       <button type="submit">Register</button>

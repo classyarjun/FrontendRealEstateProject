@@ -92,6 +92,6 @@ button:hover {
 }
 
 button:disabled {
-  background-color: #ccc; /* Gray background for disabled button */
+  background-color: #5d78ff; /* Gray background for disabled button */
   cursor: not-allowed; /* Not-allowed cursor */
 }

@@ -13,16 +13,16 @@ export class AgentregisterComponent implements OnInit {
   selectedFile: File | null = null;
   fileError: string = '';
   showPassword: boolean = false;
+  loading: boolean = false;
 
   constructor(private fb: FormBuilder, private agentService: AgentService, private router: Router) {}
 
   ngOnInit(): void {
     this.agentForm = this.fb.group({
-      userName: ['', [Validators.required, Validators.minLength(3)]],
+      userName: ['', [Validators.required, Validators.minLength(3),Validators.pattern('^[a-z]+$')]],
       fullName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
+      password: ['',
         [
           Validators.required,
           Validators.minLength(6),
@@ -64,6 +64,9 @@ export class AgentregisterComponent implements OnInit {
   }
 
   submitForm() {
+
+    this.loading = true; // Show loader
+
     if (this.agentForm.invalid || this.fileError) {
       return;
     }
@@ -77,11 +80,13 @@ export class AgentregisterComponent implements OnInit {
 
     this.agentService.registerAgent(formData).subscribe({
       next: (response) => {
+        this.loading = false;
         alert('Agent registered successfully!');
         this.agentForm.reset();
         this.router.navigate(["/agentlogin"]);
       },
       error: (error) => {
+        this.loading = false;
         console.error('Error:', error);
         alert('Registration failed.');
       },

@@ -22,7 +22,7 @@
             Name is required.
           </div>
         </div>
-  
+
         <!-- Email Field -->
         <div class="form-group">
           <label for="email">Email:</label>
@@ -40,7 +40,7 @@
             Please enter a valid email.
           </div>
         </div>
-  
+
         <!-- Phone Field -->
         <div class="form-group">
           <label for="phone">Phone:</label>
@@ -51,8 +51,15 @@
             placeholder="Enter your phone number"
             class="form-control"
           />
+
+          <div
+          *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched"
+          class="error"
+        >
+          Please enter a valid contact No.
         </div>
-  
+        </div>
+
         <!-- Message Field -->
         <div class="form-group">
           <label for="message">Message:</label>
@@ -70,7 +77,7 @@
             Message is required.
           </div>
         </div>
-  
+
         <!-- Submit Button -->
         <button
           type="submit"

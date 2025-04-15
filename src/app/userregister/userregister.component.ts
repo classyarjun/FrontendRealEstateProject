@@ -13,13 +13,13 @@ export class UserregisterComponent {
   selectedFile: File | null = null;
   fileSizeError: boolean = false;
   fileFormatError: boolean = false;
-
   showPassword: boolean = false;
   showConfirmPassword: boolean = false;
+  loading: boolean = false;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.registerForm = this.fb.group({
-      username: ['', Validators.required],
+      username: ['', [Validators.required, Validators.pattern('^[a-z]+$')]],
       fullname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -86,6 +86,8 @@ export class UserregisterComponent {
       return;
     }
 
+
+    this.loading = true;
     // Convert form data to JSON
     const userData = this.registerForm.value;
 
@@ -97,7 +99,10 @@ export class UserregisterComponent {
     // Call the userService to send data to the backend
     this.userService.registerTemporaryUser(formData).subscribe(
       (response) => {
-        console.log("Response:", response);
+
+        this.loading = false;
+
+        // console.log("Response:", response);
 
         if (response.message === 'Temporary user registered. Please verify OTP sent to your email.') {
           alert('User registered successfully! OTP has been sent to your email.');
@@ -107,7 +112,8 @@ export class UserregisterComponent {
         }
       },
       (error) => {
-        console.error('Error:', error);
+        this.loading = false;
+        // console.error('Error:', error);
         alert('Error: ' + error.message);
       }
     );
