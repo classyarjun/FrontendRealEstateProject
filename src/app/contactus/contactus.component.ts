@@ -11,15 +11,16 @@ export class ContactusComponent {
 
    contactForm: FormGroup;
   isModalOpen = true; // Modal is open by default
-
+  
   constructor(private fb: FormBuilder, private contactUsService: ContactusService) {
     this.contactForm = this.fb.group({
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.pattern('^[A-Za-z][A-Za-z\'\\-\\s]*$')]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['',[Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      message: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      message: ['', [Validators.required]],
     });
   }
+
 
   closeModal(): void {
     this.isModalOpen = false; // Hide the modal
